@@ -1,0 +1,6 @@
+@QACheckSheetAPI_HostAddress = http://localhost:5171
+
+GET {{QACheckSheetAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,41 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace QACheckSheetAPI.Models.Domain
+{
+    public class CheckResult
+    {
+        [Key]
+        public int ResultID { get; set; }
+        // Sheet
+        public string FormNO { get; set; } = string.Empty;
+        public string SheetCode { get; set; } = string.Empty;
+        public string SheetName { get; set; } = string.Empty;
+        // DeviceType
+        public string TypeCode { get; set; } = string.Empty;
+        public string TypeName { get; set; } = string.Empty;
+        // Device
+        public string DeviceCode { get; set; } = string.Empty;
+        public string DeviceName { get; set; } = string.Empty;
+        public string Locaiton { get; set; } = string.Empty;
+        public string Factory { get; set; } = string.Empty;
+        public string Frequency { get; set; } = string.Empty;
+        // SheetItem
+        public string Title { get; set; } = string.Empty;
+        public string ContentA { get; set; } = string.Empty;
+        public string ContentB { get; set; } = string.Empty;
+        public string ContentC { get; set; } = string.Empty;
+        public string DataType { get; set; } = string.Empty;
+        public int OrderNumber { get; set; }
+        // Result
+        [Required]
+        public string Value { get; set; } = null!;
+        [Required]
+        public string CheckedBy { get; set; } = null!;
+        [Required]
+        public DateTime CheckedDate { get; set; } = DateTime.Now;
+        public string ConfimedBy { get; set; } = string.Empty;
+        public DateTime ConfimedDate { get; set; } = DateTime.Now;
+        public string UpdateBy { get; set; } = string.Empty;
+        public DateTime UpdateAt { get; set; } = DateTime.Now;
+    }
+}

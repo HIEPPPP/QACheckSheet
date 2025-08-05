@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QACheckSheetAPI", "QACheckSheetAPI\QACheckSheetAPI.csproj", "{364FFACA-4E67-4191-9197-82C4C65000ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{364FFACA-4E67-4191-9197-82C4C65000ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{364FFACA-4E67-4191-9197-82C4C65000ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{364FFACA-4E67-4191-9197-82C4C65000ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{364FFACA-4E67-4191-9197-82C4C65000ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB1581B7-A593-4924-920E-6C85A0F84690}
+	EndGlobalSection
+EndGlobal
