@@ -25,11 +25,12 @@ export const login = async (
             password,
         });
         const data = res.data;
+        const playload = data.data;
 
         saveAuthData({
-            userCode: data.userCode,
-            fullName: data.fullName,
-            roles: data.roles,
+            userCode: playload.userCode,
+            fullName: playload.fullName,
+            roles: playload.roles,
         });
 
         return data;

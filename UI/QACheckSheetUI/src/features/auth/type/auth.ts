@@ -1,9 +1,15 @@
-export interface LoginResponse {
-    userID: number;
+export interface LoginPayload {
     userCode: string;
     fullName: string;
-    createdAt: Date;
     roles: string[];
+    createdAt: string;
+    userID: number;
+}
+
+export interface LoginResponse {
+    status: number;
+    message: string;
+    data: LoginPayload;
 }
 
 export interface ChangePwdRequest {

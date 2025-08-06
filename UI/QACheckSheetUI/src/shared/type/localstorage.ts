@@ -1,5 +1,5 @@
-export interface AuthLocalStorage {
-    userCode: string;
-    fullName: string;
+export interface User {
+    userCode: string | null;
+    fullName: string | null;
     roles: string[];
 }

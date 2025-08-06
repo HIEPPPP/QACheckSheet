@@ -1,8 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../services/authAPI";
 
+import { login } from "../services/authAPI";
 import type { UseAuthResult } from "../type/auth";
+import { UserContext } from "../../../contexts/UserProvider";
 
 export function useAuth(): UseAuthResult {
     const [userCode, setUserCode] = useState<string>("");
@@ -10,7 +11,7 @@ export function useAuth(): UseAuthResult {
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = useCallback(
         async (event: React.FormEvent<HTMLFormElement>) => {
@@ -20,7 +21,6 @@ export function useAuth(): UseAuthResult {
                 setError("Vui lòng nhập mã nhân viên và mật khẩu.");
                 return;
             }
-
             setLoading(true);
             try {
                 const result = await login(userCode, password);
@@ -32,7 +32,7 @@ export function useAuth(): UseAuthResult {
                     );
                     setPassword("");
                 } else {
-                    // navigate("/dashboard");
+                    navigate("/");
                 }
             } catch (err) {
                 setLoading(false);
@@ -40,11 +40,7 @@ export function useAuth(): UseAuthResult {
             }
         },
 
-        [
-            userCode,
-            password,
-            // navigate
-        ]
+        [userCode, password, navigate]
     );
 
     return {

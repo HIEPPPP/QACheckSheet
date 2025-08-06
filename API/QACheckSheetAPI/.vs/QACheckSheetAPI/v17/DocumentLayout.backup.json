@@ -166,8 +166,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Services\\AuthServices.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAowBkAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T02:48:19.087Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T02:48:19.087Z"
             },
             {
               "$type": "Document",
@@ -179,8 +178,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAB0AAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T02:35:20.358Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T02:35:20.358Z"
             },
             {
               "$type": "Document",
@@ -192,8 +190,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\Auth\\ChangePasswordRequestDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T06:50:23.846Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T06:50:23.846Z"
             },
             {
               "$type": "Document",
@@ -205,8 +202,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\Auth\\LoginResponseDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T02:54:53.449Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T02:54:53.449Z"
             },
             {
               "$type": "Document",
@@ -216,7 +212,7 @@
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Program.cs",
               "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Program.cs",
               "RelativeToolTip": "QACheckSheetAPI\\Program.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAwDkAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-29T04:55:25.371Z",
               "EditorCaption": ""
@@ -231,8 +227,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Implementation\\AuthRepository.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAUwCsAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T02:45:30.13Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T02:45:30.13Z"
             },
             {
               "$type": "Document",
@@ -244,8 +239,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Interface\\IAuthRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T02:43:25.319Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T02:43:25.319Z"
             },
             {
               "$type": "Document",
@@ -257,8 +251,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\Auth\\LoginRequestDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T02:50:04.881Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T02:50:04.881Z"
             },
             {
               "$type": "Document",
@@ -270,8 +263,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Services\\UserServices.cs",
               "ViewState": "AgIAACsAAAAAAAAAAAAAACMAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T03:35:44.481Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T03:35:44.481Z"
             },
             {
               "$type": "Document",
@@ -283,8 +275,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Interface\\IUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T03:28:29.846Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T03:28:29.846Z"
             },
             {
               "$type": "Document",
@@ -296,8 +287,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Implementation\\UserRepository.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAUwCMAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T03:30:19.569Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T03:30:19.569Z"
             },
             {
               "$type": "Document",
@@ -309,8 +299,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAQAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T11:35:12.58Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T11:35:12.58Z"
             },
             {
               "$type": "Document",
@@ -322,8 +311,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\User\\UserDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T04:47:45.416Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T04:47:45.416Z"
             },
             {
               "$type": "Document",
@@ -335,8 +323,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Mapping\\AutoMapperProfile.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAADwvxcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T06:16:19.507Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T06:16:19.507Z"
             },
             {
               "$type": "Document",
@@ -348,8 +335,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\Role.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T11:35:21.388Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T11:35:21.388Z"
             },
             {
               "$type": "Document",
@@ -361,8 +347,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\UserRole.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T11:35:30.448Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T11:35:30.448Z"
             },
             {
               "$type": "Document",
@@ -374,8 +359,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\SheetDeviceTypeMST.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T10:21:41.078Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T10:21:41.078Z"
             },
             {
               "$type": "Document",
@@ -387,8 +371,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Controllers\\UserController.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAQwBgAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T04:08:25.528Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T04:08:25.528Z"
             },
             {
               "$type": "Document",
@@ -400,8 +383,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\User\\CreateUserRequestDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T04:47:42.072Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T04:47:42.072Z"
             },
             {
               "$type": "Document",
@@ -413,8 +395,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\User\\UpdateUserRequestDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T04:51:18.951Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T04:51:18.951Z"
             },
             {
               "$type": "Document",
@@ -426,8 +407,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-29T05:46:51.223Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T05:46:51.223Z"
             },
             {
               "$type": "Document",
@@ -439,8 +419,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Migrations\\20250801025808_Init.cs",
               "ViewState": "AgIAAMoAAAAAAAAAAAAgwAoAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-01T02:58:09.089Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-01T02:58:09.089Z"
             },
             {
               "$type": "Document",
@@ -452,8 +431,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\DeviceTypeMST.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAQwA4AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T08:53:10.545Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T08:53:10.545Z"
             },
             {
               "$type": "Document",
@@ -465,8 +443,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Migrations\\QACheckSheetDBContextModelSnapshot.cs",
               "ViewState": "AgIAAE4BAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-01T03:50:16.708Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-01T03:50:16.708Z"
             },
             {
               "$type": "Document",
@@ -478,8 +455,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\ClassBase.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T08:55:43.401Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T08:55:43.401Z"
             },
             {
               "$type": "Document",
@@ -491,8 +467,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\DeviceMST.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAA9wBsAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T09:29:30.096Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T09:29:30.096Z"
             },
             {
               "$type": "Document",
@@ -504,8 +479,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\ConfirmApprove.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAIBJwBQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T10:55:36.936Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T10:55:36.936Z"
             },
             {
               "$type": "Document",
@@ -517,8 +491,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\CheckResult.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAzwCAAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T10:23:39.166Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T10:23:39.166Z"
             },
             {
               "$type": "Document",
@@ -530,8 +503,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Data\\QACheckSheetDBContext.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwBgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T06:00:31.188Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T06:00:31.188Z"
             },
             {
               "$type": "Document",
@@ -543,8 +515,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\SheetItemMST.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAIwBcAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T10:02:24.144Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T10:02:24.144Z"
             },
             {
               "$type": "Document",
@@ -556,8 +527,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\NGDetail.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T11:07:07.501Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T11:07:07.501Z"
             },
             {
               "$type": "Document",
@@ -569,8 +539,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\SheetMST.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAIBJwBEAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T09:46:38.53Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T09:46:38.53Z"
             },
             {
               "$type": "Document",
@@ -582,8 +551,7 @@
               "RelativeToolTip": "QACheckSheetAPI\\WeatherForecast.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T05:46:45.794Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T05:46:45.794Z"
             }
           ]
         }

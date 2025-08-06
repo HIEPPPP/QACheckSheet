@@ -1,11 +1,12 @@
-import "./App.css";
-import LoginPage from "./features/auth/LoginPage";
+import { Layout } from "./layouts/Layout.tsx";
+import { AppRoutes } from "./routes/AppRoutes.tsx";
+import { RouterProvider } from "react-router-dom";
 
 function App() {
     return (
-        <>
-            <LoginPage />
-        </>
+        <Layout>
+            <RouterProvider router={AppRoutes} />
+        </Layout>
     );
 }
 
