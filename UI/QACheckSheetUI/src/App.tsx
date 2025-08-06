@@ -1,13 +1,9 @@
-import { Layout } from "./layouts/Layout.tsx";
+import { Layout } from "./layouts/PrivateLayout.tsx";
 import { AppRoutes } from "./routes/AppRoutes.tsx";
 import { RouterProvider } from "react-router-dom";
 
 function App() {
-    return (
-        <Layout>
-            <RouterProvider router={AppRoutes} />
-        </Layout>
-    );
+    return <RouterProvider router={AppRoutes} />;
 }
 
 export default App;
