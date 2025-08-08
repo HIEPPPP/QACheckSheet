@@ -17,6 +17,7 @@ namespace QACheckSheetAPI.Controllers
             this.userServices = userServices;
         }
 
+        // POST: api/user
         [HttpPost("createUser")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserRequestDTO dto)
         {
@@ -33,7 +34,7 @@ namespace QACheckSheetAPI.Controllers
 
         // GET: api/user
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetListUser()
         {
             var list = await userServices.GetAllAsync();
             return Ok(new ApiResponse<List<UserDTO>>(200, "OK", list));
@@ -41,7 +42,7 @@ namespace QACheckSheetAPI.Controllers
 
         // GET: api/user/{id}
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetUserById(int id)
         {
             var user = await userServices.GetByIdAsync(id);
             if (user == null)
@@ -51,7 +52,7 @@ namespace QACheckSheetAPI.Controllers
 
         // PUT: api/user/{id}
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateUserRequestDTO dto)
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserRequestDTO dto)
         {
             try
             {
@@ -66,7 +67,7 @@ namespace QACheckSheetAPI.Controllers
 
         // DELETE: api/user/{id}
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
             try
             {

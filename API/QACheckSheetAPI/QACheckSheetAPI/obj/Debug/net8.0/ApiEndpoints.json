@@ -32,8 +32,245 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
+    "Method": "GetListDevice",
+    "RelativePath": "api/Device",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
+    "Method": "CreateDevice",
+    "RelativePath": "api/Device",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.Device.CreateDeviceRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
+    "Method": "GetDevice",
+    "RelativePath": "api/Device/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
+    "Method": "UpdateDevice",
+    "RelativePath": "api/Device/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.Device.UpdateDeviceRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
+    "Method": "Delete",
+    "RelativePath": "api/Device/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceTypeController",
+    "Method": "GetListDeviceType",
+    "RelativePath": "api/DeviceType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceTypeController",
+    "Method": "GetDeviceTypeById",
+    "RelativePath": "api/DeviceType/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceTypeController",
+    "Method": "UpdateDeviceType",
+    "RelativePath": "api/DeviceType/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.DeviceType.UpdateDeviceTypeRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceTypeController",
+    "Method": "DeleteDeviceType",
+    "RelativePath": "api/DeviceType/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceTypeController",
+    "Method": "CreateDeviceType",
+    "RelativePath": "api/DeviceType/createDeviceType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.DeviceType.CreateDeviceTypeRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.SheetController",
+    "Method": "GetListSheet",
+    "RelativePath": "api/Sheet",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.SheetController",
+    "Method": "CreateSheet",
+    "RelativePath": "api/Sheet",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.Sheet.CreateSheetRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.SheetController",
+    "Method": "GetSheet",
+    "RelativePath": "api/Sheet/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.SheetController",
+    "Method": "UpdateSheet",
+    "RelativePath": "api/Sheet/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.Sheet.UpdateSheetRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.SheetController",
+    "Method": "Delete",
+    "RelativePath": "api/Sheet/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "QACheckSheetAPI.Controllers.UserController",
-    "Method": "GetAll",
+    "Method": "GetListUser",
     "RelativePath": "api/User",
     "HttpMethod": "GET",
     "IsController": true,
@@ -43,7 +280,7 @@
   },
   {
     "ContainingType": "QACheckSheetAPI.Controllers.UserController",
-    "Method": "GetById",
+    "Method": "GetUserById",
     "RelativePath": "api/User/{id}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -59,7 +296,7 @@
   },
   {
     "ContainingType": "QACheckSheetAPI.Controllers.UserController",
-    "Method": "Update",
+    "Method": "UpdateUser",
     "RelativePath": "api/User/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -80,7 +317,7 @@
   },
   {
     "ContainingType": "QACheckSheetAPI.Controllers.UserController",
-    "Method": "Delete",
+    "Method": "DeleteUser",
     "RelativePath": "api/User/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,

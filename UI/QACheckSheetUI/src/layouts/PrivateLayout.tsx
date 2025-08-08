@@ -9,7 +9,7 @@ export const PrivateLayout = () => {
             <Sidebar />
             <div className="flex flex-col flex-1 overflow-y-auto">
                 <Header />
-                <main className="mt-16 p-6 bg-gray-100 flex-1">
+                <main className="mt-16 p-6 flex-1">
                     <Outlet />
                 </main>
             </div>

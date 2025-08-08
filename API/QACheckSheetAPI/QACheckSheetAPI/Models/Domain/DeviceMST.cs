@@ -29,7 +29,7 @@ namespace QACheckSheetAPI.Models.Domain
         [ForeignKey("TypeID")]
         [JsonIgnore]
         public DeviceTypeMST DeviceTypeMST { get; set; } = null!;
-
+            
         [NotMapped]
         public int EffectiveFrequency
         => FrequencyOverride ?? DeviceTypeMST.DefaultFrequency;

@@ -32,7 +32,7 @@ export function useAuth(): UseAuthResult {
                     );
                     setPassword("");
                 } else {
-                    navigate("/");
+                    navigate("/app");
                 }
             } catch (err) {
                 setLoading(false);

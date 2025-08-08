@@ -42,9 +42,15 @@ builder.Services.AddAutoMapper(cfg =>
 // Repositories & Services
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IDeviceTypeRepository, DeviceTypeRepository>();
+builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
+builder.Services.AddScoped<ISheetRepository, SheetRepository>();
 
 builder.Services.AddScoped<AuthServices>();
 builder.Services.AddScoped<UserServices>();
+builder.Services.AddScoped<DeviceTypeServices>();
+builder.Services.AddScoped<DeviceServices>();
+builder.Services.AddScoped<SheetServices>();
 
 var app = builder.Build();
 
