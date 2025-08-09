@@ -6,15 +6,15 @@ namespace QACheckSheetAPI.Models.Domain
     public class UserRole
     {
         [Key]
-        public int UserRoleID { get; set; }
+        public int UserRoleId { get; set; }
 
-        public int UserID { get; set; }
-        public int RoleID { get; set; }
+        public int UserId { get; set; }
+        public int RoleId { get; set; }
 
         // Navigation
-        [ForeignKey("UserID")]
+        [ForeignKey("UserId")]
         public User User { get; set; } = null!;
-        [ForeignKey("RoleID")]
+        [ForeignKey("RoleId")]
         public Role Role { get; set; } = null!;
     }
 }

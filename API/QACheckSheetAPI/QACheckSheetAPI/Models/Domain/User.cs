@@ -5,7 +5,7 @@ namespace QACheckSheetAPI.Models.Domain
     public class User
     {
         [Key]
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         [MaxLength(100)]
         public string UserCode { get; set; } = string.Empty;
         [MaxLength(100)]

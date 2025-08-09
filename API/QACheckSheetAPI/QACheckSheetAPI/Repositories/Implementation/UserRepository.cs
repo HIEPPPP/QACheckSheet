@@ -25,7 +25,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
             // gán các UserRole
             foreach (var rid in roleIds)
             {
-                user.UserRoles.Add(new UserRole { RoleID = rid });
+                user.UserRoles.Add(new UserRole { RoleId = rid });
             }
             user.CreatedAt = DateTime.Now;
             context.Users.Add(user);
@@ -33,7 +33,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
             return await context.Users
                                 .Include(u => u.UserRoles)
                                 .ThenInclude(ur => ur.Role)
-                                .FirstOrDefaultAsync(u => u.UserID == user.UserID);
+                                .FirstOrDefaultAsync(u => u.UserId == user.UserId);
         }
 
         public async Task DeleteAsync(User user)
@@ -46,7 +46,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
         {
             return await context.Users
                                 .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
-                                .FirstOrDefaultAsync(u => u.UserID == userId);
+                                .FirstOrDefaultAsync(u => u.UserId == userId);
         }
 
         public async Task<List<User>> GetListAsync()
@@ -64,7 +64,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
             // Xóa các UserRole cũ
             context.UserRoles.RemoveRange(user.UserRoles);
             // Gán lại
-            user.UserRoles = roleIds.Select(rid => new UserRole { UserID = user.UserID, RoleID = rid }).ToList();
+            user.UserRoles = roleIds.Select(rid => new UserRole { UserId = user.UserId, RoleId = rid }).ToList();
             await context.SaveChangesAsync();
             return user;
         }

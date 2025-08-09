@@ -6,9 +6,9 @@ namespace QACheckSheetAPI.Models.Domain
     public class NGDetail
     {
         [Key]
-        public int NgID { get; set; }
+        public int NgId { get; set; }
         [Required]
-        public int ResultId { get; set; }
+        public long ResultId { get; set; }
         [MaxLength(700)]
         public string NGContentDetail { get; set; } = string.Empty; // Chi tiết nội dung NG
         [MaxLength(700)]

@@ -5,7 +5,7 @@ namespace QACheckSheetAPI.Models.Domain
     public class ConfirmApprove
     {
         [Key]
-        public int ConfirmApproveID { get; set; }
+        public int ConfirmApproveId { get; set; }
         [Required]
         public string ConfirmedBy { get; set; } = string.Empty;
         [Required]

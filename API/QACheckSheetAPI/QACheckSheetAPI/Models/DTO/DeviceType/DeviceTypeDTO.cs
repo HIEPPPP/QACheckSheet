@@ -4,7 +4,7 @@ namespace QACheckSheetAPI.Models.DTO.DeviceType
 {
     public class DeviceTypeDTO
     {
-        public int TypeID { get; set; }
+        public int TypeId { get; set; }
         public string TypeName { get; set; } = null!;
         public int DefaultFrequency { get; set; }
         public string Description { get; set; } = string.Empty;

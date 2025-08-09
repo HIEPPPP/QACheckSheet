@@ -5,7 +5,7 @@ namespace QACheckSheetAPI.Models.Domain
     public class SheetMST : ClassBase
     {
         [Key]
-        public int SheetID { get; set; }
+        public int SheetId { get; set; }
         [Required]
         [MaxLength(20)]
         public string SheetCode { get; set; } = null!;

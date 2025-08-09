@@ -4,15 +4,16 @@ namespace QACheckSheetAPI.Models.DTO.SheetItem
 {
     public class ItemDTO
     {
-        public int ItemID { get; set; }
-        public int SheetID { get; set; }
+        public int ItemId { get; set; }
+        public int SheetId { get; set; }
         public string SheetName { get; set; } = null!;
         public string SheetCode { get; set; } = null!;
+        public int ParentItemId { get; set; }
+        public int Level { get; set; }
+        public string? PathIds { get; set; }  
+        public string? PathTitles { get; set; }
         public string FormNO { get; set; } = null!;
-        public string Title { get; set; } = null!;
-        public string ContentA { get; set; } = string.Empty;
-        public string ContentB { get; set; } = string.Empty;
-        public string ContentC { get; set; } = string.Empty;
+        public string Title { get; set; } = null!; 
         public string DataType { get; set; } = null!;
         public int OrderNumber { get; set; }
         public decimal Min { get; set; }

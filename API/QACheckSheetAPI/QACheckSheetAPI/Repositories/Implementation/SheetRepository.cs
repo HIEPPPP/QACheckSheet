@@ -29,7 +29,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
 
         public async Task<SheetMST?> GetAsync(int sheetId)
         {
-            return await context.Sheets.FirstOrDefaultAsync(x => x.SheetID == sheetId);
+            return await context.Sheets.FirstOrDefaultAsync(x => x.SheetId == sheetId);
         }
 
         public async Task<List<SheetMST>> GetListAsync()

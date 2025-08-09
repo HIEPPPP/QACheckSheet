@@ -15,8 +15,13 @@ namespace QACheckSheetAPI.Migrations
                 name: "CheckResults",
                 columns: table => new
                 {
-                    ResultID = table.Column<int>(type: "int", nullable: false)
+                    ResultId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    InstanceId = table.Column<int>(type: "int", nullable: true),
+                    SheetId = table.Column<int>(type: "int", nullable: true),
+                    DeviceId = table.Column<int>(type: "int", nullable: true),
+                    DeviceTypeId = table.Column<int>(type: "int", nullable: true),
+                    ItemId = table.Column<int>(type: "int", nullable: true),
                     FormNO = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SheetCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SheetName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -24,7 +29,7 @@ namespace QACheckSheetAPI.Migrations
                     TypeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeviceCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeviceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Locaiton = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Factory = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Frequency = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -36,21 +41,21 @@ namespace QACheckSheetAPI.Migrations
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CheckedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CheckedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ConfimedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ConfimedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ConfirmBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ConfirmDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CheckResults", x => x.ResultID);
+                    table.PrimaryKey("PK_CheckResults", x => x.ResultId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ConfirmApproves",
                 columns: table => new
                 {
-                    ConfirmApproveID = table.Column<int>(type: "int", nullable: false)
+                    ConfirmApproveId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ConfirmedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ConfirmedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -61,14 +66,14 @@ namespace QACheckSheetAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConfirmApproves", x => x.ConfirmApproveID);
+                    table.PrimaryKey("PK_ConfirmApproves", x => x.ConfirmApproveId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "DeviceTypes",
                 columns: table => new
                 {
-                    TypeID = table.Column<int>(type: "int", nullable: false)
+                    TypeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TypeCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     TypeName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
@@ -82,28 +87,28 @@ namespace QACheckSheetAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DeviceTypes", x => x.TypeID);
+                    table.PrimaryKey("PK_DeviceTypes", x => x.TypeId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
-                    RoleID = table.Column<int>(type: "int", nullable: false)
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Roles", x => x.RoleID);
+                    table.PrimaryKey("PK_Roles", x => x.RoleId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Sheets",
                 columns: table => new
                 {
-                    SheetID = table.Column<int>(type: "int", nullable: false)
+                    SheetId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SheetCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     SheetName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
@@ -117,14 +122,14 @@ namespace QACheckSheetAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sheets", x => x.SheetID);
+                    table.PrimaryKey("PK_Sheets", x => x.SheetId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
-                    UserID = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserCode = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -133,16 +138,16 @@ namespace QACheckSheetAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserID);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "NGDetails",
                 columns: table => new
                 {
-                    NgID = table.Column<int>(type: "int", nullable: false)
+                    NgId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ResultId = table.Column<int>(type: "int", nullable: false),
+                    ResultId = table.Column<long>(type: "bigint", nullable: false),
                     NGContentDetail = table.Column<string>(type: "nvarchar(700)", maxLength: 700, nullable: false),
                     FixContent = table.Column<string>(type: "nvarchar(700)", maxLength: 700, nullable: false),
                     FixedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -152,12 +157,12 @@ namespace QACheckSheetAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NGDetails", x => x.NgID);
+                    table.PrimaryKey("PK_NGDetails", x => x.NgId);
                     table.ForeignKey(
                         name: "FK_NGDetails_CheckResults_ResultId",
                         column: x => x.ResultId,
                         principalTable: "CheckResults",
-                        principalColumn: "ResultID",
+                        principalColumn: "ResultId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -165,9 +170,9 @@ namespace QACheckSheetAPI.Migrations
                 name: "Devices",
                 columns: table => new
                 {
-                    DeviceID = table.Column<int>(type: "int", nullable: false)
+                    DeviceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TypeID = table.Column<int>(type: "int", nullable: false),
+                    TypeId = table.Column<int>(type: "int", nullable: false),
                     DeviceCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     DeviceName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     SeriNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -185,12 +190,12 @@ namespace QACheckSheetAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Devices", x => x.DeviceID);
+                    table.PrimaryKey("PK_Devices", x => x.DeviceId);
                     table.ForeignKey(
-                        name: "FK_Devices_DeviceTypes_TypeID",
-                        column: x => x.TypeID,
+                        name: "FK_Devices_DeviceTypes_TypeId",
+                        column: x => x.TypeId,
                         principalTable: "DeviceTypes",
-                        principalColumn: "TypeID",
+                        principalColumn: "TypeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -198,23 +203,23 @@ namespace QACheckSheetAPI.Migrations
                 name: "SheetDeviceTypes",
                 columns: table => new
                 {
-                    SheetID = table.Column<int>(type: "int", nullable: false),
-                    DeviceTypeID = table.Column<int>(type: "int", nullable: false)
+                    SheetId = table.Column<int>(type: "int", nullable: false),
+                    DeviceTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SheetDeviceTypes", x => x.SheetID);
+                    table.PrimaryKey("PK_SheetDeviceTypes", x => new { x.SheetId, x.DeviceTypeId });
                     table.ForeignKey(
-                        name: "FK_SheetDeviceTypes_DeviceTypes_DeviceTypeID",
-                        column: x => x.DeviceTypeID,
+                        name: "FK_SheetDeviceTypes_DeviceTypes_DeviceTypeId",
+                        column: x => x.DeviceTypeId,
                         principalTable: "DeviceTypes",
-                        principalColumn: "TypeID",
+                        principalColumn: "TypeId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SheetDeviceTypes_Sheets_SheetID",
-                        column: x => x.SheetID,
+                        name: "FK_SheetDeviceTypes_Sheets_SheetId",
+                        column: x => x.SheetId,
                         principalTable: "Sheets",
-                        principalColumn: "SheetID",
+                        principalColumn: "SheetId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -222,17 +227,19 @@ namespace QACheckSheetAPI.Migrations
                 name: "SheetItems",
                 columns: table => new
                 {
-                    ItemID = table.Column<int>(type: "int", nullable: false)
+                    ItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SheetID = table.Column<int>(type: "int", nullable: false),
+                    SheetId = table.Column<int>(type: "int", nullable: false),
+                    ParentItemId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(700)", maxLength: 700, nullable: false),
-                    ContentA = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContentB = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContentC = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OrderNumber = table.Column<int>(type: "int", nullable: false),
-                    Min = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Max = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Level = table.Column<int>(type: "int", nullable: false),
+                    PathIds = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    PathTitles = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    DataType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Min = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Max = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     IsRequired = table.Column<bool>(type: "bit", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -242,12 +249,17 @@ namespace QACheckSheetAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SheetItems", x => x.ItemID);
+                    table.PrimaryKey("PK_SheetItems", x => x.ItemId);
                     table.ForeignKey(
-                        name: "FK_SheetItems_Sheets_SheetID",
-                        column: x => x.SheetID,
+                        name: "FK_SheetItems_SheetItems_ParentItemId",
+                        column: x => x.ParentItemId,
+                        principalTable: "SheetItems",
+                        principalColumn: "ItemId");
+                    table.ForeignKey(
+                        name: "FK_SheetItems_Sheets_SheetId",
+                        column: x => x.SheetId,
                         principalTable: "Sheets",
-                        principalColumn: "SheetID",
+                        principalColumn: "SheetId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -255,32 +267,32 @@ namespace QACheckSheetAPI.Migrations
                 name: "UserRoles",
                 columns: table => new
                 {
-                    UserRoleID = table.Column<int>(type: "int", nullable: false)
+                    UserRoleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    RoleID = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserRoles", x => x.UserRoleID);
+                    table.PrimaryKey("PK_UserRoles", x => x.UserRoleId);
                     table.ForeignKey(
-                        name: "FK_UserRoles_Roles_RoleID",
-                        column: x => x.RoleID,
+                        name: "FK_UserRoles_Roles_RoleId",
+                        column: x => x.RoleId,
                         principalTable: "Roles",
-                        principalColumn: "RoleID",
+                        principalColumn: "RoleId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserRoles_Users_UserID",
-                        column: x => x.UserID,
+                        name: "FK_UserRoles_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserID",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Devices_TypeID",
+                name: "IX_Devices_TypeId",
                 table: "Devices",
-                column: "TypeID");
+                column: "TypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NGDetails_ResultId",
@@ -288,24 +300,29 @@ namespace QACheckSheetAPI.Migrations
                 column: "ResultId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SheetDeviceTypes_DeviceTypeID",
+                name: "IX_SheetDeviceTypes_DeviceTypeId",
                 table: "SheetDeviceTypes",
-                column: "DeviceTypeID");
+                column: "DeviceTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SheetItems_SheetID",
+                name: "IX_SheetItems_ParentItemId",
                 table: "SheetItems",
-                column: "SheetID");
+                column: "ParentItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserRoles_RoleID",
-                table: "UserRoles",
-                column: "RoleID");
+                name: "IX_SheetItems_SheetId",
+                table: "SheetItems",
+                column: "SheetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserRoles_UserID",
+                name: "IX_UserRoles_RoleId",
                 table: "UserRoles",
-                column: "UserID");
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_UserId",
+                table: "UserRoles",
+                column: "UserId");
         }
 
         /// <inheritdoc />

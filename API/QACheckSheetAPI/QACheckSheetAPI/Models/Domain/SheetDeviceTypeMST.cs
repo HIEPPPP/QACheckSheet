@@ -6,15 +6,14 @@ namespace QACheckSheetAPI.Models.Domain
 {
     public class SheetDeviceTypeMST
     {
-        [Key]
-        public int SheetID { get; set; }
-        public int DeviceTypeID { get; set; }
+        public int SheetId { get; set; }
+        public int DeviceTypeId { get; set; }
 
         //Navigation Properties
-        [ForeignKey("SheetID")]
+        [ForeignKey("SheetId")]
         [JsonIgnore] 
         public SheetMST SheetMST { get; set; } = null!;
-        [ForeignKey("DeviceTypeID")]
+        [ForeignKey("DeviceTypeId")]
         [JsonIgnore] 
         public DeviceTypeMST DeviceTypeMST { get; set; } = null!;
     }

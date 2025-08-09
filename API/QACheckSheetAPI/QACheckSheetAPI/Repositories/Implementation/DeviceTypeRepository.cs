@@ -36,7 +36,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
 
         public async Task<DeviceTypeMST?> GetAsync(int typeId)
         {
-            return await context.DeviceTypes.FirstOrDefaultAsync(x => x.TypeID == typeId);
+            return await context.DeviceTypes.FirstOrDefaultAsync(x => x.TypeId == typeId);
         }
 
         public async Task<List<DeviceTypeMST>> GetListAsync()

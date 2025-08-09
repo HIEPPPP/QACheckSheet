@@ -5,7 +5,7 @@ namespace QACheckSheetAPI.Models.Domain
     public class DeviceTypeMST : ClassBase
     {
         [Key]
-        public int TypeID { get; set; }
+        public int TypeId { get; set; }
         [Required]
         [MaxLength(20)]
         public string TypeCode { get; set; } = null!;

@@ -28,7 +28,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
 
         public Task<SheetItemMST?> GetAsync(int itemId)
         {
-            return context.SheetItems.Include(x => x.SheetMST).FirstOrDefaultAsync(x => x.ItemID == itemId);
+            return context.SheetItems.Include(x => x.SheetMST).FirstOrDefaultAsync(x => x.ItemId == itemId);
         }
 
         public Task<List<SheetItemMST>> GetListAsync()

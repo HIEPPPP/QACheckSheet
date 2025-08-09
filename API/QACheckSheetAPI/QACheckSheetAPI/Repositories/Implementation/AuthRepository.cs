@@ -34,7 +34,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
         {
             return await context.Users
                                 .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
-                                .FirstOrDefaultAsync(u => u.UserID == userId);
+                                .FirstOrDefaultAsync(u => u.UserId == userId);
         }
 
         public async Task UpdatePasswordAsync(User user, string newHashedPassword)

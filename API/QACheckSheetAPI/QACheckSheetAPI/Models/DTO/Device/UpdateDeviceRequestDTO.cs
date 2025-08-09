@@ -2,7 +2,7 @@
 {
     public class UpdateDeviceRequestDTO
     {
-        public int? TypeID { get; set; }
+        public int? TypeId { get; set; }
         public string DeviceName { get; set; } = null!;
         public string SeriNumber { get; set; } = string.Empty;
         public string Model { get; set; } = string.Empty;

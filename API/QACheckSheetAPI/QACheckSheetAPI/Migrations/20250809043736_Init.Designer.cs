@@ -12,7 +12,7 @@ using QACheckSheetAPI.Data;
 namespace QACheckSheetAPI.Migrations
 {
     [DbContext(typeof(QACheckSheetDBContext))]
-    [Migration("20250801025808_Init")]
+    [Migration("20250809043736_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -27,11 +27,11 @@ namespace QACheckSheetAPI.Migrations
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.CheckResult", b =>
                 {
-                    b.Property<int>("ResultID")
+                    b.Property<long>("ResultId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ResultID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ResultId"));
 
                     b.Property<string>("CheckedBy")
                         .IsRequired()
@@ -40,11 +40,11 @@ namespace QACheckSheetAPI.Migrations
                     b.Property<DateTime>("CheckedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ConfimedBy")
+                    b.Property<string>("ConfirmBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ConfimedDate")
+                    b.Property<DateTime?>("ConfirmDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ContentA")
@@ -67,9 +67,15 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DeviceId")
+                        .HasColumnType("int");
+
                     b.Property<string>("DeviceName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DeviceTypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Factory")
                         .IsRequired()
@@ -83,7 +89,13 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Locaiton")
+                    b.Property<int?>("InstanceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -93,6 +105,9 @@ namespace QACheckSheetAPI.Migrations
                     b.Property<string>("SheetCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SheetId")
+                        .HasColumnType("int");
 
                     b.Property<string>("SheetName")
                         .IsRequired()
@@ -121,18 +136,18 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ResultID");
+                    b.HasKey("ResultId");
 
                     b.ToTable("CheckResults");
                 });
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.ConfirmApprove", b =>
                 {
-                    b.Property<int>("ConfirmApproveID")
+                    b.Property<int>("ConfirmApproveId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConfirmApproveID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConfirmApproveId"));
 
                     b.Property<string>("ApprovedBy")
                         .IsRequired()
@@ -156,18 +171,18 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ConfirmApproveID");
+                    b.HasKey("ConfirmApproveId");
 
                     b.ToTable("ConfirmApproves");
                 });
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.DeviceMST", b =>
                 {
-                    b.Property<int>("DeviceID")
+                    b.Property<int>("DeviceId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeviceID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeviceId"));
 
                     b.Property<bool>("CancelFlag")
                         .HasColumnType("bit");
@@ -217,7 +232,7 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeID")
+                    b.Property<int>("TypeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdateAt")
@@ -227,20 +242,20 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("DeviceID");
+                    b.HasKey("DeviceId");
 
-                    b.HasIndex("TypeID");
+                    b.HasIndex("TypeId");
 
                     b.ToTable("Devices");
                 });
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.DeviceTypeMST", b =>
                 {
-                    b.Property<int>("TypeID")
+                    b.Property<int>("TypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypeID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypeId"));
 
                     b.Property<bool>("CancelFlag")
                         .HasColumnType("bit");
@@ -277,18 +292,18 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TypeID");
+                    b.HasKey("TypeId");
 
                     b.ToTable("DeviceTypes");
                 });
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.NGDetail", b =>
                 {
-                    b.Property<int>("NgID")
+                    b.Property<int>("NgId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NgID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NgId"));
 
                     b.Property<string>("ConfirmedBy")
                         .IsRequired()
@@ -314,10 +329,10 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ResultId")
-                        .HasColumnType("int");
+                    b.Property<long>("ResultId")
+                        .HasColumnType("bigint");
 
-                    b.HasKey("NgID");
+                    b.HasKey("NgId");
 
                     b.HasIndex("ResultId");
 
@@ -326,11 +341,11 @@ namespace QACheckSheetAPI.Migrations
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.Role", b =>
                 {
-                    b.Property<int>("RoleID")
+                    b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -340,48 +355,36 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RoleID");
+                    b.HasKey("RoleId");
 
                     b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.SheetDeviceTypeMST", b =>
                 {
-                    b.Property<int>("SheetID")
+                    b.Property<int>("SheetId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DeviceTypeID")
+                    b.Property<int>("DeviceTypeId")
                         .HasColumnType("int");
 
-                    b.HasKey("SheetID");
+                    b.HasKey("SheetId", "DeviceTypeId");
 
-                    b.HasIndex("DeviceTypeID");
+                    b.HasIndex("DeviceTypeId");
 
                     b.ToTable("SheetDeviceTypes");
                 });
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.SheetItemMST", b =>
                 {
-                    b.Property<int>("ItemID")
+                    b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemId"));
 
                     b.Property<bool>("CancelFlag")
                         .HasColumnType("bit");
-
-                    b.Property<string>("ContentA")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentB")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentC")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
@@ -394,19 +397,36 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsRequired")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("Max")
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Max")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Min")
+                    b.Property<decimal?>("Min")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("OrderNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("SheetID")
+                    b.Property<int?>("ParentItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PathIds")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("PathTitles")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<int>("SheetId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -421,20 +441,22 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ItemID");
+                    b.HasKey("ItemId");
 
-                    b.HasIndex("SheetID");
+                    b.HasIndex("ParentItemId");
+
+                    b.HasIndex("SheetId");
 
                     b.ToTable("SheetItems");
                 });
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.SheetMST", b =>
                 {
-                    b.Property<int>("SheetID")
+                    b.Property<int>("SheetId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SheetID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SheetId"));
 
                     b.Property<bool>("CancelFlag")
                         .HasColumnType("bit");
@@ -472,18 +494,18 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SheetID");
+                    b.HasKey("SheetId");
 
                     b.ToTable("Sheets");
                 });
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.User", b =>
                 {
-                    b.Property<int>("UserID")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -503,30 +525,30 @@ namespace QACheckSheetAPI.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("UserID");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.UserRole", b =>
                 {
-                    b.Property<int>("UserRoleID")
+                    b.Property<int>("UserRoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserRoleID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserRoleId"));
 
-                    b.Property<int>("RoleID")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserID")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserRoleID");
+                    b.HasKey("UserRoleId");
 
-                    b.HasIndex("RoleID");
+                    b.HasIndex("RoleId");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
                 });
@@ -535,7 +557,7 @@ namespace QACheckSheetAPI.Migrations
                 {
                     b.HasOne("QACheckSheetAPI.Models.Domain.DeviceTypeMST", "DeviceTypeMST")
                         .WithMany("DeviceMSTs")
-                        .HasForeignKey("TypeID")
+                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -557,13 +579,13 @@ namespace QACheckSheetAPI.Migrations
                 {
                     b.HasOne("QACheckSheetAPI.Models.Domain.DeviceTypeMST", "DeviceTypeMST")
                         .WithMany("SheetDeviceTypeMSTs")
-                        .HasForeignKey("DeviceTypeID")
+                        .HasForeignKey("DeviceTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("QACheckSheetAPI.Models.Domain.SheetMST", "SheetMST")
                         .WithMany("SheetDeviceTypeMSTs")
-                        .HasForeignKey("SheetID")
+                        .HasForeignKey("SheetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -574,11 +596,17 @@ namespace QACheckSheetAPI.Migrations
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.SheetItemMST", b =>
                 {
+                    b.HasOne("QACheckSheetAPI.Models.Domain.SheetItemMST", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentItemId");
+
                     b.HasOne("QACheckSheetAPI.Models.Domain.SheetMST", "SheetMST")
                         .WithMany("SheetItemMSTs")
-                        .HasForeignKey("SheetID")
+                        .HasForeignKey("SheetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Parent");
 
                     b.Navigation("SheetMST");
                 });
@@ -587,13 +615,13 @@ namespace QACheckSheetAPI.Migrations
                 {
                     b.HasOne("QACheckSheetAPI.Models.Domain.Role", "Role")
                         .WithMany("UserRoles")
-                        .HasForeignKey("RoleID")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("QACheckSheetAPI.Models.Domain.User", "User")
                         .WithMany("UserRoles")
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -612,6 +640,11 @@ namespace QACheckSheetAPI.Migrations
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.Role", b =>
                 {
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("QACheckSheetAPI.Models.Domain.SheetItemMST", b =>
+                {
+                    b.Navigation("Children");
                 });
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.SheetMST", b =>

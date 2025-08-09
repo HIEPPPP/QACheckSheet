@@ -4,7 +4,7 @@ namespace QACheckSheetAPI.Models.DTO.Sheet
 {
     public class SheetDTO
     {
-        public int SheetID { get; set; }
+        public int SheetId { get; set; }
         public string SheetCode { get; set; } = null!;
         public string SheetName { get; set; } = null!;
         public string FormNO { get; set; } = null!;

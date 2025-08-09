@@ -5,7 +5,14 @@ namespace QACheckSheetAPI.Models.Domain
     public class CheckResult
     {
         [Key]
-        public int ResultID { get; set; }
+        public long ResultId { get; set; }
+        // FK references
+        public int? InstanceId { get; set; }    // link tới ChecklistInstance nếu có
+        public int? SheetId { get; set; }
+        public int? DeviceId { get; set; }
+        public int? DeviceTypeId { get; set; }
+        public int? ItemId { get; set; }        // link tới SheetItemMST logical (optional)
+
         // Sheet
         public string FormNO { get; set; } = string.Empty;
         public string SheetCode { get; set; } = string.Empty;
@@ -16,7 +23,7 @@ namespace QACheckSheetAPI.Models.Domain
         // Device
         public string DeviceCode { get; set; } = string.Empty;
         public string DeviceName { get; set; } = string.Empty;
-        public string Locaiton { get; set; } = string.Empty;
+        public string Location { get; set; } = string.Empty;
         public string Factory { get; set; } = string.Empty;
         public string Frequency { get; set; } = string.Empty;
         // SheetItem
@@ -32,9 +39,9 @@ namespace QACheckSheetAPI.Models.Domain
         [Required]
         public string CheckedBy { get; set; } = null!;
         [Required]
-        public DateTime CheckedDate { get; set; } = DateTime.Now;
-        public string ConfimedBy { get; set; } = string.Empty;
-        public DateTime ConfimedDate { get; set; } = DateTime.Now;
+        public DateTime CheckedDate { get; set; }
+        public string ConfirmBy { get; set; } = string.Empty;
+        public DateTime? ConfirmDate { get; set; }
         public string UpdateBy { get; set; } = string.Empty;
         public DateTime UpdateAt { get; set; } = DateTime.Now;
     }

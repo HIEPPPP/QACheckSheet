@@ -34,7 +34,7 @@ namespace QACheckSheetAPI.Services
             if (await deviceRepository.IsDeviceCodeExistAsync(dto.DeviceCode))
                 throw new Exception("DeviceCode đã tồn tại");
 
-            var deviceDomain = mapper.Map<DeviceMST>(dto);
+            var deviceDomain = mapper.Map<DeviceMST>(dto);  
             var created = await deviceRepository.CreateAsync(deviceDomain);
             return mapper.Map<DeviceDTO>(created);
         }
@@ -45,8 +45,8 @@ namespace QACheckSheetAPI.Services
                 ?? throw new Exception("Device không tồn tại");
 
             device.UpdateAt = DateTime.Now;
-            if(dto.TypeID.HasValue)
-                device.TypeID = dto.TypeID.Value;
+            if(dto.TypeId.HasValue)
+                device.TypeId = dto.TypeId.Value;
             if(!string.IsNullOrWhiteSpace(dto.DeviceName))
                 device.DeviceName = dto.DeviceName;
             if(dto.FrequencyOverride.HasValue)

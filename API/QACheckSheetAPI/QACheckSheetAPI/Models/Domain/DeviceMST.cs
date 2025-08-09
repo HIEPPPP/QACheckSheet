@@ -7,9 +7,9 @@ namespace QACheckSheetAPI.Models.Domain
     public class DeviceMST : ClassBase
     {
         [Key]
-        public int DeviceID { get; set; }
+        public int DeviceId { get; set; }
         [Required]
-        public int TypeID { get; set; }
+        public int TypeId { get; set; }
         [Required]
         [MaxLength(20)]
         public string DeviceCode { get; set; } = null!;
@@ -26,7 +26,7 @@ namespace QACheckSheetAPI.Models.Domain
         public string Description { get; set; } = string.Empty;
 
         //Navigation Properties
-        [ForeignKey("TypeID")]
+        [ForeignKey("TypeId")]
         [JsonIgnore]
         public DeviceTypeMST DeviceTypeMST { get; set; } = null!;
             

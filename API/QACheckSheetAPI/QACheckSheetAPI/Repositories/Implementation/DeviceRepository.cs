@@ -29,7 +29,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
 
         public async Task<DeviceMST?> GetAsync(int deviceId)
         {
-            return await context.Devices.Include(x => x.DeviceTypeMST).FirstOrDefaultAsync(x => x.DeviceID == deviceId);
+            return await context.Devices.Include(x => x.DeviceTypeMST).FirstOrDefaultAsync(x => x.DeviceId == deviceId);
         }
 
         public async Task<List<DeviceMST>> GetListAsync()
