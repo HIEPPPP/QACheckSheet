@@ -17,7 +17,7 @@ const NotFoundPage = () => {
                 variant="contained"
                 color="primary"
                 component={RouterLink}
-                to="/"
+                to="/app"
                 sx={{ textTransform: "none", mt: 2, boxShadow: 3 }}
             >
                 Trở về trang chủ

@@ -27,6 +27,7 @@ namespace QACheckSheetAPI.Controllers
         }
 
         // GET: api/item/{id}
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetItem(int id)
         {
             var item = await itemServices.GetItemByID(id);

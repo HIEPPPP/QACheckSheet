@@ -5,6 +5,10 @@ import DashboardPage from "../features/dashboard/DashboardPage";
 import { PublicLayout } from "../layouts/PublicLayout";
 import { RequireAuth } from "./RequireAuth";
 import { PrivateLayout } from "../layouts/PrivateLayout";
+import DeviceTypePage from "../features/mstDeviceType/DeviceTypePage";
+import DevicePage from "../features/mstDevice/DevicePage";
+import SheetPage from "../features/mstSheet/SheetPage";
+import ItemPage from "../features/mstSheetItem/ItemPage";
 
 export const AppRoutes = createBrowserRouter([
     // PUBLIC routes (no sidebar/header)
@@ -12,6 +16,7 @@ export const AppRoutes = createBrowserRouter([
         path: "/",
         element: <PublicLayout />, // layout rỗng hoặc đơn giản
         children: [
+            { index: true, element: <LoginPage /> },
             { path: "login", element: <LoginPage /> },
             { path: "*", element: <NotFoundPage /> },
         ],
@@ -28,7 +33,10 @@ export const AppRoutes = createBrowserRouter([
         children: [
             { index: true, element: <DashboardPage /> },
             { path: "dashboard", element: <DashboardPage /> },
-            // more routes
+            { path: "deviceType", element: <DeviceTypePage /> },
+            { path: "device", element: <DevicePage /> },
+            { path: "sheet", element: <SheetPage /> },
+            { path: "item", element: <ItemPage /> },
         ],
     },
 ]);
