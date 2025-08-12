@@ -18,7 +18,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradient-move 3s ease infinite;
+    animation: gradient-move 2s ease infinite;
 }
 
 .body {

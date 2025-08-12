@@ -38,7 +38,7 @@ const getTitleFromPath = (path: string) => {
     }
 
     // mặc định: chuyển segment đầu thành Title Case
-    const first = parts[0];
+    const first = parts[1];
     if (!first) return "Welcome";
     return first.charAt(0).toUpperCase() + first.slice(1);
 };
@@ -53,34 +53,33 @@ export const Header: React.FC = () => {
 
     return (
         <header className="w-full px-6 py-10 flex items-center justify-between">
-            <div className="relative w-full max-w-md mx-auto">
-                <input
-                    type="text"
-                    placeholder="Tìm kiếm thiết bị..."
-                    className="w-[380px] py-2 pl-10 pr-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-700"
-                    // onChange={handleInputChange}
-                    // value={value}
-                />
-                {/* <FiSearch
-                    className="absolute left-3 top-2.5 text-gray-500"
-                    size={18}
-                /> */}
-            </div>
             <div>
                 {/* big title */}
-                <h1 className="text-sm md:text-xl font-semibold text-[#313b5e]">
+                <h1 className="text-sm md:text-xl font-semibold text-[#5d7186]">
                     {title.toUpperCase()}!
                 </h1>
             </div>
 
             <div className="flex items-center gap-4">
-                {/* user avatar */}
-                <div className="flex items-center gap-2 ml-2">
-                    <img
-                        src="https://i.pravatar.cc/40"
-                        alt="avatar"
-                        className="w-9 h-9 rounded-full object-cover border"
+                <div className="relative w-full max-w-md mx-auto">
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        className="w-[380px] py-2 pl-10 pr-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-700"
+                        // onChange={handleInputChange}
+                        // value={value}
                     />
+                </div>
+
+                <div className="flex items-center gap-4">
+                    {/* user avatar */}
+                    <div className="flex items-center gap-2 ml-2">
+                        <img
+                            src="https://i.pravatar.cc/40"
+                            alt="avatar"
+                            className="w-9 h-9 rounded-full object-cover border"
+                        />
+                    </div>
                 </div>
             </div>
         </header>

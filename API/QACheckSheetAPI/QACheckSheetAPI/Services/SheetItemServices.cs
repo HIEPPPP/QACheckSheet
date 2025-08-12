@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using QACheckSheetAPI.Data;
 using QACheckSheetAPI.Models.Domain;
 using QACheckSheetAPI.Models.DTO.SheetItem;
+using QACheckSheetAPI.Repositories.Implementation;
 using QACheckSheetAPI.Repositories.Interface;
 
 namespace QACheckSheetAPI.Services
@@ -9,11 +12,13 @@ namespace QACheckSheetAPI.Services
     {
         private readonly ISheetItemRepository sheetItemRepository;
         private readonly IMapper mapper;
+        private readonly QACheckSheetDBContext context;
 
-        public SheetItemServices(ISheetItemRepository sheetItemRepository, IMapper mapper)
+        public SheetItemServices(ISheetItemRepository sheetItemRepository, IMapper mapper, QACheckSheetDBContext context)
         {
             this.sheetItemRepository = sheetItemRepository;
             this.mapper = mapper;
+            this.context = context;
         }
 
         public async Task<List<ItemDTO>> GetListItem()
@@ -26,14 +31,7 @@ namespace QACheckSheetAPI.Services
         {
             var item = await sheetItemRepository.GetAsync(id);
             return item == null ? null : mapper.Map<ItemDTO>(item);
-        }
-
-        public async Task<ItemDTO> CreateItem(CreateItemRequestDTO dto) 
-        {
-            var itemDomain = mapper.Map<SheetItemMST>(dto); 
-            var created = await sheetItemRepository.CreateAsync(itemDomain);
-            return mapper.Map<ItemDTO>(created);
-        }
+        }        
 
         public async Task<ItemDTO> UpdateItem(int id, UpdateItemRequestDTO dto)
         {
@@ -61,13 +59,47 @@ namespace QACheckSheetAPI.Services
             }
             await sheetItemRepository.UpdateAsync(item);
             return mapper.Map<ItemDTO>(item);
+        }        
+
+        public async Task<ItemDTO> CreateItem(CreateItemRequestDTO dto)
+        {
+            var item = mapper.Map<SheetItemMST>(dto);
+
+            if (item.OrderNumber == 0)
+            {
+                var last = await context.SheetItems
+                    .Where(s => s.SheetId == item.SheetId && s.ParentItemId == item.ParentItemId)
+                    .OrderByDescending(s => s.OrderNumber)
+                    .Select(s => s.OrderNumber)
+                    .FirstOrDefaultAsync();
+                item.OrderNumber = last + 1;
+            }
+
+            await sheetItemRepository.CreateAsync(item);
+
+            await ComputeAndUpdatePathForNewItemAsync(item);
+
+            return mapper.Map<ItemDTO>(item);
         }
 
-        public async Task DeleteItem(int id)
+        private async Task ComputeAndUpdatePathForNewItemAsync(SheetItemMST item)
         {
-            var item = await sheetItemRepository.GetAsync(id)
-                ?? throw new Exception("Item không tồn tại");
-            await sheetItemRepository.DeleteAsync(item);
-        }
+            if (item.ParentItemId == null)
+            {
+                item.Level = 1;
+                item.PathIds = $"/{item.ItemId}/";
+                item.PathTitles = item.Title;
+            }
+            else
+            {
+                var parent = await context.SheetItems.FirstOrDefaultAsync(p => p.ItemId == item.ParentItemId);
+                if (parent == null) throw new Exception("Parent không tồn tại");
+                item.Level = parent.Level + 1;
+                item.PathIds = $"{parent.PathIds}{item.ItemId}/";
+                item.PathTitles = $"{parent.PathTitles} > {item.Title}";
+            }
+            context.SheetItems.Update(item);
+            await context.SaveChangesAsync();
+        }        
     }
 }

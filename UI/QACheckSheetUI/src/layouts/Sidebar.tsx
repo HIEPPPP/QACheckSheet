@@ -18,7 +18,7 @@ const menu: MenuItem[] = [
 ];
 
 const admin: MenuItem[] = [
-    { label: "Device Type", path: "/app/deviceType", Icon: HomeIcon },
+    { label: "Type", path: "/app/deviceType", Icon: HomeIcon },
     { label: "Device", path: "/app/device", Icon: HomeIcon },
     { label: "Template", path: "/app/sheet", Icon: HomeIcon },
     { label: "Content", path: "/app/item", Icon: HomeIcon },
@@ -38,7 +38,7 @@ export const Sidebar: React.FC = () => {
 
     return (
         <div
-            className={`h-screen bg-[#f8f5f1] text-[#333] transition-all duration-200 flex flex-col shadow-lg ${
+            className={`h-screen bg-[#f8f5f1] text-[#333] transition-all duration-200 flex flex-col border-r-0 border-solid border-[#eaedf1] shadow-[inset_-8px_0px_8px_-8px_rgba(134,110,110,0.25)] ${
                 isOpen ? "w-64" : "w-16"
             }`}
         >
@@ -60,7 +60,14 @@ export const Sidebar: React.FC = () => {
                     Assurance
                 </span>
             </div>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-4">
+                <li
+                    className={`text-[11px] text-[#797b97] pl-[25px] py-[8px] font-bold ${
+                        isOpen ? "opacity-60" : "opacity-0"
+                    }`}
+                >
+                    GENERAL
+                </li>
                 {menu
                     // Lọc luôn những item không phải “Approve - Confirm” hoặc chỉ giữ “Approve - Confirm” khi có quyền
                     // .filter(
@@ -96,38 +103,40 @@ export const Sidebar: React.FC = () => {
                     ))}
             </ul>
             {isAdmin && (
-                <>
-                    {/* Khoảng cách để tách phần Admin */}
-                    {/* Đường kẻ */}
-                    <hr className="my-4 mx-3 border-t border-gray-300" />{" "}
-                    <ul className="space-y-2">
-                        {admin.map(({ label, path, Icon }) => (
-                            <li key={label}>
-                                <NavLink
-                                    to={path}
-                                    className={({ isActive }) =>
-                                        `flex items-center p-3 rounded-lg transition-all duration-300 ease-in-out ${
-                                            isActive
-                                                ? "bg-[#009DDC] text-white"
-                                                : "hover:bg-[#E0E0E0] text-[#333]"
-                                        }`
-                                    }
+                <ul className="space-y-2 mt-8">
+                    <li
+                        className={`text-[11px] text-[#797b97] pl-[25px] font-bold ${
+                            isOpen ? "opacity-60" : "opacity-0"
+                        }`}
+                    >
+                        ADMIN
+                    </li>
+                    {admin.map(({ label, path, Icon }) => (
+                        <li key={label}>
+                            <NavLink
+                                to={path}
+                                className={({ isActive }) =>
+                                    `flex items-center p-3 rounded-lg transition-all duration-300 ease-in-out ${
+                                        isActive
+                                            ? "bg-[#009DDC] text-white"
+                                            : "hover:bg-[#E0E0E0] text-[#333]"
+                                    }`
+                                }
+                            >
+                                <div className="w-10 flex justify-center flex-shrink-0">
+                                    {<Icon />}
+                                </div>
+                                <span
+                                    className={`ml-2 transition-all duration-300 overflow-hidden whitespace-nowrap ${
+                                        isOpen ? "opacity-100" : "opacity-0"
+                                    }`}
                                 >
-                                    <div className="w-10 flex justify-center flex-shrink-0">
-                                        {<Icon />}
-                                    </div>
-                                    <span
-                                        className={`ml-2 transition-all duration-300 overflow-hidden whitespace-nowrap ${
-                                            isOpen ? "opacity-100" : "opacity-0"
-                                        }`}
-                                    >
-                                        {label}
-                                    </span>
-                                </NavLink>
-                            </li>
-                        ))}
-                    </ul>
-                </>
+                                    {label}
+                                </span>
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
             )}
         </div>
     );

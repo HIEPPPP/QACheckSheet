@@ -4,6 +4,7 @@ using QACheckSheetAPI.Models.DTO.Auth;
 using QACheckSheetAPI.Models.DTO.Device;
 using QACheckSheetAPI.Models.DTO.DeviceType;
 using QACheckSheetAPI.Models.DTO.Sheet;
+using QACheckSheetAPI.Models.DTO.SheetItem;
 using QACheckSheetAPI.Models.DTO.User;
 
 namespace QACheckSheetAPI.Mapping
@@ -39,6 +40,11 @@ namespace QACheckSheetAPI.Mapping
             // Sheet
             CreateMap<SheetMST, SheetDTO>().ReverseMap();
             CreateMap<SheetMST, CreateSheetRequestDTO>().ReverseMap();
+
+            // SheetItem
+            CreateMap<SheetItemMST, ItemDTO>().ReverseMap();
+            CreateMap<SheetItemMST, CreateItemRequestDTO>().ReverseMap();
+
         }
     }
 }

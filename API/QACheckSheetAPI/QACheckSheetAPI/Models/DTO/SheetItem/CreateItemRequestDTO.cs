@@ -3,10 +3,14 @@
     public class CreateItemRequestDTO
     {
         public int SheetId { get; set; }
+        public int ParentItemId { get; set; }
         public string Title { get; set; } = null!;        
-        public string DataType { get; set; } = null!;
         public int OrderNumber { get; set; }
+        public string? PathIds { get; set; }
+        public string? PathTitles { get; set; }
+        public string? Description { get; set; }
         public int Level { get; set; }
+        public string? DataType { get; set; };
         public decimal Min { get; set; }
         public decimal Max { get; set; }
         public bool IsRequired { get; set; } = false;

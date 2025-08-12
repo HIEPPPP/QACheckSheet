@@ -4,8 +4,8 @@ namespace QACheckSheetAPI.Models.DTO.SheetItem
 {
     public class ItemDTO
     {
-        public int ItemId { get; set; }
-        public int SheetId { get; set; }
+        public int? ItemId { get; set; }
+        public int? SheetId { get; set; }
         public string SheetName { get; set; } = null!;
         public string SheetCode { get; set; } = null!;
         public int ParentItemId { get; set; }
