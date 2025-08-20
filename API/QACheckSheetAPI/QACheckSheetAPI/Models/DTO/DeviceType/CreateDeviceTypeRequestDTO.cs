@@ -2,7 +2,7 @@
 {
     public class CreateDeviceTypeRequestDTO
     {
-        public string TypeCode { get; set; } = null!;
+        //public string TypeCode { get; set; } = null!;
         public string TypeName { get; set; } = null!;
         public int? DefaultFrequency { get; set; }
         public string Description { get; set; } = string.Empty;

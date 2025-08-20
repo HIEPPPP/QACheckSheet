@@ -2,11 +2,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { getAuthData } from "../shared/services/auth.service";
 
 const isAuthenticated = () => {
-    const {
-        userCode,
-        fullName,
-        roles: [],
-    } = getAuthData();
+    const { userCode, fullName, roles = [] } = getAuthData();
     return !!userCode;
 };
 

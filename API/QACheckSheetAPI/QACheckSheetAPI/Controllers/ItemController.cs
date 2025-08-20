@@ -38,6 +38,30 @@ namespace QACheckSheetAPI.Controllers
             return Ok(new ApiResponse<ItemDTO>(200, "OK", item));
         }
 
+        // GET: api/item/tree/sheetId
+        [HttpGet("tree/{sheetId}")]
+        public async Task<IActionResult> GetTreeItemBySheetId(int sheetId)
+        {
+            var items = await itemServices.GetTreeBySheetId(sheetId);
+            if(items == null)
+            {
+                return NotFound("Item tree không tồn tại");
+            }
+            return Ok(new ApiResponse<List<ItemTreeDTO>>(200, "OK", items));
+        }
+
+        // GET: api/item/tree
+        [HttpGet("tree")]
+        public async Task<IActionResult> GetTreeItem()
+        {
+            var items = await itemServices.GetTree();
+            if (items == null)
+            {
+                return NotFound("Item tree không tồn tại");
+            }
+            return Ok(new ApiResponse<List<SheetGroupDTO>>(200, "OK", items));
+        }
+
         // POST: api/item
         [HttpPost]
         public async Task<IActionResult> CreateDevice(CreateItemRequestDTO dto)

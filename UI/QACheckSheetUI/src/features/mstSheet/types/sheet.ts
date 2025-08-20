@@ -1,6 +1,6 @@
 export interface Sheet {
     sheetId?: number | null;
-    sheetCode: string;
+    sheetCode?: string | null;
     sheetName: string;
     formNO: string;
     description?: string;

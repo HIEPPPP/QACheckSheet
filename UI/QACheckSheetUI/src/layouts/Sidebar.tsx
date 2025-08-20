@@ -24,7 +24,7 @@ const admin: MenuItem[] = [
     { label: "Content", path: "/app/item", Icon: HomeIcon },
     {
         label: "Relations   ",
-        path: "/app/type-sheet",
+        path: "/app/typeSheet",
         Icon: HomeIcon,
     },
     { label: "Users", path: "/app/users", Icon: HomeIcon },
@@ -39,7 +39,7 @@ export const Sidebar: React.FC = () => {
     return (
         <div
             className={`h-screen bg-[#f8f5f1] text-[#333] transition-all duration-200 flex flex-col border-r-0 border-solid border-[#eaedf1] shadow-[inset_-8px_0px_8px_-8px_rgba(134,110,110,0.25)] ${
-                isOpen ? "w-64" : "w-16"
+                isOpen ? "w-54" : "w-16"
             }`}
         >
             {/*Sidebar  */}

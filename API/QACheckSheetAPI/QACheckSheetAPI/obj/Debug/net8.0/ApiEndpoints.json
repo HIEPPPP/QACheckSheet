@@ -269,6 +269,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "QACheckSheetAPI.Controllers.ItemController",
+    "Method": "GetTreeItem",
+    "RelativePath": "api/Item/tree",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.ItemController",
+    "Method": "GetTreeItemBySheetId",
+    "RelativePath": "api/Item/tree/{sheetId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sheetId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "QACheckSheetAPI.Controllers.SheetController",
     "Method": "GetListSheet",
     "RelativePath": "api/Sheet",
@@ -335,6 +361,85 @@
     "ContainingType": "QACheckSheetAPI.Controllers.SheetController",
     "Method": "Delete",
     "RelativePath": "api/Sheet/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.SheetDeviceTypeController",
+    "Method": "GetListSheet",
+    "RelativePath": "api/SheetDeviceType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.SheetDeviceTypeController",
+    "Method": "CreateSheetDeviceType",
+    "RelativePath": "api/SheetDeviceType",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.SheetDeviceTypeDTO.CreateSheetDeviceTypeRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.SheetDeviceTypeController",
+    "Method": "GetSheetDeviceTypeByDeviceTypeId",
+    "RelativePath": "api/SheetDeviceType/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.SheetDeviceTypeController",
+    "Method": "UpdateSheetDeviceType",
+    "RelativePath": "api/SheetDeviceType/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.SheetDeviceTypeDTO.UpdateSheetDeviceTypeRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.SheetDeviceTypeController",
+    "Method": "DeleteSheetDeviceType",
+    "RelativePath": "api/SheetDeviceType/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,

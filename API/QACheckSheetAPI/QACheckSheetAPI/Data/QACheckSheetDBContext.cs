@@ -53,8 +53,8 @@ namespace QACheckSheetAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // composite key
-            modelBuilder.Entity<SheetDeviceTypeMST>()
-                .HasKey(sdt => new { sdt.SheetId, sdt.DeviceTypeId });
+            //modelBuilder.Entity<SheetDeviceTypeMST>()
+            //    .HasKey(sdt => new { sdt.SheetId, sdt.DeviceTypeId });
 
             // optional: configure relationships explicitly
             modelBuilder.Entity<SheetDeviceTypeMST>()
@@ -68,6 +68,39 @@ namespace QACheckSheetAPI.Data
                 .WithMany(d => d.SheetDeviceTypeMSTs)   // ensure DeviceTypeMST has ICollection<SheetDeviceTypeMST> SheetDeviceTypes
                 .HasForeignKey(sdt => sdt.DeviceTypeId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<DeviceTypeMST>(entity =>
+            {
+                entity.HasKey(e => e.TypeId);
+                entity.Property(e => e.TypeId)
+                      .ValueGeneratedOnAdd();
+
+                // computed column DT + Id
+                entity.Property(e => e.TypeCode)
+                      .HasComputedColumnSql("'DT' + CAST([TypeId] AS VARCHAR(20))", stored: true);
+
+                entity.HasIndex(e => e.TypeCode).IsUnique();
+            });
+
+            modelBuilder.Entity<DeviceMST>(entity =>
+            {
+                entity.HasKey(e => e.DeviceId);
+                entity.Property(e => e.DeviceId).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.DeviceCode)
+                      .HasComputedColumnSql("'DV' + CAST([DeviceId] AS VARCHAR(20))", stored: true);
+                entity.HasIndex(e => e.DeviceCode).IsUnique();
+            });
+
+            modelBuilder.Entity<SheetMST>(entity =>
+            {
+                entity.HasKey(e => e.SheetId);
+                entity.Property(e => e.SheetId).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.SheetCode)
+                      .HasComputedColumnSql("'CS' + CAST([SheetId] AS VARCHAR(20))", stored: true);
+                entity.HasIndex(e => e.SheetCode).IsUnique();
+            });            
 
             base.OnModelCreating(modelBuilder);
         }

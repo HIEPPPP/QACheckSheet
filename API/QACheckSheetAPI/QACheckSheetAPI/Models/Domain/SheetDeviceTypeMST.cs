@@ -4,8 +4,10 @@ using System.Text.Json.Serialization;
 
 namespace QACheckSheetAPI.Models.Domain
 {
-    public class SheetDeviceTypeMST
+    public class SheetDeviceTypeMST : ClassBase
     {
+        [Key]
+        public int Id { get; set; }
         public int SheetId { get; set; }
         public int DeviceTypeId { get; set; }
 

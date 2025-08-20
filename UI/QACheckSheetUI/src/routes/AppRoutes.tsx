@@ -9,6 +9,7 @@ import DeviceTypePage from "../features/mstDeviceType/DeviceTypePage";
 import DevicePage from "../features/mstDevice/DevicePage";
 import SheetPage from "../features/mstSheet/SheetPage";
 import ItemPage from "../features/mstSheetItem/ItemPage";
+import TypeSheetPage from "../features/mstTypeSheet/TypeSheetPage";
 
 export const AppRoutes = createBrowserRouter([
     // PUBLIC routes (no sidebar/header)
@@ -37,6 +38,7 @@ export const AppRoutes = createBrowserRouter([
             { path: "device", element: <DevicePage /> },
             { path: "sheet", element: <SheetPage /> },
             { path: "item", element: <ItemPage /> },
+            { path: "typeSheet", element: <TypeSheetPage /> },
         ],
     },
 ]);

@@ -17,7 +17,7 @@ import { useState } from "react";
 
 import type { Sheet } from "../types/sheet";
 
-import { formatDateTime } from "../../../utils/formatDateTiem";
+import { formatDateTime } from "../../../utils/formatDateTime";
 
 // Định nghĩa props cho component
 interface SheetTableProps {

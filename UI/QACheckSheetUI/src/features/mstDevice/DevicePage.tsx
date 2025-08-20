@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button } from "@mui/material";
+import { Button, LinearProgress } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import type { Device } from "./types/device";
 import DeviceTable from "./components/DeviceTable";
@@ -8,12 +8,12 @@ import ConfirmDialog from "../../shared/components/ConfirmDialog";
 import Notification from "../../shared/components/Notification";
 import { useDevices } from "./hooks/useDevice";
 import type { AlertColor } from "@mui/material";
-// import { AuthContext } from "../contexts/AuthContext";
-import { vnTime } from "../../utils/formatDateTiem";
+import { UserContext } from "../../contexts/UserProvider";
+import { vnTime } from "../../utils/formatDateTime";
 
 const DeviceTypePage: React.FC = () => {
     const { devices, create, update, remove, refresh, loading } = useDevices();
-    // const user = useContext(AuthContext);
+    const { user } = useContext(UserContext);
 
     const [open, setOpen] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState<number | null>(null);
@@ -124,9 +124,11 @@ const DeviceTypePage: React.FC = () => {
     };
 
     const handleButtonAddClick = () => {
+        console.log(user);
+
         setFormData({
             typeId: null,
-            deviceCode: "DV" + devices.length + 1,
+            // deviceCode: "DV" + devices.length + 1
             deviceName: "",
             seriNumber: "",
             model: "",
@@ -136,15 +138,16 @@ const DeviceTypePage: React.FC = () => {
             frequencyOverride: null,
             description: "",
             createAt: new Date(vnTime).toISOString(),
-            createBy: "24182",
+            createBy: String(user?.userCode),
             updateAt: new Date(vnTime).toISOString(),
-            updateBy: "24182",
+            updateBy: String(user?.userCode),
         });
         setOpen(true);
     };
 
     return (
         <div>
+            {loading && <LinearProgress />}
             <h1 className="text-3xl font-bold mb-4">Danh Sách Thiết Bị</h1>
             <Button
                 variant="contained"

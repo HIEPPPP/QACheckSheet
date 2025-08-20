@@ -11,9 +11,9 @@ import {
     Select,
     TextField,
 } from "@mui/material";
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import DangerousIcon from "@mui/icons-material/Dangerous";
-import EngineeringIcon from "@mui/icons-material/Engineering";
+import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import HourglassBottomOutlinedIcon from "@mui/icons-material/HourglassBottomOutlined";
 
 import type { Device } from "../types/device";
 import type { DeviceType } from "../../mstDeviceType/types/deviceType";
@@ -89,16 +89,6 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                     )}
                 />
                 <TextField
-                    label="Mã thiết bị"
-                    fullWidth
-                    margin="dense"
-                    value={formData.deviceCode ?? ""}
-                    onChange={(e) =>
-                        setFormData({ ...formData, deviceCode: e.target.value })
-                    }
-                    disabled
-                />
-                <TextField
                     label="Tên thiết bị"
                     fullWidth
                     margin="dense"
@@ -169,19 +159,19 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                         <MenuItem value={"Đang sử dụng"}>
                             Sử dụng{" "}
                             <span className="ml-4">
-                                <ThumbUpAltIcon color="success" />
+                                <CheckCircleOutlinedIcon color="success" />
                             </span>
                         </MenuItem>
                         <MenuItem value={"Bảo trì"}>
                             Bảo trì{" "}
                             <span className="ml-4">
-                                <EngineeringIcon color="warning" />
+                                <HourglassBottomOutlinedIcon color="warning" />
                             </span>
                         </MenuItem>
                         <MenuItem value={"Hỏng"}>
                             Hỏng{" "}
                             <span className="ml-4">
-                                <DangerousIcon color="error" />
+                                <CancelOutlinedIcon color="error" />
                             </span>
                         </MenuItem>
                     </Select>

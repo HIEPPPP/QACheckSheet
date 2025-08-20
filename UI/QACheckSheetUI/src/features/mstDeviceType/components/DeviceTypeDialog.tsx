@@ -4,8 +4,6 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    FormControlLabel,
-    Switch,
     TextField,
 } from "@mui/material";
 
@@ -37,16 +35,6 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
             {formData.typeId ? "Cập Nhật Loại Thiết Bị" : "Thêm Loại Thiết Bị"}
         </DialogTitle>
         <DialogContent>
-            <TextField
-                label="Mã loại thiết bị"
-                fullWidth
-                margin="dense"
-                value={formData.typeCode ?? ""}
-                onChange={(e) =>
-                    setFormData({ ...formData, typeCode: e.target.value })
-                }
-                disabled
-            />
             <TextField
                 label="Tên loại thiết bị"
                 fullWidth

@@ -2,7 +2,7 @@ export interface Device {
     deviceId?: number | null;
     typeId?: number | null;
     typeName?: string;
-    deviceCode: string;
+    deviceCode?: string | null;
     deviceName: string;
     seriNumber: string;
     model: string;

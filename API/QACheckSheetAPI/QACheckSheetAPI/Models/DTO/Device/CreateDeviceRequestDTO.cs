@@ -3,7 +3,7 @@
     public class CreateDeviceRequestDTO
     {
         public int TypeId { get; set; }
-        public string DeviceCode { get; set; } = null!;
+        //public string DeviceCode { get; set; } = null!;
         public string DeviceName { get; set; } = null!;
         public string SeriNumber { get; set; } = string.Empty;
         public string Model { get; set; } = string.Empty;

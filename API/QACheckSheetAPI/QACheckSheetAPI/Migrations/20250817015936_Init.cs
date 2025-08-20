@@ -32,12 +32,12 @@ namespace QACheckSheetAPI.Migrations
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Factory = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Frequency = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ParentItemId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContentA = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContentB = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContentC = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OrderNumber = table.Column<int>(type: "int", nullable: false),
+                    Level = table.Column<int>(type: "int", nullable: false),
+                    PathTitles = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CheckedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CheckedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -75,7 +75,7 @@ namespace QACheckSheetAPI.Migrations
                 {
                     TypeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TypeCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TypeCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false, computedColumnSql: "'DT' + CAST([TypeId] AS VARCHAR(20))", stored: true),
                     TypeName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     DefaultFrequency = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
@@ -110,7 +110,7 @@ namespace QACheckSheetAPI.Migrations
                 {
                     SheetId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SheetCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    SheetCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false, computedColumnSql: "'CS' + CAST([SheetId] AS VARCHAR(20))", stored: true),
                     SheetName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     FormNO = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -173,7 +173,7 @@ namespace QACheckSheetAPI.Migrations
                     DeviceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TypeId = table.Column<int>(type: "int", nullable: false),
-                    DeviceCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    DeviceCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false, computedColumnSql: "'DV' + CAST([DeviceId] AS VARCHAR(20))", stored: true),
                     DeviceName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     SeriNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -203,12 +203,19 @@ namespace QACheckSheetAPI.Migrations
                 name: "SheetDeviceTypes",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     SheetId = table.Column<int>(type: "int", nullable: false),
-                    DeviceTypeId = table.Column<int>(type: "int", nullable: false)
+                    DeviceTypeId = table.Column<int>(type: "int", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CancelFlag = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SheetDeviceTypes", x => new { x.SheetId, x.DeviceTypeId });
+                    table.PrimaryKey("PK_SheetDeviceTypes", x => x.Id);
                     table.ForeignKey(
                         name: "FK_SheetDeviceTypes_DeviceTypes_DeviceTypeId",
                         column: x => x.DeviceTypeId,
@@ -290,9 +297,21 @@ namespace QACheckSheetAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Devices_DeviceCode",
+                table: "Devices",
+                column: "DeviceCode",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Devices_TypeId",
                 table: "Devices",
                 column: "TypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DeviceTypes_TypeCode",
+                table: "DeviceTypes",
+                column: "TypeCode",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_NGDetails_ResultId",
@@ -305,6 +324,11 @@ namespace QACheckSheetAPI.Migrations
                 column: "DeviceTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SheetDeviceTypes_SheetId",
+                table: "SheetDeviceTypes",
+                column: "SheetId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SheetItems_ParentItemId",
                 table: "SheetItems",
                 column: "ParentItemId");
@@ -313,6 +337,12 @@ namespace QACheckSheetAPI.Migrations
                 name: "IX_SheetItems_SheetId",
                 table: "SheetItems",
                 column: "SheetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sheets_SheetCode",
+                table: "Sheets",
+                column: "SheetCode",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_RoleId",

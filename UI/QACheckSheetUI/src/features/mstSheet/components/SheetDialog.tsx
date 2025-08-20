@@ -32,11 +32,11 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
         disableRestoreFocus
     >
         <DialogTitle>
-            {formData.sheetId ? "Cập Nhật Loại Thiết Bị" : "Thêm Loại Thiết Bị"}
+            {formData.sheetId ? "Cập Nhật Check Sheet" : "Thêm Check Sheet"}
         </DialogTitle>
         <DialogContent>
-            <TextField
-                label="Mã loại thiết bị"
+            {/* <TextField
+                label="Mã Check Sheet"
                 fullWidth
                 margin="dense"
                 value={formData.sheetCode ?? ""}
@@ -44,9 +44,9 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                     setFormData({ ...formData, sheetCode: e.target.value })
                 }
                 disabled
-            />
+            /> */}
             <TextField
-                label="Tên loại thiết bị"
+                label="Tên Check Sheet"
                 fullWidth
                 margin="dense"
                 value={formData.sheetName ?? ""}

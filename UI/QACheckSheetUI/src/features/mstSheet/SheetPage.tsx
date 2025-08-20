@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button } from "@mui/material";
+import { Button, LinearProgress } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import SheetTable from "./components/SheetTable";
 import SheetDialog from "./components/SheetDialog";
@@ -7,13 +7,13 @@ import ConfirmDialog from "../../shared/components/ConfirmDialog";
 import Notification from "../../shared/components/Notification";
 import useSheet from "./hooks/useSheet";
 import type { AlertColor } from "@mui/material";
-// import { AuthContext } from "../contexts/AuthContext";
-import { vnTime } from "../../utils/formatDateTiem";
+import { UserContext } from "../../contexts/UserProvider";
+import { vnTime } from "../../utils/formatDateTime";
 import type { Sheet } from "./types/sheet";
 
 const SheetPage: React.FC = () => {
     const { sheets, create, update, remove, refresh, loading } = useSheet();
-    // const user = useContext(AuthContext);
+    const { user } = useContext(UserContext);
 
     const [open, setOpen] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState<number | null>(null);
@@ -116,20 +116,20 @@ const SheetPage: React.FC = () => {
     const handleButtonAddClick = () => {
         setFormData({
             sheetId: null,
-            sheetCode: "CS" + (sheets.length + 1),
             sheetName: "",
             formNO: "",
             description: "",
             createAt: new Date(vnTime).toISOString(),
-            createBy: "24182",
+            createBy: String(user?.userCode),
             updateAt: new Date(vnTime).toISOString(),
-            updateBy: "24182",
+            updateBy: String(user?.userCode),
         });
         setOpen(true);
     };
 
     return (
         <div>
+            {loading && <LinearProgress />}
             <h1 className="text-3xl font-bold mb-4">Danh Sách Check Sheet</h1>
             <Button
                 variant="contained"

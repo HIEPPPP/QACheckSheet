@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../services/authAPI";
 import type { UseAuthResult } from "../type/auth";
 import { UserContext } from "../../../contexts/UserProvider";
+import type { User } from "../../../shared/type/localstorage";
 
 export function useAuth(): UseAuthResult {
     const [userCode, setUserCode] = useState<string>("");
@@ -11,36 +12,47 @@ export function useAuth(): UseAuthResult {
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
+    const { loginUser } = useContext(UserContext);
+
     const navigate = useNavigate();
 
     const handleSubmit = useCallback(
         async (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             setError("");
+
             if (!userCode || !password) {
                 setError("Vui lòng nhập mã nhân viên và mật khẩu.");
                 return;
             }
+
             setLoading(true);
             try {
-                const result = await login(userCode, password);
-                setLoading(false);
+                const user: User | null = await login(userCode, password);
 
-                if (!result) {
+                if (!user) {
                     setError(
                         "Đăng nhập không thành công. Vui lòng kiểm tra lại."
                     );
                     setPassword("");
-                } else {
-                    navigate("/app");
+                    setLoading(false);
+                    return;
                 }
-            } catch (err) {
+
+                loginUser(user);
+
                 setLoading(false);
-                setError("Đã xảy ra lỗi khi đăng nhập. Vui lòng thử lại sau.");
+                navigate("/app");
+            } catch (err: any) {
+                setLoading(false);
+                // hiển thị message nếu axios trả về message, nếu không thì fallback chung
+                setError(
+                    err?.response?.data?.message ??
+                        "Đã xảy ra lỗi khi đăng nhập. Vui lòng thử lại sau."
+                );
             }
         },
-
-        [userCode, password, navigate]
+        [userCode, password, navigate, loginUser] // thêm loginUser vào dependency
     );
 
     return {

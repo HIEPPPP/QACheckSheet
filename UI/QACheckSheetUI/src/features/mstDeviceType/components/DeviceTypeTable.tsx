@@ -17,7 +17,7 @@ import { useState } from "react";
 
 import type { DeviceType } from "../types/deviceType";
 
-import { formatDateTime } from "../../../utils/formatDateTiem";
+import { formatDateTime } from "../../../utils/formatDateTime";
 
 // Định nghĩa props cho component
 interface DeviceTypeTableProps {

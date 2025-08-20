@@ -31,10 +31,10 @@ namespace QACheckSheetAPI.Services
 
         public async Task<DeviceTypeDTO> CreateDeviceType (CreateDeviceTypeRequestDTO dto)
         {
-            if(await deviceTypeRepository.IsTypeCodeExistAsync(dto.TypeCode))
-            {
-                throw new Exception("TypeCode đã tồn tại");
-            }
+            //if(await deviceTypeRepository.IsTypeCodeExistAsync(dto.TypeCode))
+            //{
+            //    throw new Exception("TypeCode đã tồn tại");
+            //}
 
             var typeDomain = mapper.Map<DeviceTypeMST>(dto);
 

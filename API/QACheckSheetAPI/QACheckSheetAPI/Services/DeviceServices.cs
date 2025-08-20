@@ -31,8 +31,8 @@ namespace QACheckSheetAPI.Services
 
         public async Task<DeviceDTO> CreateDevice(CreateDeviceRequestDTO dto)   
         {
-            if (await deviceRepository.IsDeviceCodeExistAsync(dto.DeviceCode))
-                throw new Exception("DeviceCode đã tồn tại");
+            //if (await deviceRepository.IsDeviceCodeExistAsync(dto.DeviceCode))
+            //    throw new Exception("DeviceCode đã tồn tại");
 
             var deviceDomain = mapper.Map<DeviceMST>(dto);  
             var created = await deviceRepository.CreateAsync(deviceDomain);
@@ -63,6 +63,8 @@ namespace QACheckSheetAPI.Services
                 device.Factory = dto.Factory;
             if(!string.IsNullOrWhiteSpace(dto.UpdateBy))
                 device.UpdateBy = dto.UpdateBy;
+            if (!string.IsNullOrWhiteSpace(dto.Location))
+                device.Location = dto.Location;
 
             await deviceRepository.UpdateAsync(device);
             return mapper.Map<DeviceDTO>(device);

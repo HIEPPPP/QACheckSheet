@@ -1,6 +1,6 @@
 export interface DeviceType {
     typeId?: number | null;
-    typeCode: string;
+    typeCode?: string | null;
     typeName: string;
     defaultFrequency: number | null;
     description?: string;

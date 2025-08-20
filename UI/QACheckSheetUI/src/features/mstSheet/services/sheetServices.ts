@@ -25,7 +25,7 @@ export const getListSheet = async () => {
 };
 
 // Lấy danh sách check sheet theo id
-export const getListDeviceTypeById = async (sheetId: number) => {
+export const getSheetById = async (sheetId: number) => {
     try {
         const res = await apiClient.get(`/Sheet/${sheetId}`);
         return res.data.data;
@@ -44,7 +44,7 @@ export const createSheet = async (sheet: Sheet) => {
     }
 };
 
-// Cập nhật check sheet 
+// Cập nhật check sheet
 export const updateSheet = async (sheetId: number, sheet: Sheet) => {
     try {
         const res = await apiClient.put(`/${sheetId}`, sheet);

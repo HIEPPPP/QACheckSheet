@@ -27,12 +27,12 @@ namespace QACheckSheetAPI.Models.Domain
         public string Factory { get; set; } = string.Empty;
         public string Frequency { get; set; } = string.Empty;
         // SheetItem
-        public string Title { get; set; } = string.Empty;
-        public string ContentA { get; set; } = string.Empty;
-        public string ContentB { get; set; } = string.Empty;
-        public string ContentC { get; set; } = string.Empty;
-        public string DataType { get; set; } = string.Empty;
+        public int? ParentItemId { get; set; }
+        public string Title { get; set; } = string.Empty;        
         public int OrderNumber { get; set; }
+        public int Level { get; set; }
+        public string? PathTitles { get; set; }
+        public string? DataType { get; set; }
         // Result
         [Required]
         public string Value { get; set; } = null!;

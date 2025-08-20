@@ -17,7 +17,7 @@ import { useState } from "react";
 
 import type { Device } from "../types/device";
 
-import { formatDateTime } from "../../../utils/formatDateTiem";
+import { formatDateTime } from "../../../utils/formatDateTime";
 
 // Định nghĩa props cho component
 interface DeviceTableProps {
@@ -159,7 +159,28 @@ const DeviceTable: React.FC<DeviceTableProps> = ({
                                     <TableCell>{device.model}</TableCell>
                                     <TableCell>{device.location}</TableCell>
                                     <TableCell>{device.factory}</TableCell>
-                                    <TableCell>{device.status}</TableCell>
+                                    {device.status === "Đang sử dụng" && (
+                                        <TableCell>
+                                            <span className="p-2 bg-[#d3f3df] rounded-sm text-green-600">
+                                                Sử dụng
+                                            </span>
+                                        </TableCell>
+                                    )}
+                                    {device.status === "Bảo trì" && (
+                                        <TableCell className="">
+                                            <span className="p-2 bg-[#fcdfdf] rounded-sm text-black">
+                                                Bảo trì
+                                            </span>
+                                        </TableCell>
+                                    )}
+                                    {device.status === "Hỏng" && (
+                                        <TableCell className="text-red-500">
+                                            <span className="p-2 bg-[#fcdfdf] rounded-sm text-orange-500">
+                                                Hỏng
+                                            </span>
+                                        </TableCell>
+                                    )}
+
                                     <TableCell>
                                         {device.frequencyOverride}
                                     </TableCell>

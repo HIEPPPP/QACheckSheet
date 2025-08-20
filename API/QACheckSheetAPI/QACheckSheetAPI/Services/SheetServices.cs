@@ -30,8 +30,8 @@ namespace QACheckSheetAPI.Services
 
         public async Task<SheetDTO> CreateSheet (CreateSheetRequestDTO dto)
         {
-            if (await sheetRepository.IsSheetCodeExistAsync(dto.SheetCode))
-                throw new Exception("SheetCode đã tồn tại");
+            //if (await sheetRepository.IsSheetCodeExistAsync(dto.SheetCode))
+            //    throw new Exception("SheetCode đã tồn tại");
 
             var sheetDomain = mapper.Map<SheetMST>(dto);
             var created = await sheetRepository.CreateAsync(sheetDomain);

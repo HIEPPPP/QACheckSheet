@@ -12,7 +12,7 @@ using QACheckSheetAPI.Data;
 namespace QACheckSheetAPI.Migrations
 {
     [DbContext(typeof(QACheckSheetDBContext))]
-    [Migration("20250809043736_Init")]
+    [Migration("20250817015936_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -47,20 +47,7 @@ namespace QACheckSheetAPI.Migrations
                     b.Property<DateTime?>("ConfirmDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ContentA")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentB")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentC")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("DataType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeviceCode")
@@ -95,12 +82,21 @@ namespace QACheckSheetAPI.Migrations
                     b.Property<int?>("ItemId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OrderNumber")
                         .HasColumnType("int");
+
+                    b.Property<int?>("ParentItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PathTitles")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SheetCode")
                         .IsRequired()
@@ -200,8 +196,10 @@ namespace QACheckSheetAPI.Migrations
 
                     b.Property<string>("DeviceCode")
                         .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasComputedColumnSql("'DV' + CAST([DeviceId] AS VARCHAR(20))", true);
 
                     b.Property<string>("DeviceName")
                         .IsRequired()
@@ -244,6 +242,9 @@ namespace QACheckSheetAPI.Migrations
 
                     b.HasKey("DeviceId");
 
+                    b.HasIndex("DeviceCode")
+                        .IsUnique();
+
                     b.HasIndex("TypeId");
 
                     b.ToTable("Devices");
@@ -277,8 +278,10 @@ namespace QACheckSheetAPI.Migrations
 
                     b.Property<string>("TypeCode")
                         .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasComputedColumnSql("'DT' + CAST([TypeId] AS VARCHAR(20))", true);
 
                     b.Property<string>("TypeName")
                         .IsRequired()
@@ -293,6 +296,9 @@ namespace QACheckSheetAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TypeId");
+
+                    b.HasIndex("TypeCode")
+                        .IsUnique();
 
                     b.ToTable("DeviceTypes");
                 });
@@ -362,15 +368,40 @@ namespace QACheckSheetAPI.Migrations
 
             modelBuilder.Entity("QACheckSheetAPI.Models.Domain.SheetDeviceTypeMST", b =>
                 {
-                    b.Property<int>("SheetId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("CancelFlag")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreateBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DeviceTypeId")
                         .HasColumnType("int");
 
-                    b.HasKey("SheetId", "DeviceTypeId");
+                    b.Property<int>("SheetId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdateBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("DeviceTypeId");
+
+                    b.HasIndex("SheetId");
 
                     b.ToTable("SheetDeviceTypes");
                 });
@@ -479,8 +510,10 @@ namespace QACheckSheetAPI.Migrations
 
                     b.Property<string>("SheetCode")
                         .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasComputedColumnSql("'CS' + CAST([SheetId] AS VARCHAR(20))", true);
 
                     b.Property<string>("SheetName")
                         .IsRequired()
@@ -495,6 +528,9 @@ namespace QACheckSheetAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SheetId");
+
+                    b.HasIndex("SheetCode")
+                        .IsUnique();
 
                     b.ToTable("Sheets");
                 });
