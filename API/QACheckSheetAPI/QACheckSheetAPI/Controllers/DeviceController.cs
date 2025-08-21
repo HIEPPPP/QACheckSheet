@@ -27,11 +27,23 @@ namespace QACheckSheetAPI.Controllers
         }
 
         // GET: api/device/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetDevice(int id)
         {
             var device = await deviceServices.GetDeviceById(id);
             if(device == null)
+            {
+                return NotFound("Device không tồn tại");
+            }
+            return Ok(new ApiResponse<DeviceDTO>(200, "OK", device));
+        }
+
+        // GET: api/device/{deviceCode}
+        [HttpGet("{deviceCode}")]
+        public async Task<IActionResult> GetDeviceByCode(string deviceCode)
+        {
+            var device = await deviceServices.GetDeviceByCode(deviceCode);
+            if (device == null)
             {
                 return NotFound("Device không tồn tại");
             }

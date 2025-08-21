@@ -59,6 +59,22 @@
   },
   {
     "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
+    "Method": "GetDeviceByCode",
+    "RelativePath": "api/Device/{deviceCode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "deviceCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
     "Method": "GetDevice",
     "RelativePath": "api/Device/{id}",
     "HttpMethod": "GET",
@@ -368,6 +384,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.SheetController",
+    "Method": "GetSheetByCode",
+    "RelativePath": "api/Sheet/{sheetCode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sheetCode",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

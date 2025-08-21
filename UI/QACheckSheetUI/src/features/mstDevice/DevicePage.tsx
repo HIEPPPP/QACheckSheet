@@ -29,6 +29,8 @@ const DeviceTypePage: React.FC = () => {
 
     const [formData, setFormData] = useState<Device>({
         typeId: null,
+        typeName: "",
+        typeCode: "",
         deviceCode: "",
         deviceName: "",
         seriNumber: "",
@@ -50,6 +52,8 @@ const DeviceTypePage: React.FC = () => {
         } else {
             setFormData({
                 typeId: null,
+                typeName: "",
+                typeCode: "",
                 deviceCode: "",
                 deviceName: "",
                 seriNumber: "",

@@ -96,7 +96,10 @@ const DeviceTable: React.FC<DeviceTableProps> = ({
                         <TableRow className="bg-gray-200">
                             <TableCell sx={{ fontWeight: 700 }}>STT</TableCell>
                             <TableCell sx={{ fontWeight: 700 }}>
-                                Loại thiết bị
+                                Mã Loại thiết bị
+                            </TableCell>
+                            <TableCell sx={{ fontWeight: 700 }}>
+                                Tên loại thiết bị
                             </TableCell>
                             <TableCell sx={{ fontWeight: 700 }}>
                                 Mã thiết bị
@@ -152,7 +155,9 @@ const DeviceTable: React.FC<DeviceTableProps> = ({
                                     <TableCell>
                                         {page * rowsPerPage + index + 1}
                                     </TableCell>
-                                    <TableCell>{device.typeId}</TableCell>
+                                    {/* <TableCell>{device.typeId}</TableCell> */}
+                                    <TableCell>{device.typeCode}</TableCell>
+                                    <TableCell>{device.typeName}</TableCell>
                                     <TableCell>{device.deviceCode}</TableCell>
                                     <TableCell>{device.deviceName}</TableCell>
                                     <TableCell>{device.seriNumber}</TableCell>

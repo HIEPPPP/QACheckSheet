@@ -14,7 +14,7 @@ const handleError = (error: any) => {
     return null;
 };
 
-// Lấy danh sách loại thiết bị
+// Lấy danh sách thiết bị
 export const getListDevice = async () => {
     try {
         const res = await apiClient.get("/");
@@ -24,10 +24,20 @@ export const getListDevice = async () => {
     }
 };
 
-// Lấy danh sách loại thiết bị theo id
-export const getListDeviceById = async (typeId: number) => {
+// Lấy danh sách thiết bị theo id
+export const getDeviceById = async (deviceID: number) => {
     try {
-        const res = await apiClient.get(`/Device/${typeId}`);
+        const res = await apiClient.get(`/${deviceID}`);
+        return res.data.data;
+    } catch (error) {
+        return handleError(error);
+    }
+};
+
+// Lấy theo code
+export const getDeviceByCode = async (deviceCode: string) => {
+    try {
+        const res = await apiClient.get(`/${deviceCode}`);
         return res.data.data;
     } catch (error) {
         return handleError(error);

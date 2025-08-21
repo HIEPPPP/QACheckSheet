@@ -32,6 +32,11 @@ namespace QACheckSheetAPI.Repositories.Implementation
             return await context.Devices.Include(x => x.DeviceTypeMST).FirstOrDefaultAsync(x => x.DeviceId == deviceId);
         }
 
+        public async Task<DeviceMST?> GetByCodeAsync(string deviceCode)
+        {
+            return await context.Devices.Include(x => x.DeviceTypeMST).FirstOrDefaultAsync(x => x.DeviceCode == deviceCode);
+        }
+
         public async Task<List<DeviceMST>> GetListAsync()
         {
             return await context.Devices.Include(x => x.DeviceTypeMST).ToListAsync();

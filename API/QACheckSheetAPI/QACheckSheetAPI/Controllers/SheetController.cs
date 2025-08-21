@@ -28,15 +28,27 @@ namespace QACheckSheetAPI.Controllers
         }
 
         // GET: api/sheet/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetSheet(int id)
         {
-            var device = await sheetService.GetSheetById(id);
-            if (device == null)
+            var sheet = await sheetService.GetSheetById(id);
+            if (sheet == null)
             {
                 return NotFound("Sheet không tồn tại");
             }
-            return Ok(new ApiResponse<SheetDTO>(200, "OK", device));
+            return Ok(new ApiResponse<SheetDTO>(200, "OK", sheet));
+        }
+
+        // GET: api/sheet/{sheetCode}
+        [HttpGet("{sheetCode}")]
+        public async Task<IActionResult> GetSheetByCode(string sheetCode)
+        {
+            var sheet = await sheetService.GetSheetBycode(sheetCode);
+            if (sheet == null)
+            {
+                return NotFound("Sheet không tồn tại");
+            }
+            return Ok(new ApiResponse<SheetDTO>(200, "OK", sheet));
         }
 
         // POST: api/deivce

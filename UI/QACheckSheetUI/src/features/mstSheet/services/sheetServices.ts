@@ -14,7 +14,7 @@ const handleError = (error: any) => {
     return null;
 };
 
-// Lấy danh sách check sheet
+// Lấy danh sách
 export const getListSheet = async () => {
     try {
         const res = await apiClient.get("/");
@@ -24,17 +24,27 @@ export const getListSheet = async () => {
     }
 };
 
-// Lấy danh sách check sheet theo id
+// Lấy theo id
 export const getSheetById = async (sheetId: number) => {
     try {
-        const res = await apiClient.get(`/Sheet/${sheetId}`);
+        const res = await apiClient.get(`/${sheetId}`);
         return res.data.data;
     } catch (error) {
         return handleError(error);
     }
 };
 
-// Tạo mới check sheet
+// Lấy theo sheetCode
+export const getSheetByCode = async (sheetCode: string) => {
+    try {
+        const res = await apiClient.get(`/${sheetCode}`);
+        return res.data.data;
+    } catch (error) {
+        return handleError(error);
+    }
+};
+
+// Tạo mới template
 export const createSheet = async (sheet: Sheet) => {
     try {
         const res = await apiClient.post("/", sheet);
@@ -44,7 +54,7 @@ export const createSheet = async (sheet: Sheet) => {
     }
 };
 
-// Cập nhật check sheet
+// Cập nhật
 export const updateSheet = async (sheetId: number, sheet: Sheet) => {
     try {
         const res = await apiClient.put(`/${sheetId}`, sheet);

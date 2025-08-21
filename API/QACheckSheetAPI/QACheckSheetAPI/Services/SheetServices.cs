@@ -28,6 +28,12 @@ namespace QACheckSheetAPI.Services
             return mapper.Map<SheetDTO>(sheet);
         }
 
+        public async Task<SheetDTO> GetSheetBycode(string sheetCode)
+        {
+            var sheet = await sheetRepository.GetByCodeAsync(sheetCode);
+            return mapper.Map<SheetDTO>(sheet);
+        }
+
         public async Task<SheetDTO> CreateSheet (CreateSheetRequestDTO dto)
         {
             //if (await sheetRepository.IsSheetCodeExistAsync(dto.SheetCode))

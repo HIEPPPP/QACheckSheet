@@ -64,10 +64,10 @@ const DashboardPage: React.FC = () => {
                     </div>
                 </div>
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     color="info"
                     onClick={() => {}}
-                    startIcon={<QrCode />}
+                    startIcon={<QrCode fontSize="large" />}
                 >
                     <span className="font-bold text-xl">Check</span>
                 </Button>

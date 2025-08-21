@@ -1,6 +1,7 @@
 export interface Device {
     deviceId?: number | null;
     typeId?: number | null;
+    typeCode?: string;
     typeName?: string;
     deviceCode?: string | null;
     deviceName: string;

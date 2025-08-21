@@ -8,7 +8,7 @@ type DeviceProps = {
 
 const Devices: React.FC<DeviceProps> = ({ devices }) => {
     return (
-        <div className="flex flex-wrap gap-4 mt-10">
+        <div className="flex flex-wrap justify-center gap-4 mt-10 w-full ">
             {devices.map((device) => (
                 <div key={device.deviceId} className="w-full sm:w-51">
                     <DeviceCard device={device} />
