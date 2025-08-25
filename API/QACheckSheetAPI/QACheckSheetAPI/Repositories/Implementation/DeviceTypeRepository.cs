@@ -42,7 +42,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
         public async Task<List<DeviceTypeMST>> GetListAsync()
         {
             return await context.DeviceTypes.AsNoTracking().ToListAsync();
-        }
+        }   
 
         public async Task<bool> IsTypeCodeExistAsync(string typeCode)
         {

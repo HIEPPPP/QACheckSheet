@@ -1,7 +1,9 @@
-import React, { use, useEffect, useState } from "react";
+import React, { use, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getSheetByCode } from "../mstSheet/services/sheetServices";
 import { getDeviceByCode } from "../mstDevice/services/deviceServices";
+import { Alert } from "@mui/material";
+import { UserContext } from "../../contexts/UserProvider";
 
 interface Template {
     sheetCode?: string;
@@ -28,6 +30,12 @@ const CheckPage: React.FC = () => {
     const [template, setTemplate] = useState<Template>({});
     const [device, setDevice] = useState<Device>({});
 
+    // Sate khóa màn khi đã xác nhận
+    const [isLocked, setIsLocked] = useState(false);
+
+    // UserContext
+    const { user } = useContext(UserContext);
+
     useEffect(() => {
         if (!code) return navigate("/");
         const parts = code.split("-");
@@ -36,59 +44,64 @@ const CheckPage: React.FC = () => {
         setSheetCode(parts[1]);
     }, [code, navigate]);
 
-    // Lấy Template (Sheet) và danh sách item
+    // Lấy Template, thiết bị và danh sách item
     useEffect(() => {
-        const fetchTemplate = async () => {
+        if (!sheetCode || !deviceCode) return;
+        const fetchData = async () => {
             setLoading(true);
             try {
-                const res = await getSheetByCode(sheetCode);
-                res && setTemplate(res);
+                const [templateRes, deviceRes] = await Promise.all([
+                    getSheetByCode(sheetCode),
+                    getDeviceByCode(deviceCode),
+                ]);
+                templateRes && setTemplate(templateRes);
+                deviceRes && setDevice(deviceRes);
             } catch (err: any) {
                 setError(err.message);
             } finally {
                 setLoading(false);
             }
         };
-        const fetchItems = async () => {
-            setLoading(true);
-            try {
-                const res = await getDeviceByCode(deviceCode);
-                res && setDevice(res);
-            } catch (err: any) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchTemplate();
-        fetchItems();
-    }, [sheetCode]);
-
-    // Lấy thiết bị
-    useEffect(() => {
-        const fetchDevice = async () => {
-            setLoading(true);
-            try {
-                const res = await getDeviceByCode(deviceCode);
-                res && setDevice(res);
-            } catch (err: any) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDevice();
-    }, [deviceCode]);
+        fetchData();
+    }, [sheetCode, deviceCode]);
 
     return (
         <div>
-            <p>{deviceCode}</p>
-            <p>{sheetCode}</p>
-            <p>{template.sheetCode}</p>
-            <p>{template.sheetName}</p>
-            <p>{template.formNO}</p>
-            <p>{device.deviceCode}</p>
-            <p>{device.deviceName}</p>
+            <div className="overflow-auto">
+                {isLocked && (
+                    <Alert severity="info">
+                        Phiếu kiểm tra này đã được xác nhận, bạn không thể thao
+                        tác thêm.
+                    </Alert>
+                )}
+                <header>
+                    <div
+                        className={`p-4 space-y-6 relative ${
+                            isLocked ? "pointer-events-none opacity-50" : ""
+                        }`}
+                    >
+                        <h1 className="text-3xl font-bold">
+                            {template.sheetName}
+                        </h1>
+                        <div className="flex justify-between mt-4">
+                            <div>
+                                <p>
+                                    Mã thiết bị:{" "}
+                                    <strong>{device.deviceCode}</strong>{" "}
+                                </p>
+                                <p>
+                                    Tên thiết bị:{" "}
+                                    <strong>{device.deviceName}</strong>
+                                </p>
+                            </div>
+                            <p>
+                                Người kiểm tra:{" "}
+                                <strong>{user?.userCode}</strong>{" "}
+                            </p>
+                        </div>
+                    </div>
+                </header>
+            </div>
         </div>
     );
 };

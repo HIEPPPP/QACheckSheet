@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using QACheckSheetAPI.Models.Domain;
 using QACheckSheetAPI.Models.DTO.Auth;
+using QACheckSheetAPI.Models.DTO.CheckResult;
 using QACheckSheetAPI.Models.DTO.Device;
 using QACheckSheetAPI.Models.DTO.DeviceType;
 using QACheckSheetAPI.Models.DTO.Sheet;
@@ -54,7 +55,6 @@ namespace QACheckSheetAPI.Mapping
                 .ForMember(dest => dest.Level, opt => opt.Ignore())
                 .ForMember(dest => dest.CreateAt, opt => opt.Ignore()); // Bỏ qua 
             CreateMap<SheetItemMST, ItemTreeDTO>().ReverseMap();
-
             // Nếu có trường trong Entity không có trong DTO, AutoMapper mặc định vẫn cố map, nhưng vì không tìm thấy source, nó set giá trị mặc định(null, 0, ...).
             // .Ignore() đảm bảo AutoMapper không động tới các field đó, để tránh override giá trị mặc định do code hoặc DB set.
 
@@ -65,6 +65,11 @@ namespace QACheckSheetAPI.Mapping
                 .ForMember(dest => dest.SheetCode, otp => otp.MapFrom(src => src.SheetMST.SheetCode))
                 .ForMember(dest => dest.SheetName, otp => otp.MapFrom(src => src.SheetMST.SheetName));
             CreateMap<SheetDeviceTypeMST, CreateSheetDeviceTypeRequestDTO>().ReverseMap();
+
+            // CheckResult
+            CreateMap<CheckResult, CheckResultDTO>().ReverseMap();
+            CreateMap<CheckResult, CreateCheckResultRequestDTO>().ReverseMap();
+
         }
     }
 }

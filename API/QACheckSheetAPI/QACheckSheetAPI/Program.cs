@@ -47,6 +47,7 @@ builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 builder.Services.AddScoped<ISheetRepository, SheetRepository>();
 builder.Services.AddScoped<ISheetDeviceTypeRepository, SheetDeviceTypeRepository>();
 builder.Services.AddScoped<ISheetItemRepository, SheetItemRepository>();
+builder.Services.AddScoped<ICheckResultRepository, CheckResultRepository>();
 
 builder.Services.AddScoped<AuthServices>();
 builder.Services.AddScoped<UserServices>();
@@ -55,6 +56,7 @@ builder.Services.AddScoped<DeviceServices>();
 builder.Services.AddScoped<SheetServices>();
 builder.Services.AddScoped<SheetDeviceTypeServices>();
 builder.Services.AddScoped<SheetItemServices>();
+builder.Services.AddScoped<CheckResultRepository>();
 
 var app = builder.Build();
 

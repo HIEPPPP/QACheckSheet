@@ -105,10 +105,10 @@ const TypeSheetTable: React.FC<TypeSheetTableProps> = ({
                                 Tên Sheet
                             </TableCell>
                             <TableCell sx={{ fontWeight: 700 }}>
-                                Mã thiết bị
+                                Mã loại thiết bị
                             </TableCell>
                             <TableCell sx={{ fontWeight: 700 }}>
-                                Tên thiết bị
+                                Tên loại thiết bị
                             </TableCell>
                             <TableCell sx={{ fontWeight: 700 }}>
                                 Ngày tạo

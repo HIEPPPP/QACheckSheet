@@ -128,8 +128,6 @@ const DeviceTypePage: React.FC = () => {
     };
 
     const handleButtonAddClick = () => {
-        console.log(user);
-
         setFormData({
             typeId: null,
             // deviceCode: "DV" + devices.length + 1
