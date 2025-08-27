@@ -56,7 +56,7 @@ builder.Services.AddScoped<DeviceServices>();
 builder.Services.AddScoped<SheetServices>();
 builder.Services.AddScoped<SheetDeviceTypeServices>();
 builder.Services.AddScoped<SheetItemServices>();
-builder.Services.AddScoped<CheckResultRepository>();
+builder.Services.AddScoped<CheckResultServices>();
 
 var app = builder.Build();
 

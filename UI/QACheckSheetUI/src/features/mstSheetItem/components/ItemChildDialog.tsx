@@ -39,7 +39,11 @@ const ItemChildDialog: React.FC<ItemChildDialogProps> = ({
             disableAutoFocus
             disableRestoreFocus
         >
-            <DialogTitle>Thêm Nội dung Con</DialogTitle>
+            <DialogTitle>
+                {formData.itemId
+                    ? "Cập Nhật Nội dung Con"
+                    : "Thêm Nội dung Con"}
+            </DialogTitle>
             <DialogContent>
                 <TextField
                     label="ID Cha"
@@ -83,7 +87,7 @@ const ItemChildDialog: React.FC<ItemChildDialogProps> = ({
                         }
                         label="Kiểu dữ liệu"
                     >
-                        <MenuItem value={""}>-- Chọn kiểu dữ liệu --</MenuItem>
+                        <MenuItem value="">-- Chọn kiểu dữ liệu --</MenuItem>
                         <MenuItem value="BOOLEAN">BOOLEAN</MenuItem>
                         <MenuItem value="TEXT">TEXT</MenuItem>
                         <MenuItem value="NUMBER">NUMBER</MenuItem>

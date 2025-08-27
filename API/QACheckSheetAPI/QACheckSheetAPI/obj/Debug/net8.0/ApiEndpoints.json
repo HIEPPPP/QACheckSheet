@@ -32,6 +32,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "GetListResultNG",
+    "RelativePath": "api/CheckResult",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
     "Method": "GetListDevice",
     "RelativePath": "api/Device",

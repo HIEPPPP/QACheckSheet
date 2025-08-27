@@ -40,7 +40,7 @@ namespace QACheckSheetAPI.Services
 
             if(!string.IsNullOrWhiteSpace(dto.Title))
                 item.Title = dto.Title;            
-            if (!string.IsNullOrEmpty(dto.DataType))
+            //if (!string.IsNullOrEmpty(dto.DataType))
                 item.DataType = dto.DataType;            
             if(dto.Min.HasValue)
                 item.Min = dto.Min.Value;

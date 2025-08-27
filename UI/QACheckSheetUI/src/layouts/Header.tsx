@@ -1,5 +1,5 @@
 // Header.tsx
-import React, { useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import {
@@ -21,32 +21,21 @@ import {
     FiLogOut,
 } from "react-icons/fi";
 import { clearAuthData } from "../shared/services/auth.service";
+import { UserContext } from "../contexts/UserProvider";
 
 type TitleMap = Record<string, string>;
 
 const TITLE_MAP: TitleMap = {
-    "/": "Welcome",
-    "/dashboard": "Welcome",
-    "/products": "Products",
-    "/products/list": "Products / List",
-    "/products/grid": "Products / Grid",
-    "/products/details": "Products / Details",
-    "/products/edit": "Products / Edit",
-    "/products/create": "Products / Create",
-    "/inventory": "Inventory",
-    "/inventory/stocks": "Inventory / Stocks",
-    "/settings": "Settings",
+    "/app": "Welcome",
+    "/app/dashboard": "Welcome",
 };
 
-const getTitleFromPath = (path: string) => {
-    if (TITLE_MAP[path]) return TITLE_MAP[path];
-    const parts = path.split("/").filter(Boolean);
-    for (let i = parts.length; i > 0; i--) {
-        const tryPath = "/" + parts.slice(0, i).join("/");
-        if (TITLE_MAP[tryPath]) return TITLE_MAP[tryPath];
-    }
-    const first = parts[0] || "";
-    return first ? first.charAt(0).toUpperCase() + first.slice(1) : "Welcome";
+const getTitleFromPath = (path: string): string => {
+    return (
+        TITLE_MAP[path] ||
+        path.split("/")[1]?.replace(/^\w/, (c) => c.toUpperCase()) ||
+        "Welcome"
+    );
 };
 
 export const Header: React.FC = () => {
@@ -56,6 +45,8 @@ export const Header: React.FC = () => {
         () => getTitleFromPath(location.pathname),
         [location.pathname]
     );
+
+    const { user } = useContext(UserContext);
 
     // Avatar menu state
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -81,7 +72,7 @@ export const Header: React.FC = () => {
 
     return (
         <header className="w-full px-6 py-10 flex items-center justify-between">
-            <div>
+            <div className="">
                 <h1 className="text-sm md:text-xl font-semibold text-[#5d7186]">
                     {title.toUpperCase()}!
                 </h1>
@@ -89,15 +80,15 @@ export const Header: React.FC = () => {
 
             <div className="flex items-center gap-4">
                 <div className="relative w-full max-w-md mx-auto">
-                    <input
+                    {/* <input
                         type="text"
                         placeholder="Search..."
                         className="w-[380px] py-2 pl-10 pr-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-700"
-                    />
+                    /> */}
                     {/* optional icon inside input */}
-                    <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                    {/* <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
                         <SearchIcon fontSize="small" />
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="flex items-center gap-4">
@@ -111,7 +102,7 @@ export const Header: React.FC = () => {
                                 sx={{ bgcolor: "primary.main" }}
                                 className="w-8 h-8 rounded-full mr-2"
                             >
-                                {fullName?.charAt(0).toUpperCase() || "H"}
+                                {user?.fullName?.charAt(0).toUpperCase()}
                             </Avatar>
                         </div>
 
@@ -138,7 +129,7 @@ export const Header: React.FC = () => {
                                     color="text.secondary"
                                     noWrap
                                 >
-                                    {username}
+                                    {user?.fullName} - {user?.userCode}
                                 </Typography>
                             </Box>
 

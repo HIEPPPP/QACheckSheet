@@ -28,7 +28,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
 
         public Task<List<CheckResult>> GetlistResultNG()
         {
-            return context.CheckResults.Where(x => x.Value )
+            return context.CheckResults.Where(x => x.Status == "NG").ToListAsync();
         }
 
         public async Task<CheckResult> UpdateResult(CheckResult result)

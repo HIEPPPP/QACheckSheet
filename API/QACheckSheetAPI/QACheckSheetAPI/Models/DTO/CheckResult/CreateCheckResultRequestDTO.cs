@@ -8,7 +8,6 @@ namespace QACheckSheetAPI.Models.DTO.CheckResult
         public int? DeviceId { get; set; }
         public int? DeviceTypeId { get; set; }
         public int? ItemId { get; set; }        // link tới SheetItemMST logical (optional)
-
         // Sheet
         public string FormNO { get; set; } = string.Empty;
         public string SheetCode { get; set; } = string.Empty;

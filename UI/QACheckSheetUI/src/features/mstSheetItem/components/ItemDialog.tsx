@@ -101,7 +101,7 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
                         }
                         label="Kiểu dữ liệu"
                     >
-                        <MenuItem value={""}>-- Chọn kiểu dữ liệu --</MenuItem>
+                        <MenuItem value="">-- Chọn kiểu dữ liệu --</MenuItem>
                         <MenuItem value="BOOLEAN">BOOLEAN</MenuItem>
                         <MenuItem value="TEXT">TEXT</MenuItem>
                         <MenuItem value="NUMBER">NUMBER</MenuItem>

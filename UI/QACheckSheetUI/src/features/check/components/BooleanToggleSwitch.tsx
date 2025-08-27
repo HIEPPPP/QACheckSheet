@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { keyframes } from "@emotion/react";
 
-const options = ["NG", "-", "OK"];
+const options = ["NG", "-", "OK"] as const;
+type Opt = (typeof options)[number];
 
-const colors = {
+const colors: Record<Opt, string> = {
     NG: "#f44336",
-    "-": "#ff9800",
+    "-": "#9e9e9e",
     OK: "#4caf50",
 };
 
-// Tạo hiệu ứng shake
 const shake = keyframes`
   0% { transform: translateX(0); }
   20% { transform: translateX(-2px); }
@@ -20,107 +20,109 @@ const shake = keyframes`
   100% { transform: translateX(0); }
 `;
 
-type BooleanToggleSwitchProps = {
-    defaultValue: string;
-    onChange: () => void;
-    disabled: boolean;
+type Props = {
+    value?: "OK" | "NG" | null; // controlled value
+    onChange?: (val: "OK" | "NG" | null) => void;
+    disabled?: boolean;
+    size?: number; // width px, default 180
 };
 
-const BooleanToggleSwitch: React.FC<BooleanToggleSwitchProps> = ({
-    defaultValue = "-",
+const BooleanToggleSwitch: React.FC<Props> = ({
+    value = null,
     onChange,
     disabled = false,
+    size = 180,
 }) => {
-    const [selected, setSelected] = useState(defaultValue);
     const [isShaking, setIsShaking] = useState(false);
-
-    const selectedIndex = options.indexOf(selected);
-
-    const handleClick = (val: any) => {
-        // if (disabled || val === selected) return;
-        // console.log(disabled);
-
-        setSelected(val);
-        val = val === "-" ? null : val; // Chuyển đổi "-" thành null
-        onChange?.(val);
-
-        // Kích hoạt hiệu ứng lắc
-        setIsShaking(true);
-        setTimeout(() => setIsShaking(false), 400);
-    };
+    const idx = useMemo(() => {
+        if (value === "NG") return 0;
+        if (value === "OK") return 2;
+        return 1; // "-"
+    }, [value]);
 
     useEffect(() => {
-        if (!options.includes(defaultValue)) {
-            setSelected("-");
-        }
-    }, [defaultValue]);
+        // play a gentle appear animation when value changes
+        setIsShaking(true);
+        const t = setTimeout(() => setIsShaking(false), 240);
+        return () => clearTimeout(t);
+    }, [value]);
+
+    const handleClick = (opt: Opt) => {
+        if (disabled) return;
+        const val = opt === "-" ? null : (opt as "OK" | "NG");
+        onChange?.(val);
+    };
 
     return (
         <Box
             position="relative"
             display="flex"
             alignItems="center"
-            width={180}
+            width={size}
             height={44}
             bgcolor="#f3f4f6"
             borderRadius="999px"
-            boxShadow="inset 0 1px 4px rgba(0,0,0,0.1)"
             sx={{
                 overflow: "hidden",
                 userSelect: "none",
-                border: "1px solid #ccc",
-                // opacity: disabled ? 0.5 : 1,
-                // pointerEvents: disabled ? "none" : "auto",
+                border: "1px solid #e3e3e3",
+                opacity: disabled ? 0.6 : 1,
+                pointerEvents: disabled ? "none" : "auto",
             }}
         >
-            {/* Nút trượt động */}
+            {/* sliding background */}
             <Box
                 position="absolute"
-                top={3}
-                left={`calc(${selectedIndex * 33.33}% + 3px)`}
-                width="calc(33.33% - 6px)"
-                height="calc(100% - 6px)"
-                // bgcolor={colors[selected]}
+                top={4}
+                left={`calc(${(idx * 100) / 3}% + 4px)`}
+                width={`calc(${100 / 3}% - 8px)`}
+                height="calc(100% - 8px)"
                 borderRadius="999px"
-                boxShadow="0 3px 8px rgba(0,0,0,0.2)"
                 sx={{
-                    transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
-                    animation: isShaking ? `${shake} 0.4s` : "none",
+                    transition:
+                        "left 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s",
+                    backgroundColor: value
+                        ? value === "OK"
+                            ? colors.OK
+                            : colors.NG
+                        : "transparent",
+                    boxShadow: value ? "0 6px 18px rgba(0,0,0,0.12)" : "none",
+                    animation: isShaking ? `${shake} 0.24s` : "none",
                 }}
             />
 
-            {/* Nút văn bản */}
-            {options.map((opt) => (
-                <Box
-                    key={opt}
-                    flex={1}
-                    textAlign="center"
-                    zIndex={1}
-                    sx={{
-                        cursor: "pointer",
-                        fontWeight: 600,
-                        transition: "color 0.3s ease",
-                        color: selected === opt ? "white" : "#333",
-                        "&:hover": {
-                            backgroundColor: "rgba(0, 0, 0, 0.05)",
-                        },
-                        // pointerEvents: disabled ? "none" : "auto",
-                    }}
-                    onClick={() => handleClick(opt)}
-                >
-                    <Typography
-                        variant="body2"
+            {options.map((opt) => {
+                const isSelected =
+                    (opt === "OK" && value === "OK") ||
+                    (opt === "NG" && value === "NG");
+                return (
+                    <Box
+                        key={opt}
+                        flex={1}
+                        textAlign="center"
+                        zIndex={1}
+                        onClick={() => handleClick(opt)}
                         sx={{
-                            lineHeight: "44px",
-                            fontSize: "15px",
+                            cursor: disabled ? "not-allowed" : "pointer",
+                            userSelect: "none",
                         }}
                     >
-                        {opt}
-                    </Typography>
-                </Box>
-            ))}
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                lineHeight: "44px",
+                                fontSize: 14,
+                                fontWeight: 600,
+                                color: isSelected ? "#fff" : "#333",
+                            }}
+                        >
+                            {opt}
+                        </Typography>
+                    </Box>
+                );
+            })}
         </Box>
     );
 };
 
-export default BooleanToggleSwitch;
+export default React.memo(BooleanToggleSwitch);

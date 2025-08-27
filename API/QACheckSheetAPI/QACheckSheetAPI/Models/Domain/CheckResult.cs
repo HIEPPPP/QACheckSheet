@@ -35,7 +35,9 @@ namespace QACheckSheetAPI.Models.Domain
         public string? DataType { get; set; }
         // Result
         [Required]
-        public string Value { get; set; } = null!;
+        public string? Value { get; set; }
+        [StringLength(20)]         
+        public string? Status { get; set; } // OK, NG, null
         [Required]
         public string CheckedBy { get; set; } = null!;
         [Required]

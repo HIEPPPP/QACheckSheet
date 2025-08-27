@@ -48,7 +48,6 @@ namespace QACheckSheetAPI.Services
             var type = await deviceTypeRepository.GetAsync(typeId)
                              ?? throw new KeyNotFoundException("DeviceType không tồn tại");
             // Cập nhật các trường nếu được truyền
-
             type.UpdateAt = DateTime.Now;
             
             if (!string.IsNullOrWhiteSpace(dto.TypeName))

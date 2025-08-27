@@ -15,6 +15,8 @@ interface MenuItem {
 
 const menu: MenuItem[] = [
     { label: "Dashboard", path: "/app/dashboard", Icon: HomeIcon },
+    { label: "Report", path: "/app/report", Icon: HomeIcon },
+    { label: "NG-Detail", path: "/app/ng", Icon: HomeIcon },
 ];
 
 const admin: MenuItem[] = [
