@@ -42,6 +42,96 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "CreateResults",
+    "RelativePath": "api/CheckResult",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "System.Collections.Generic.List\u00601[[QACheckSheetAPI.Models.DTO.CheckResult.CreateCheckResultRequestDTO, QACheckSheetAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "UpdateResult",
+    "RelativePath": "api/CheckResult/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.CheckResult.UpdateCheckResultRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "BulkUpdate",
+    "RelativePath": "api/CheckResult/bulk",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dtoList",
+        "Type": "System.Collections.Generic.List\u00601[[QACheckSheetAPI.Models.DTO.CheckResult.UpdateCheckResultRequestDTO, QACheckSheetAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "ResultConfirm",
+    "RelativePath": "api/CheckResult/confirm",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "System.Collections.Generic.List\u00601[[QACheckSheetAPI.Models.DTO.CheckResult.ConfirmResultRequestDTO, QACheckSheetAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "GetListResultDayBySDCode",
+    "RelativePath": "api/CheckResult/getListResultDayBySDCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sheetCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "deviceCode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
     "Method": "GetListDevice",
     "RelativePath": "api/Device",

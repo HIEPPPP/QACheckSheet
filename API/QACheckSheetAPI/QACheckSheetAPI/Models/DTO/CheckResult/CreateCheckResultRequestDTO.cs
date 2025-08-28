@@ -30,6 +30,7 @@ namespace QACheckSheetAPI.Models.DTO.CheckResult
         public string? DataType { get; set; }
         // Result
         public string Value { get; set; } = null!;
+        public string? Status { get; set; }
         public string CheckedBy { get; set; } = null!;
         public DateTime CheckedDate { get; set; }
         public string ConfirmBy { get; set; } = string.Empty;

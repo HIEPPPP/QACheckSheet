@@ -1,22 +1,20 @@
-import React, { use, useContext, useEffect, useState } from "react";
+// src/features/check/pages/CheckPage.tsx
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Alert, Button, CircularProgress } from "@mui/material";
 import { UserContext } from "../../contexts/UserProvider";
 import { useCheck } from "./hooks/useCheck";
 import ItemNodeComponent from "./components/ItemNodeComponent";
 
-type AnswerValue = boolean | number | string | null;
-type ItemAnswer = {
-    itemId: number;
-    value: AnswerValue;
-    status?: "OK" | "NG" | null;
-    note?: string | null;
-};
-
 const CheckPage: React.FC = () => {
     const { code } = useParams();
     const navigate = useNavigate();
 
+    const { user } = React.useContext(UserContext);
+
+    console.log("User " + user?.roles);
+
+    // pass user into useCheck so it can use CheckedBy/UpdateBy info in submit
     const {
         template,
         device,
@@ -25,37 +23,20 @@ const CheckPage: React.FC = () => {
         error,
         isLocked,
         setIsLocked,
-    } = useCheck(code);
+        answers,
+        setAnswer,
+        submitAll,
+    } = useCheck(code, user);
 
-    const { user } = useContext(UserContext);
-
-    const [answers, setAnswers] = useState<Record<number, ItemAnswer>>({});
-
-    const setAnswer = (itemId: number, partial: Partial<ItemAnswer>) => {
-        setAnswers((prev) => {
-            const existing = prev[itemId] ?? {
-                itemId,
-                value: null,
-                status: null,
-                note: null,
-            };
-
-            const merged: ItemAnswer = { ...existing, ...partial };
-
-            merged.itemId = itemId;
-
-            // const next = {
-            //     ...prev,
-            //     [itemId]: merged,
-            // };
-
-            // console.log("Updated answers:", next);
-
-            return {
-                ...prev,
-                [itemId]: merged,
-            };
-        });
+    const handleFinish = async () => {
+        if (isLocked) return;
+        const res = await submitAll();
+        if (res.success) {
+            // optionally show toast / notification; here just console
+            console.log("Submitted:", res);
+        } else {
+            console.error("Submit failed:", res);
+        }
     };
 
     return (
@@ -86,9 +67,6 @@ const CheckPage: React.FC = () => {
                                 <strong>{device?.deviceName}</strong>
                             </p>
                         </div>
-                        <p>
-                            Người kiểm tra: <strong>{user?.userCode}</strong>
-                        </p>
                     </div>
                 </div>
             </header>
@@ -115,10 +93,10 @@ const CheckPage: React.FC = () => {
                     <Button
                         variant="contained"
                         color="primary"
-                        // onClick={handleSubmit}
+                        onClick={handleFinish}
                         disabled={isLocked}
                     >
-                        Lưu Dữ Liệu
+                        Hoàn thành
                     </Button>
                 </div>
             </main>

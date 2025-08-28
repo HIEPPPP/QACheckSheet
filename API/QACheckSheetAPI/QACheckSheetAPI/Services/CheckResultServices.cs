@@ -33,6 +33,8 @@ namespace QACheckSheetAPI.Services
 
             if (!string.IsNullOrWhiteSpace(dto.Value))
                 result.Value = dto.Value;
+            if (!string.IsNullOrWhiteSpace(dto.Status))
+                result.Status = dto.Status;
             if (!string.IsNullOrWhiteSpace(dto.UpdateBy))
                 result.UpdateBy = dto.UpdateBy;            
 
@@ -41,10 +43,56 @@ namespace QACheckSheetAPI.Services
 
         }
 
+        public async Task<List<CheckResultDTO>> BulkUpdateCheckResults(List<UpdateCheckResultRequestDTO> dtoList)
+        {
+            if (dtoList == null || dtoList.Count == 0) return new List<CheckResultDTO>();
+
+            // Lấy từng entity, cập nhật và lưu một lần (atomic)
+            var updatedEntities = new List<CheckResult>();
+
+            foreach (var dto in dtoList)
+            {
+                if (dto.ResultId == null)
+                    throw new KeyNotFoundException("ResultId is required for bulk update");
+
+                var result = await checkResultRepository.GetCheckResultByIdAsync(dto.ResultId.Value)
+                             ?? throw new KeyNotFoundException($"ResultId {dto.ResultId} không tồn tại");
+
+                result.UpdateAt = DateTime.Now;
+
+                // Chỉ cập nhật nếu DTO có giá trị (giữ logic hiện có)
+                if (!string.IsNullOrWhiteSpace(dto.Value))
+                    result.Value = dto.Value;
+                if (!string.IsNullOrWhiteSpace(dto.Status))
+                    result.Status = dto.Status;
+                if (!string.IsNullOrWhiteSpace(dto.UpdateBy))
+                    result.UpdateBy = dto.UpdateBy;
+
+                updatedEntities.Add(result);
+            }
+
+            // Lưu tất cả (repository thực hiện SaveChanges một lần trong transaction)
+            await checkResultRepository.UpdateResults(updatedEntities);
+
+            // Map để trả về
+            return mapper.Map<List<CheckResultDTO>>(updatedEntities);
+        }
+
         public async Task<List<CheckResultDTO>> GetListResultNG()
         {
             var list = await checkResultRepository.GetlistResultNG();
             return mapper.Map<List<CheckResultDTO>>(list);
+        }
+
+        public async Task<List<CheckResult>> GetListResultDayBySDCode(string sheetCode, string deviceCode)
+        {
+            return await checkResultRepository.GetListResultDayBySDCode(sheetCode, deviceCode);
+        }
+
+        public async Task<List<CheckResult>> ConfirmResult(List<ConfirmResultRequestDTO> dto)
+        {
+            var resultsDomain = mapper.Map<List<CheckResult>>(dto);
+            return await checkResultRepository.ConfirmResult(resultsDomain);
         }
     }
 }

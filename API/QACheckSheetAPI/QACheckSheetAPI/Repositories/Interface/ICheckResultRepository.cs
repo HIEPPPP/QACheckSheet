@@ -7,6 +7,9 @@ namespace QACheckSheetAPI.Repositories.Interface
         Task<CheckResult?> GetCheckResultByIdAsync(int resultId);
         Task<List<CheckResult>> CreateResultsAsync (List<CheckResult> results);
         Task<CheckResult> UpdateResult (CheckResult result);
+        Task UpdateResults (List<CheckResult> results);
         Task<List<CheckResult>> GetlistResultNG();
+        Task<List<CheckResult>> GetListResultDayBySDCode(string sheetCode, string deviceCode);
+        Task<List<CheckResult>> ConfirmResult(List<CheckResult> results);
     }
 }

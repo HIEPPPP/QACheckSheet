@@ -66,6 +66,8 @@ namespace QACheckSheetAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDevice(CreateItemRequestDTO dto)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             try
             {
                 var created = await itemServices.CreateItem(dto);
@@ -81,8 +83,9 @@ namespace QACheckSheetAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDevice(int id, UpdateItemRequestDTO dto)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             try
-            {
+            {                
                 var updated = await itemServices.UpdateItem(id, dto);
                 return Ok(new ApiResponse<ItemDTO>(200, "OK", updated));
             }

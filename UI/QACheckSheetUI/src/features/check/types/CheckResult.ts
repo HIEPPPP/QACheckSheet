@@ -1,31 +1,35 @@
+import { vnTime } from "../../../utils/formatDateTime";
+
 export interface CheckResult {
-    SheetId: number | null;
-    DeviceTypeId: number | null;
-    DeviceId: number | null;
-    ItemId: number | null;
-    FormNO?: string;
-    SheetCode?: string;
-    SheetName?: string;
-    TypeCode?: string;
-    TypeName?: string;
-    DeviceCode?: string;
-    DeviceName?: string;
-    Location?: string;
-    Factory?: string;
-    Frequency: number | null;
-    ParentItemId: number | null;
-    Title?: string;
-    OrderNumber: number | null;
-    Level: number | null;
-    PathTitles?: string;
-    DataType?: string;
-    Value?: string;
-    CheckedBy?: string;
-    CheckedDate?: Date | string | null;
-    ConfirmBy?: string;
-    ConfirmDate?: Date | string | null;
-    UpdateBy?: string;
-    UpdateAt?: Date | string | null;
+    resultId: number | null;
+    sheetId: number | null;
+    deviceTypeId: number | null;
+    deviceId: number | null;
+    itemId: number | null;
+    formNO?: string;
+    sheetCode?: string;
+    sheetName?: string;
+    typeCode?: string;
+    typeName?: string;
+    deviceCode?: string;
+    deviceName?: string;
+    location?: string;
+    factory?: string;
+    frequency: number | null;
+    parentItemId: number | null;
+    title?: string;
+    orderNumber: number | null;
+    level: number | null;
+    pathTitles?: string;
+    dataType?: string;
+    value?: string;
+    status?: string;
+    checkedBy?: string;
+    checkedDate?: Date | string | null;
+    confirmBy?: string;
+    confirmDate?: Date | string | null;
+    updateBy?: string;
+    updateAt?: Date | string | null;
 }
 
 export type ItemNode = {
@@ -49,42 +53,49 @@ export type ItemAnswer = {
     itemId: number;
     value: AnswerValue;
     status?: "OK" | "NG" | null;
-    note?: string | null;
 };
 
 export type CreateCheckResultRequestDTO = {
-    SheetId?: number | null;
-    DeviceId?: number | null;
-    DeviceTypeId?: number | null;
-    ItemId?: number | null;
+    sheetId?: number | null;
+    deviceId?: number | null;
+    deviceTypeId?: number | null;
+    itemId?: number | null;
 
-    FormNO: string;
-    SheetCode: string;
-    SheetName: string;
+    formNO: string;
+    sheetCode: string;
+    sheetName: string;
 
-    TypeCode: string;
-    TypeName: string;
+    typeCode: string;
+    typeName: string;
 
-    DeviceCode: string;
-    DeviceName: string;
-    Location: string;
-    Factory: string;
-    Frequency: string;
+    deviceCode: string;
+    deviceName: string;
+    location: string;
+    factory: string;
+    frequency: string;
 
-    ParentItemId?: number | null;
-    Title: string;
-    OrderNumber: number;
-    Level: number;
-    PathTitles?: string | null;
-    DataType?: string | null;
+    parentItemId?: number | null;
+    title: string;
+    orderNumber: number;
+    level: number;
+    pathTitles?: string | null;
+    dataType?: string | null;
 
-    Value: string;
-    CheckedBy: string;
-    CheckedDate: string;
-    ConfirmBy: string;
-    ConfirmDate?: string | null;
-    UpdateBy: string;
-    UpdateAt: string;
+    value: string;
+    status: string;
+    checkedBy: string;
+    checkedDate: string;
+    confirmBy: string;
+    confirmDate?: string | null;
+    updateBy: string;
+    updateAt: string;
+};
+
+export type UpdateResultRequestDTO = {
+    resultId: number;
+    value: string;
+    status?: string;
+    updateBy: string;
 };
 
 function buildItemNodeMap(tree: ItemNode[]): Record<number, ItemNode> {
@@ -98,7 +109,6 @@ function buildItemNodeMap(tree: ItemNode[]): Record<number, ItemNode> {
 }
 
 function formatValueForDTO(ans: ItemAnswer, node?: ItemNode): string {
-    // BOOLEAN priority: status OK/NG, else boolean value -> "true"/"false"
     if (node?.dataType === "BOOLEAN") {
         if (ans.status) return ans.status; // "OK" or "NG"
         if (typeof ans.value === "boolean") return String(ans.value);
@@ -108,12 +118,7 @@ function formatValueForDTO(ans: ItemAnswer, node?: ItemNode): string {
         return ans.value == null ? "" : String(ans.value);
     }
 
-    // TEXT or fallback
     const base = ans.value == null ? "" : String(ans.value);
-    if (ans.note) {
-        // backend DTO has no note field => append or change as you like
-        return `${base}${base ? " || " : ""}note:${String(ans.note)}`;
-    }
     return base;
 }
 
@@ -130,15 +135,10 @@ export function buildCheckResultsPayload(
 
     for (const [idStr, ans] of Object.entries(answers)) {
         const itemId = Number(idStr);
-        // skip unanswered if you want:
-        const answered =
-            ans.value !== null ||
-            ans.status !== null ||
-            (ans.note && ans.note !== "");
+        const answered = ans.value !== null || ans.status !== null;
         if (!answered) continue;
 
         const node = itemMap[itemId];
-        // if node undefined, you may still send partial info, but better skip or handle gracefully
         if (!node) {
             console.warn("No node metadata for itemId", itemId);
             continue;
@@ -146,39 +146,100 @@ export function buildCheckResultsPayload(
 
         const valueStr = formatValueForDTO(ans, node);
 
+        // --- Tính toán status theo dataType và node metadata (min/max) ---
+        let statusVal: "OK" | "NG" | "" = "";
+
+        const dataType = (node.dataType ?? "").toString().toUpperCase();
+
+        if (dataType === "BOOLEAN") {
+            // ưu tiên ans.status nếu có
+            if (ans.status === "OK" || ans.status === "NG") {
+                statusVal = ans.status;
+            } else {
+                // nếu value là boolean hoặc string "true"/"false" hoặc "OK"/"NG"
+                if (ans.value === true || ans.value === "true")
+                    statusVal = "OK";
+                else if (ans.value === false || ans.value === "false")
+                    statusVal = "NG";
+                else if (ans.value === "OK" || ans.value === "NG")
+                    statusVal = ans.value as "OK" | "NG";
+                else statusVal = "";
+            }
+        } else if (dataType === "NUMBER") {
+            // cố gắng parse số từ ans.value
+            if (
+                ans.value === null ||
+                ans.value === "" ||
+                ans.value === undefined
+            ) {
+                statusVal = "";
+            } else {
+                const numeric =
+                    typeof ans.value === "number"
+                        ? ans.value
+                        : Number(ans.value);
+                if (!Number.isFinite(numeric)) {
+                    statusVal = "";
+                } else {
+                    const min = node.min;
+                    const max = node.max;
+                    // Nếu có cả min và max: kiểm tra min <= numeric <= max (bao gồm biên)
+                    if (min != null && max != null) {
+                        statusVal =
+                            numeric >= Number(min) && numeric <= Number(max)
+                                ? "OK"
+                                : "NG";
+                    } else if (min != null) {
+                        // chỉ có min: >= min => OK
+                        statusVal = numeric >= Number(min) ? "OK" : "NG";
+                    } else if (max != null) {
+                        // chỉ có max: <= max => OK
+                        statusVal = numeric <= Number(max) ? "OK" : "NG";
+                    } else {
+                        // không có biên -> không xác định status
+                        statusVal = "";
+                    }
+                }
+            }
+        } else {
+            // TEXT hoặc các kiểu khác: không có status mặc định
+            statusVal = "";
+        }
+
         const dto: CreateCheckResultRequestDTO = {
-            SheetId: template?.sheetId ?? null,
-            DeviceId: device?.deviceId ?? null,
-            DeviceTypeId: device?.deviceTypeId ?? null,
-            ItemId: itemId,
+            sheetId: template?.sheetId ?? null,
+            deviceId: device?.deviceId ?? null,
+            deviceTypeId: device?.typeId ?? null,
+            itemId: itemId,
 
-            FormNO: template?.formNO ?? template?.FormNO ?? "",
-            SheetCode: template?.sheetCode ?? template?.SheetCode ?? "",
-            SheetName: template?.sheetName ?? template?.SheetName ?? "",
+            formNO: template?.formNO ?? template?.FormNO ?? "",
+            sheetCode: template?.sheetCode ?? template?.SheetCode ?? "",
+            sheetName: template?.sheetName ?? template?.SheetName ?? "",
 
-            TypeCode: device?.typeCode ?? device?.typeCode ?? "",
-            TypeName: device?.typeName ?? device?.typeName ?? "",
+            typeCode: device?.typeCode ?? device?.typeCode ?? "",
+            typeName: device?.typeName ?? device?.typeName ?? "",
 
-            DeviceCode: device?.deviceCode ?? "",
-            DeviceName: device?.deviceName ?? "",
-            Location: device?.location ?? "",
-            Factory: device?.factory ?? "",
-            Frequency: device?.frequency ?? "",
+            deviceCode: device?.deviceCode ?? "",
+            deviceName: device?.deviceName ?? "",
+            location: device?.location ?? "",
+            factory: device?.factory ?? "",
+            frequency: device?.frequency ?? "",
 
-            ParentItemId: node.parentItemId ?? null,
-            Title: node.title ?? "",
-            OrderNumber: node.orderNumber ?? 0,
-            Level: node.level ?? 0,
-            PathTitles: node.pathTitles ?? null,
-            DataType: node.dataType ?? null,
+            parentItemId: node.parentItemId ?? null,
+            title: node.title ?? "",
+            orderNumber: node.orderNumber ?? 0,
+            level: node.level ?? 0,
+            pathTitles: node.pathTitles ?? null,
+            dataType: node.dataType ?? null,
 
-            Value: valueStr,
-            CheckedBy: user?.userCode ?? "",
-            CheckedDate: new Date().toISOString(),
-            ConfirmBy: "",
-            ConfirmDate: null,
-            UpdateBy: user?.userCode ?? "",
-            UpdateAt: new Date().toISOString(),
+            value: valueStr,
+            status: statusVal,
+            checkedBy: user?.userCode ?? "",
+            checkedDate: new Date(vnTime).toISOString(),
+            confirmBy: "",
+            confirmDate: null,
+            updateBy: user?.userCode ?? "",
+            updateAt: new Date(vnTime).toISOString(),
         };
 
         payloads.push(dto);

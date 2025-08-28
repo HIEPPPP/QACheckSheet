@@ -69,6 +69,7 @@ namespace QACheckSheetAPI.Mapping
             // CheckResult
             CreateMap<CheckResult, CheckResultDTO>().ReverseMap();
             CreateMap<CheckResult, CreateCheckResultRequestDTO>().ReverseMap();
+            CreateMap<CheckResult, ConfirmResultRequestDTO>().ReverseMap();
 
         }
     }
