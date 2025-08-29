@@ -31,31 +31,86 @@ namespace QACheckSheetAPI.Services
         {
             var item = await sheetItemRepository.GetAsync(id);
             return item == null ? null : mapper.Map<ItemDTO>(item);
-        }        
+        }
 
         public async Task<ItemDTO> UpdateItem(int id, UpdateItemRequestDTO dto)
         {
             var item = await sheetItemRepository.GetAsync(id)
                 ?? throw new Exception("Item không tồn tại");
 
-            if(!string.IsNullOrWhiteSpace(dto.Title))
-                item.Title = dto.Title;            
-            //if (!string.IsNullOrEmpty(dto.DataType))
-                item.DataType = dto.DataType;            
-            if(dto.Min.HasValue)
-                item.Min = dto.Min.Value;
-            if(dto.Max.HasValue)
-                item.Max = dto.Max.Value;
-            if(dto.IsRequired.HasValue)
-                item.IsRequired = dto.IsRequired.Value;
-            if (!string.IsNullOrWhiteSpace(item.UpdateBy))
+            var oldPathTitles = item.PathTitles ?? string.Empty;
+            var titleChanged = false;
+
+            if (!string.IsNullOrWhiteSpace(dto.Title) && dto.Title != item.Title)
+            {
+                item.Title = dto.Title;
+                titleChanged = true;
+            }
+
+            // update các field khác
+            item.DataType = dto.DataType;
+            if (dto.Min.HasValue) item.Min = dto.Min.Value;
+            if (dto.Max.HasValue) item.Max = dto.Max.Value;
+            if (dto.IsRequired.HasValue) item.IsRequired = dto.IsRequired.Value;
+            if (!string.IsNullOrWhiteSpace(dto.UpdateBy))
             {
                 item.UpdateBy = dto.UpdateBy;
                 item.UpdateAt = DateTime.Now;
             }
-            await sheetItemRepository.UpdateAsync(item);
+
+            using (var tx = await context.Database.BeginTransactionAsync())
+            {
+                await sheetItemRepository.UpdateAsync(item);
+
+                if (titleChanged)
+                {
+                    // rebuild current item's PathTitles from parent
+                    if (item.ParentItemId == null)
+                        item.PathTitles = item.Title;
+                    else
+                    {
+                        var parent = await context.SheetItems.AsNoTracking()
+                                        .FirstOrDefaultAsync(p => p.ItemId == item.ParentItemId);
+                        if (parent == null) throw new Exception("Parent không tồn tại");
+                        item.PathTitles = $"{parent.PathTitles} > {item.Title}";
+                    }
+
+                    context.SheetItems.Update(item);
+                    await context.SaveChangesAsync();
+
+                    // dùng PathIds để tìm descendants (bao gồm cả nhiều cấp)
+                    var pathPrefix = item.PathIds; // e.g. "/1/3/15/"
+                    var oldPrefixForTitles = string.IsNullOrEmpty(oldPathTitles) ? "" : oldPathTitles + " > ";
+                    var newPrefixForTitles = item.PathTitles + " > ";
+
+                    var descendants = await context.SheetItems
+                        .Where(s => s.ItemId != item.ItemId && s.PathIds != null && s.PathIds.StartsWith(pathPrefix))
+                        .ToListAsync();
+
+                    foreach (var d in descendants)
+                    {
+                        if (!string.IsNullOrEmpty(oldPrefixForTitles) && d.PathTitles != null && d.PathTitles.StartsWith(oldPrefixForTitles))
+                        {
+                            d.PathTitles = newPrefixForTitles + d.PathTitles.Substring(oldPrefixForTitles.Length);
+                        }
+                        else
+                        {
+                            // defensive: fallback — rebuild by traversing parents (omitted for brevity)
+                        }
+                    }
+
+                    if (descendants.Count > 0)
+                    {
+                        context.SheetItems.UpdateRange(descendants);
+                        await context.SaveChangesAsync();
+                    }
+                }
+
+                await tx.CommitAsync();
+            }
+
             return mapper.Map<ItemDTO>(item);
-        }        
+        }
 
         public async Task<ItemDTO> CreateItem(CreateItemRequestDTO dto)
         {

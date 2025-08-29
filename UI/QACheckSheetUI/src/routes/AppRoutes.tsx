@@ -11,6 +11,10 @@ import SheetPage from "../features/mstSheet/SheetPage";
 import ItemPage from "../features/mstSheetItem/ItemPage";
 import TypeSheetPage from "../features/mstTypeSheet/TypeSheetPage";
 import CheckPage from "../features/check/CheckPage";
+import ReportPage from "../features/report/ReportPage";
+import NGDetailPage from "../features/ngDetail/NGDetailPage";
+import UsersPage from "../features/users/UsersPage";
+import ProfilePage from "../features/auth/ProfilePage";
 
 export const AppRoutes = createBrowserRouter([
     // PUBLIC routes (no sidebar/header)
@@ -41,6 +45,10 @@ export const AppRoutes = createBrowserRouter([
             { path: "item", element: <ItemPage /> },
             { path: "typeSheet", element: <TypeSheetPage /> },
             { path: "check/:code", element: <CheckPage /> },
+            { path: "report", element: <ReportPage /> },
+            { path: "ngDetail", element: <NGDetailPage /> },
+            { path: "users", element: <UsersPage /> },
+            { path: "profile", element: <ProfilePage /> },
         ],
     },
 ]);

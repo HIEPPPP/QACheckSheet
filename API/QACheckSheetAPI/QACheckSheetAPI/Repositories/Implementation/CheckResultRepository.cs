@@ -82,12 +82,17 @@ namespace QACheckSheetAPI.Repositories.Implementation
                 if (updateItem != null)
                 {
                     item.ConfirmBy = updateItem.ConfirmBy;
+                    item.ConfirmDate = DateTime.Now;
                 }
             }
 
             await context.SaveChangesAsync();
             return existResults;
         }
-        
+
+        public async Task<List<CheckResult>> GetListReusltDay()
+        {
+            return await context.CheckResults.Where(x => x.CheckedDate.Date == DateTime.Now.Date).ToListAsync();
+        }
     }
 }

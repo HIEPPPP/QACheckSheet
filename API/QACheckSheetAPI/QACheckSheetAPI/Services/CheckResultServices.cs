@@ -94,5 +94,10 @@ namespace QACheckSheetAPI.Services
             var resultsDomain = mapper.Map<List<CheckResult>>(dto);
             return await checkResultRepository.ConfirmResult(resultsDomain);
         }
+
+        public async Task<List<CheckResult>> GetListResultDay()
+        {
+            return await checkResultRepository.GetListReusltDay();
+        }
     }
 }

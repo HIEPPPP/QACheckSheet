@@ -1,7 +1,7 @@
 // Header.tsx
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useMemo, useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
+import Typed from "typed.js";
 import {
     Avatar,
     Menu,
@@ -67,8 +67,52 @@ export const Header: React.FC = () => {
         window.location.reload();
     };
 
-    const fullName = "Gaston";
-    const username = "gaston@example.com";
+    const el = useRef<HTMLSpanElement | null>(null);
+    const typedRef = useRef<Typed | null>(null);
+
+    useEffect(() => {
+        // đảm bảo có user và element
+        if (!user || !el.current) return;
+
+        // chuẩn hoá strings -> loại bỏ null/undefined và ép về string
+        const strings = [
+            user.fullName,
+            user.userCode,
+            Array.isArray(user.roles)
+                ? user.roles.join(", ")
+                : typeof user.roles === "string"
+                ? user.roles
+                : user.roles
+                ? JSON.stringify(user.roles)
+                : undefined,
+        ]
+            .filter(Boolean)
+            .map((s) => String(s));
+
+        if (strings.length === 0) return;
+
+        // destroy instance cũ nếu có (tránh leak / hành vi lạ)
+        if (typedRef.current) {
+            typedRef.current.destroy();
+            typedRef.current = null;
+        }
+
+        // tạo Typed mới (đảm bảo el.current non-null bằng if ở trên)
+        typedRef.current = new Typed(el.current, {
+            strings,
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true,
+            backDelay: 8000,
+            smartBackspace: true,
+            showCursor: false,
+        });
+
+        return () => {
+            typedRef.current?.destroy();
+            typedRef.current = null;
+        };
+    }, [user]);
 
     return (
         <header className="w-full px-6 py-10 flex items-center justify-between">
@@ -80,15 +124,9 @@ export const Header: React.FC = () => {
 
             <div className="flex items-center gap-4">
                 <div className="relative w-full max-w-md mx-auto">
-                    {/* <input
-                        type="text"
-                        placeholder="Search..."
-                        className="w-[380px] py-2 pl-10 pr-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-700"
-                    /> */}
-                    {/* optional icon inside input */}
-                    {/* <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                        <SearchIcon fontSize="small" />
-                    </div> */}
+                    <h1 className="text-sm md:text-lg font-semibold text-[#5d7186]">
+                        <span ref={el} />
+                    </h1>
                 </div>
 
                 <div className="flex items-center gap-4">
@@ -136,7 +174,7 @@ export const Header: React.FC = () => {
                             <Divider />
 
                             <MenuItem
-                                onClick={() => handleNavigate("/profile")}
+                                onClick={() => handleNavigate("/app/profile")}
                             >
                                 <ListItemIcon>
                                     <FiUser size={16} />

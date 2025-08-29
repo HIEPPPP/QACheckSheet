@@ -1,7 +1,14 @@
 import React, { Fragment, useState } from "react";
 import { NavLink } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import SecurityUpdateWarningIcon from "@mui/icons-material/SecurityUpdateWarning";
+import DevicesOtherIcon from "@mui/icons-material/DevicesOther";
+import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
+import VerticalAlignCenterIcon from "@mui/icons-material/VerticalAlignCenter";
+import GroupIcon from "@mui/icons-material/Group";
+import CategoryIcon from "@mui/icons-material/Category";
+import SummarizeIcon from "@mui/icons-material/Summarize";
 
 import QAIcon from "../assets/img/assurance.png";
 import { useMediaQuery, useTheme } from "@mui/material";
@@ -15,21 +22,25 @@ interface MenuItem {
 
 const menu: MenuItem[] = [
     { label: "Dashboard", path: "/app/dashboard", Icon: HomeIcon },
-    { label: "Report", path: "/app/report", Icon: HomeIcon },
-    { label: "NG-Detail", path: "/app/ng", Icon: HomeIcon },
+    { label: "Report", path: "/app/report", Icon: BarChartIcon },
+    {
+        label: "NG-Detail",
+        path: "/app/ngDetail",
+        Icon: SecurityUpdateWarningIcon,
+    },
 ];
 
 const admin: MenuItem[] = [
-    { label: "Type", path: "/app/deviceType", Icon: HomeIcon },
-    { label: "Device", path: "/app/device", Icon: HomeIcon },
-    { label: "Template", path: "/app/sheet", Icon: HomeIcon },
-    { label: "Content", path: "/app/item", Icon: HomeIcon },
+    { label: "Categories", path: "/app/deviceType", Icon: CategoryIcon },
+    { label: "Device", path: "/app/device", Icon: DevicesOtherIcon },
+    { label: "Template", path: "/app/sheet", Icon: SummarizeIcon },
+    { label: "Content", path: "/app/item", Icon: ChecklistRtlIcon },
     {
         label: "Relations   ",
         path: "/app/typeSheet",
-        Icon: HomeIcon,
+        Icon: VerticalAlignCenterIcon,
     },
-    { label: "Users", path: "/app/users", Icon: HomeIcon },
+    { label: "Users", path: "/app/users", Icon: GroupIcon },
 ];
 
 export const Sidebar: React.FC = () => {

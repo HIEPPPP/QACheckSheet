@@ -6,6 +6,8 @@ type FilterDeviceProps = {
     value: string;
     icon: ReactNode;
     accent?: "orange" | "green" | "red" | "blue";
+    onClick?: () => void;
+    active?: boolean;
 };
 
 const accentMap: Record<string, string> = {
@@ -20,21 +22,33 @@ const FilterDevice: React.FC<FilterDeviceProps> = ({
     value,
     icon,
     accent = "orange",
+    onClick,
+    active = false,
 }) => {
     const accentCls = accentMap[accent] ?? accentMap.orange;
-
     return (
-        <div className="bg-white border border-gray-100 rounded-xl shadow-sm p-4">
+        <div
+            // clickable, hiển thị active state
+            onClick={onClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") onClick?.();
+            }}
+            className={`cursor-pointer bg-white rounded-xl shadow-sm p-4 transform transition-all
+                ${
+                    active
+                        ? "scale-105 ring-2 ring-indigo-200 ring-indigo-300"
+                        : "hover:shadow-md"
+                }`}
+        >
             <div className="flex items-center gap-4">
-                {/* icon box */}
                 <div
                     className={`p-3 rounded-lg shrink-0 ${accentCls} flex items-center justify-center`}
                 >
-                    {/* icon inherits color from wrapper (currentColor) */}
                     <div className="h-6 w-6">{icon}</div>
                 </div>
 
-                {/* text */}
                 <div className="min-w-0">
                     <div className="text-xs text-gray-500 truncate">
                         {title}

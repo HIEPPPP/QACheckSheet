@@ -11,36 +11,43 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import FilterDevice from "./components/FilterDevice";
 import { Pending, QrCode } from "@mui/icons-material";
 import { Button } from "@mui/material";
+import { useStatus } from "../../contexts/StatusProvider";
+
+type FilterKey = "All" | "Pending" | "OK" | "NG" | "Confirm";
 
 const DashboardPage: React.FC = () => {
     const { devices, loading, error } = useDashboard();
+    const { totals } = useStatus();
+
+    const [selectedFilter, setSelectedFilter] =
+        React.useState<FilterKey>("All");
 
     const sampleStats = [
         {
-            id: 1,
+            id: "Pending",
             title: "Pending",
-            value: "12",
+            value: String(totals.pending ?? 0),
             icon: <Pending />,
             accent: "orange",
         },
         {
-            id: 2,
+            id: "OK",
             title: "OK",
-            value: "25",
+            value: String(totals.ok ?? 0),
             icon: <ThumbUpIcon />,
             accent: "blue",
         },
         {
-            id: 3,
+            id: "NG",
             title: "NG",
-            value: "2",
+            value: String(totals.ng ?? 0),
             icon: <ErrorIcon />,
             accent: "red",
         },
         {
-            id: 4,
+            id: "Confirm",
             title: "Confirm",
-            value: "25",
+            value: String(totals.confirmed ?? 0),
             icon: <CheckCircleIcon />,
             accent: "green",
         },
@@ -49,8 +56,7 @@ const DashboardPage: React.FC = () => {
     return (
         <div className="flex flex-col">
             <div className="flex justify-between">
-                <div className="max-w-2xl">
-                    {/* responsive grid: 1 col mobile, 2 cols tablet, 4 cols desktop */}
+                <div className="max-w-2xl w-full">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {sampleStats.map((s) => (
                             <FilterDevice
@@ -59,6 +65,24 @@ const DashboardPage: React.FC = () => {
                                 value={s.value}
                                 icon={s.icon}
                                 accent={s.accent as any}
+                                active={
+                                    selectedFilter ===
+                                    (s.id === "Confirm"
+                                        ? "Confirm"
+                                        : (s.id as FilterKey))
+                                }
+                                onClick={() =>
+                                    setSelectedFilter(
+                                        selectedFilter ===
+                                            (s.id === "Confirm"
+                                                ? "Confirm"
+                                                : (s.id as FilterKey))
+                                            ? "All"
+                                            : ((s.id === "Confirm"
+                                                  ? "Confirm"
+                                                  : (s.id as FilterKey)) as FilterKey)
+                                    )
+                                }
                             />
                         ))}
                     </div>
@@ -72,9 +96,10 @@ const DashboardPage: React.FC = () => {
                     <span className="font-bold text-xl">Check</span>
                 </Button>
             </div>
+
             <hr className="opacity-6 mt-10" />
 
-            <Devices devices={devices} />
+            <Devices devices={devices} filter={selectedFilter} />
         </div>
     );
 };

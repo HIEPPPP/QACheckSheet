@@ -1,41 +1,115 @@
 // src/features/check/pages/CheckPage.tsx
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Alert, Button, CircularProgress } from "@mui/material";
+import { Alert, Button, CircularProgress, Tooltip } from "@mui/material";
 import { UserContext } from "../../contexts/UserProvider";
 import { useCheck } from "./hooks/useCheck";
 import ItemNodeComponent from "./components/ItemNodeComponent";
+import Notification from "../../shared/components/Notification";
+import { useStatus } from "../../contexts/StatusProvider";
 
 const CheckPage: React.FC = () => {
     const { code } = useParams();
     const navigate = useNavigate();
 
     const { user } = React.useContext(UserContext);
+    const role = user?.roles;
 
-    console.log("User " + user?.roles);
-
-    // pass user into useCheck so it can use CheckedBy/UpdateBy info in submit
     const {
         template,
         device,
         itemsTree,
         loading,
         error,
+        setError,
         isLocked,
+        checkedBy,
         setIsLocked,
         answers,
         setAnswer,
         submitAll,
+        confirmAll,
+        dirty,
+        isComplete,
+        canSubmit,
+        canConfirm,
+        snackbar,
+        setSnackbar,
     } = useCheck(code, user);
 
+    const { refreshStatus } = useStatus();
+
+    // Handler lưu (Hoàn thành)
     const handleFinish = async () => {
         if (isLocked) return;
         const res = await submitAll();
         if (res.success) {
-            // optionally show toast / notification; here just console
-            console.log("Submitted:", res);
+            setSnackbar({
+                open: true,
+                message:
+                    "Hoàn thành kiểm tra, sẽ chuyển hướng về màn hình chính!",
+                severity: "success",
+            });
+            // refresh status
+            await refreshStatus();
+            setTimeout(() => {
+                navigate("/app/dashboard");
+            }, 2500);
         } else {
-            console.error("Submit failed:", res);
+            setSnackbar({
+                open: true,
+                message: "Kiểm tra thất bại!",
+                severity: "error",
+            });
+            setError?.(res.message ?? "Lưu thất bại");
+        }
+    };
+
+    // Handler xác nhận
+    const handleConfirm = async () => {
+        if (isLocked) return;
+
+        // kiểm tra thêm bảo mật (một lần nữa)
+        if ((user?.userCode ?? "") === (checkedBy ?? "")) {
+            setError("Người xác nhận không được là người kiểm tra.");
+            return;
+        }
+
+        if (!isComplete) {
+            setError("Chưa trả lời hết câu hỏi. Không thể xác nhận.");
+            return;
+        }
+
+        if (dirty) {
+            setError("Vui lòng nhấn Hoàn thành (Lưu) trước khi xác nhận.");
+            return;
+        }
+
+        if (String(role).toLowerCase().includes("operator")) {
+            setError("Operator không có quyền xác nhận.");
+            return;
+        }
+
+        const res = await confirmAll();
+        if (res.success) {
+            setSnackbar({
+                open: true,
+                message:
+                    "Xác nhận thành công, sẽ chuyển hướng về màn hình chính",
+                severity: "success",
+            });
+            // refresh status
+            await refreshStatus();
+            setTimeout(() => {
+                navigate("/app/dashboard");
+            }, 2500);
+        } else {
+            setSnackbar({
+                open: true,
+                message: "Xác nhận thất bại!",
+                severity: "error",
+            });
+            setError?.(res.message ?? "Xác nhận thất bại");
         }
     };
 
@@ -67,6 +141,19 @@ const CheckPage: React.FC = () => {
                                 <strong>{device?.deviceName}</strong>
                             </p>
                         </div>
+                        <p>
+                            {String(role).toLowerCase().includes("operator") ? (
+                                <span>
+                                    Người kiểm tra:{" "}
+                                    <strong>{user?.userCode}</strong>
+                                </span>
+                            ) : (
+                                <span>
+                                    Người xác nhận:{" "}
+                                    <strong>{user?.userCode}</strong>
+                                </span>
+                            )}
+                        </p>
                     </div>
                 </div>
             </header>
@@ -89,17 +176,67 @@ const CheckPage: React.FC = () => {
                     />
                 ))}
 
-                <div className="mt-6 pb-2 flex justify-center">
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleFinish}
-                        disabled={isLocked}
+                <div className="mt-6 pb-2 flex justify-end gap-4">
+                    {/* Hoàn thành */}
+                    <Tooltip
+                        title={
+                            !isComplete
+                                ? "Chưa trả lời hết câu hỏi"
+                                : !canSubmit
+                                ? "Không có thay đổi để lưu"
+                                : ""
+                        }
                     >
-                        Hoàn thành
-                    </Button>
+                        <span>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleFinish}
+                                disabled={!canSubmit || isLocked}
+                            >
+                                {!String(role)
+                                    .toLowerCase()
+                                    .includes("operator")
+                                    ? "Lưu"
+                                    : "Hoàn thành"}
+                            </Button>
+                        </span>
+                    </Tooltip>
+
+                    {/* Xác nhận (chỉ cho non-operator) */}
+                    {!String(role).toLowerCase().includes("operator") && (
+                        <Tooltip
+                            title={
+                                isLocked
+                                    ? "Phiếu đã bị khóa"
+                                    : !isComplete
+                                    ? "Chưa trả lời hết câu hỏi"
+                                    : dirty
+                                    ? "Vui lòng lưu trước khi xác nhận"
+                                    : (user?.userCode ?? "") ===
+                                      (checkedBy ?? "")
+                                    ? "Người xác nhận không được là người kiểm tra"
+                                    : ""
+                            }
+                        >
+                            <span>
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    onClick={handleConfirm}
+                                    disabled={!canConfirm || isLocked}
+                                >
+                                    Xác nhận
+                                </Button>
+                            </span>
+                        </Tooltip>
+                    )}
                 </div>
             </main>
+            <Notification
+                {...snackbar}
+                onClose={() => setSnackbar({ ...snackbar, open: false })}
+            />
         </div>
     );
 };

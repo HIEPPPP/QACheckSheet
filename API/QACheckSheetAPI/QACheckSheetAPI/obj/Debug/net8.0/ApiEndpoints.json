@@ -112,6 +112,16 @@
   },
   {
     "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "GetListResultDay",
+    "RelativePath": "api/CheckResult/getListResultDay",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
     "Method": "GetListResultDayBySDCode",
     "RelativePath": "api/CheckResult/getListResultDayBySDCode",
     "HttpMethod": "GET",

@@ -57,6 +57,20 @@ export const bulkUpdateResults = async (
     }
 };
 
+export const confirm = async (
+    items: {
+        resultId: number;
+        confirmBy: string;
+    }[]
+) => {
+    try {
+        const res = await apiClient.put("/confirm", items);
+        return res.data.data;
+    } catch (error) {
+        return handleError(error);
+    }
+};
+
 // Lấy dữ liệu kết quả ngày theo sheetCode và deviceCode
 export const getListResultDayBySDCode = async (
     sheetCode: string,
@@ -67,6 +81,16 @@ export const getListResultDayBySDCode = async (
             `/getListResultDayBySDCode?sheetCode=${sheetCode}&deviceCode=${deviceCode}`
         );
         return res.data.data ?? [];
+    } catch (error) {
+        return handleError(error);
+    }
+};
+
+// Lấy dữ liệu kết quả ngày
+export const getListResultDay = async () => {
+    try {
+        const res = await apiClient.get("/getListResultDay");
+        return res.data.data;
     } catch (error) {
         return handleError(error);
     }

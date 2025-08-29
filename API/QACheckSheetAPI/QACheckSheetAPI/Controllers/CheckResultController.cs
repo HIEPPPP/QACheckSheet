@@ -33,7 +33,15 @@ namespace QACheckSheetAPI.Controllers
         {
             var results = await checkResultServices.GetListResultDayBySDCode(sheetCode, deviceCode);
             return Ok(new ApiResponse<List<CheckResult>>(200, "OK", results));
-        }        
+        }
+
+        // GET: api/CheckResult/getListResultDay
+        [HttpGet("getListResultDay")]
+        public async Task<IActionResult> GetListResultDay()
+        {
+            var results = await checkResultServices.GetListResultDay();
+            return Ok(new ApiResponse<List<CheckResult>>(200, "OK", results));
+        }
 
         // POST: api/CheckResult
         [HttpPost]
