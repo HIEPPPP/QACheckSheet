@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
 import {
     Autocomplete,
     Button,
@@ -27,6 +27,11 @@ interface TypeSheetDialogProps {
 // move style object out to keep stable reference
 const AUTOCOMPLETE_SX = { my: 2 } as const;
 
+type Errors = {
+    sheetName?: string;
+    typeName?: string;
+};
+
 const TypeSheetDialogComponent: React.FC<TypeSheetDialogProps> = ({
     sheets,
     types,
@@ -36,6 +41,34 @@ const TypeSheetDialogComponent: React.FC<TypeSheetDialogProps> = ({
     onSave,
     onClose,
 }) => {
+    const [errors, setErrors] = useState<Errors>({});
+
+    useEffect(() => {
+        if (!open) setErrors({});
+    }, [open]);
+
+    const validate = async (): Promise<boolean> => {
+        const e: Errors = {};
+
+        if (!formData.sheetName || formData.sheetName.trim() === "") {
+            e.sheetName = "Check Sheet là bắt buộc";
+        }
+
+        if (!formData.deviceTypeName || formData.deviceTypeName.trim() === "") {
+            e.typeName = "Loại thiết bị là bắt buộc";
+        }
+
+        setErrors(e);
+
+        return Object.keys(e).length === 0;
+    };
+
+    const handleSave = async () => {
+        const ok = await validate();
+        if (!ok) return;
+        onSave();
+    };
+
     // compute selected option objects once (stable refs when deps unchanged)
     const sheetValue = useMemo(
         () => sheets?.find((s) => s.sheetId === formData.sheetId) ?? null,
@@ -70,6 +103,7 @@ const TypeSheetDialogComponent: React.FC<TypeSheetDialogProps> = ({
         <Dialog
             open={open}
             onClose={onClose}
+            fullWidth
             disableEnforceFocus
             disableAutoFocus
             disableRestoreFocus
@@ -92,6 +126,8 @@ const TypeSheetDialogComponent: React.FC<TypeSheetDialogProps> = ({
                             {...params}
                             label="Check Sheet"
                             variant="outlined"
+                            error={Boolean(errors.sheetName)}
+                            helperText={errors.sheetName}
                         />
                     )}
                 />
@@ -110,6 +146,8 @@ const TypeSheetDialogComponent: React.FC<TypeSheetDialogProps> = ({
                             {...params}
                             label="Loại Thiết Bị"
                             variant="outlined"
+                            error={Boolean(errors.typeName)}
+                            helperText={errors.typeName}
                         />
                     )}
                 />
@@ -117,7 +155,7 @@ const TypeSheetDialogComponent: React.FC<TypeSheetDialogProps> = ({
 
             <DialogActions>
                 <Button onClick={onClose}>Hủy</Button>
-                <Button onClick={onSave} variant="contained">
+                <Button onClick={handleSave} variant="contained">
                     Lưu
                 </Button>
             </DialogActions>

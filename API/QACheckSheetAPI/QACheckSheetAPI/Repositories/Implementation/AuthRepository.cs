@@ -5,7 +5,7 @@ using QACheckSheetAPI.Repositories.Interface;
 
 namespace QACheckSheetAPI.Repositories.Implementation
 {
-    public class AuthRepository : IAuthRepository
+    public class AuthRepository : IAuthRepository   
     {
         private readonly QACheckSheetDBContext context;
 
@@ -30,12 +30,19 @@ namespace QACheckSheetAPI.Repositories.Implementation
             return valid ? user : null;
         }
 
+        public async Task<User?> GetByCodeAsync(string userCode)
+        {
+            return await context.Users
+                                .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
+                                .FirstOrDefaultAsync(u => u.UserCode == userCode);
+        }
+
         public async Task<User?> GetByIdAsync(int userId)
         {
             return await context.Users
                                 .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
                                 .FirstOrDefaultAsync(u => u.UserId == userId);
-        }
+        }       
 
         public async Task UpdatePasswordAsync(User user, string newHashedPassword)
         {

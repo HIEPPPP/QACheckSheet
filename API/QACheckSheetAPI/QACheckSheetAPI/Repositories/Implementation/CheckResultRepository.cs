@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using QACheckSheetAPI.Data;
 using QACheckSheetAPI.Models.Domain;
+using QACheckSheetAPI.Models.DTO.CheckResult;
 using QACheckSheetAPI.Repositories.Interface;
 
 namespace QACheckSheetAPI.Repositories.Implementation
@@ -26,9 +28,32 @@ namespace QACheckSheetAPI.Repositories.Implementation
             return context.CheckResults.FirstOrDefaultAsync(x => x.ResultId == resultId);
         }        
 
-        public Task<List<CheckResult>> GetlistResultNG()
+        public async Task<List<NGDetailDTO>> GetlistResultNG()
         {
-            return context.CheckResults.Where(x => x.Status == "NG").ToListAsync();
+            var query = @"SELECT r.ResultId,
+	                       ng.NgId,
+	                       r.SheetCode,
+	                       r.SheetName,
+	                       r.DeviceCode,
+	                       r.DeviceName,
+	                       r.PathTitles,
+                           r.DataType,
+	                       r.CheckedBy,
+	                       r.CheckedDate,
+	                       r.Value,
+	                       r.Status,
+	                       ng.NGContentDetail,
+	                       ng.FixContent,
+	                       ng.FixedDate,
+	                       ng.ConfirmedBy,
+	                       ng.ConfirmedDate,
+	                       ng.Note
+	                       FROM CheckResults AS r
+                    LEFT JOIN NGDetails AS ng ON r.ResultId = ng.ResultId
+                    WHERE r.Status = 'NG'";
+            return await context.Database.SqlQueryRaw<NGDetailDTO>(
+                               query
+                           ).ToListAsync();
         }
 
         public async Task<CheckResult> UpdateResult(CheckResult result)

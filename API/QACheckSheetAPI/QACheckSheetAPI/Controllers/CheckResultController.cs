@@ -19,12 +19,12 @@ namespace QACheckSheetAPI.Controllers
             this.checkResultServices = checkResultServices;
         }
 
-        // GET: api/CheckResult
-        [HttpGet]
+        // GET: api/CheckResult/getListResultNG
+        [HttpGet("getListResultNG")]
         public async Task<IActionResult> GetListResultNG()
         {
             var list = await checkResultServices.GetListResultNG();
-            return Ok(new ApiResponse<List<CheckResultDTO>>(200, "OK", list));
+            return Ok(new ApiResponse<List<NGDetailDTO>>(200, "OK", list));
         }
 
         // GET: api/CheckResult/getListResultDayBySDCode
@@ -41,7 +41,7 @@ namespace QACheckSheetAPI.Controllers
         {
             var results = await checkResultServices.GetListResultDay();
             return Ok(new ApiResponse<List<CheckResult>>(200, "OK", results));
-        }
+        }       
 
         // POST: api/CheckResult
         [HttpPost]

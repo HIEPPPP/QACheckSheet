@@ -42,7 +42,7 @@ export function useAuth(): UseAuthResult {
                 loginUser(user);
 
                 setLoading(false);
-                navigate("/app");
+                navigate("/app/dashboard");
             } catch (err: any) {
                 setLoading(false);
                 // hiển thị message nếu axios trả về message, nếu không thì fallback chung

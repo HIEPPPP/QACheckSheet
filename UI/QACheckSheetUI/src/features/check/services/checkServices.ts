@@ -95,3 +95,13 @@ export const getListResultDay = async () => {
         return handleError(error);
     }
 };
+
+// Lấy dữ liệu NG
+export const getListResultNG = async () => {
+    try {
+        const res = await apiClient.get("/getListResultNG");
+        return res.data.data;
+    } catch (error) {
+        return handleError(error);
+    }
+};

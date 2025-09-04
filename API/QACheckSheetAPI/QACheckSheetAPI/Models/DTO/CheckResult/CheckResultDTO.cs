@@ -4,7 +4,7 @@ namespace QACheckSheetAPI.Models.DTO.CheckResult
 {
     public class CheckResultDTO
     {
-        public int? ResultId { get; set; }
+        public long? ResultId { get; set; }
         public int? SheetId { get; set; }
         public int? DeviceId { get; set; }
         public int? DeviceTypeId { get; set; }
@@ -38,6 +38,7 @@ namespace QACheckSheetAPI.Models.DTO.CheckResult
         public string ConfirmBy { get; set; } = string.Empty;
         public DateTime? ConfirmDate { get; set; }
         public string UpdateBy { get; set; } = string.Empty;
-        public DateTime UpdateAt { get; set; } = DateTime.Now;
+        public DateTime UpdateAt { get; set; } = DateTime.Now;       
+
     }
 }

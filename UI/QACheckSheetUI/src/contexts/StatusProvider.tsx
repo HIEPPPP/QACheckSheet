@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { getListResultDay } from "../features/check/services/checkServices";
-import { getListDevice } from "../features/mstDevice/services/deviceServices";
+import { getListDeviceDashboard } from "../features/mstDevice/services/deviceServices";
 
 export type DeviceStatus = "OK" | "NG" | "Pending";
 
@@ -268,7 +268,7 @@ export const StatusProvider: React.FC<{ children: ReactNode }> = ({
         try {
             // gọi đồng thời devices và results để tối ưu
             const [devicesRes, resultsRes] = await Promise.all([
-                getListDevice(),
+                getListDeviceDashboard(),
                 getListResultDay(),
             ]);
             const devicesList = Array.isArray(devicesRes)

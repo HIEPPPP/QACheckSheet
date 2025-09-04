@@ -31,11 +31,15 @@ const TITLE_MAP: TitleMap = {
 };
 
 const getTitleFromPath = (path: string): string => {
-    return (
-        TITLE_MAP[path] ||
-        path.split("/")[1]?.replace(/^\w/, (c) => c.toUpperCase()) ||
-        "Welcome"
-    );
+    // 1. lookup exact path
+    if (TITLE_MAP[path]) return TITLE_MAP[path];
+
+    // 2. split và lấy segment cuối (lọc empty để tránh lỗi với trailing slash)
+    const parts = path.split("/").filter(Boolean); // ["app","profile"]
+    const last = parts.length ? parts[parts.length - 1] : "";
+
+    // 3. chuyển thành Title Case hoặc "Welcome" nếu rỗng
+    return last ? last.replace(/^\w/, (c) => c.toUpperCase()) : "Welcome";
 };
 
 export const Header: React.FC = () => {

@@ -1,5 +1,6 @@
 export interface User {
-    userCode: string | null;
-    fullName: string | null;
-    roles: string[];
+    userId: number | null;
+    userCode?: string;
+    fullName?: string;
+    roles?: string[];
 }

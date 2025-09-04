@@ -6,6 +6,7 @@ namespace QACheckSheetAPI.Repositories.Interface
     {
         Task<User?> AuthenticateAsync(string userCode, string password);
         Task<User?> GetByIdAsync(int userId);
+        Task<User?> GetByCodeAsync(string userCode);
         Task UpdatePasswordAsync(User user, string newHashedPassword);
     }
 }

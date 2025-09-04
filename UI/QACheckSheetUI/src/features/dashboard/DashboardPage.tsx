@@ -1,10 +1,6 @@
 import React from "react";
 import { useDashboard } from "./hooks/useDashboard";
 import Devices from "./components/Devices";
-import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
-import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
-import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import ErrorIcon from "@mui/icons-material/Error";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -57,7 +53,7 @@ const DashboardPage: React.FC = () => {
         <div className="flex flex-col">
             <div className="flex justify-between">
                 <div className="max-w-2xl w-full">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mr-6">
                         {sampleStats.map((s) => (
                             <FilterDevice
                                 key={s.id}

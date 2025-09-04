@@ -48,7 +48,7 @@ namespace QACheckSheetAPI.Controllers
             if (user == null)
                 return NotFound(new ApiResponse<object>(404, "User không tồn tại"));
             return Ok(new ApiResponse<UserDTO>(200, "OK", user));
-        }
+        }       
 
         // PUT: api/user/{id}
         [HttpPut("{id:int}")]

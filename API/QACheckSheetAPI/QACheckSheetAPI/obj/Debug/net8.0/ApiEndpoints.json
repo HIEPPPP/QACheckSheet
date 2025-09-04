@@ -33,16 +33,6 @@
   },
   {
     "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
-    "Method": "GetListResultNG",
-    "RelativePath": "api/CheckResult",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
     "Method": "CreateResults",
     "RelativePath": "api/CheckResult",
     "HttpMethod": "POST",
@@ -142,6 +132,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "GetListResultNG",
+    "RelativePath": "api/CheckResult/getListResultNG",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
     "Method": "GetListDevice",
     "RelativePath": "api/Device",
@@ -234,6 +234,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
+    "Method": "GetListDeviceDashboard",
+    "RelativePath": "api/Device/getListDeviceDashboard",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -418,6 +428,26 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.NgDetailController",
+    "Method": "GetListNgDetail",
+    "RelativePath": "api/NgDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.RoleController",
+    "Method": "GetListRole",
+    "RelativePath": "api/Role",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

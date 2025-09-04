@@ -3,28 +3,112 @@
   "WorkspaceRootPath": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\checkresultcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\controllers\\checkresultcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\implementation\\checkresultrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\implementation\\checkresultrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\services\\checkresultservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\services\\checkresultservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\implementation\\checkresultrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\implementation\\checkresultrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\checkresultcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\controllers\\checkresultcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\dto\\checkresult\\ngdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\dto\\checkresult\\ngdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\ngdetailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\controllers\\ngdetailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\services\\userservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\services\\userservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\services\\roleservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\services\\roleservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\implementation\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\implementation\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\interface\\irolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\interface\\irolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\devicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\controllers\\devicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\services\\deviceservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\services\\deviceservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\implementation\\devicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\implementation\\devicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\dto\\checkresult\\checkresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\dto\\checkresult\\checkresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\interface\\icheckresultrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\interface\\icheckresultrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\services\\sheetitemservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\services\\sheetitemservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\mapping\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\mapping\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\itemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\controllers\\itemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\dto\\ngdetail\\ngdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\dto\\ngdetail\\ngdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\domain\\ngdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\domain\\ngdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\implementation\\ngdetailrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\implementation\\ngdetailrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\services\\ngdetailservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\services\\ngdetailservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\qachecksheetapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\qachecksheetapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\interface\\ingdetailrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\interface\\ingdetailrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\implementation\\sheetitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\implementation\\sheetitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Migrations\\20250903044039_Update NGDetaill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:QACheckSheetAPI\\Migrations\\20250903044039_Update NGDetaill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\dto\\checkresult\\createcheckresultrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\dto\\checkresult\\createcheckresultrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\dto\\checkresult\\confirmresultrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,28 +119,48 @@
       "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\dto\\checkresult\\updatecheckresultrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\services\\userservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\services\\userservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\services\\authservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\services\\authservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\services\\deviceservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\services\\deviceservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\dto\\auth\\changepasswordrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\dto\\auth\\changepasswordrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\dto\\checkresult\\checkresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\dto\\checkresult\\checkresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\implementation\\authrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\implementation\\authrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\domain\\checkresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\domain\\checkresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\interface\\iauthrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\interface\\iauthrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\dto\\checkresult\\createcheckresultrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\dto\\checkresult\\createcheckresultrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\interface\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\interface\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\mapping\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\mapping\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\repositories\\implementation\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\implementation\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\dto\\auth\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\dto\\auth\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\domain\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\domain\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\services\\sheetitemservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\services\\sheetitemservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\itemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\controllers\\itemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\devicetypecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,10 +187,6 @@
       "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\repositories\\implementation\\devicetyperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\models\\domain\\devicetypemst.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\models\\domain\\devicetypemst.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -105,10 +205,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\sheetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\controllers\\sheetcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|d:\\it-03-code\\01-main\\07.qa-checksheet\\api\\qachecksheetapi\\qachecksheetapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{364FFACA-4E67-4191-9197-82C4C65000ED}|QACheckSheetAPI\\QACheckSheetAPI.csproj|solutionrelative:qachecksheetapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -118,7 +214,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -134,80 +230,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ConfirmResultRequestDTO.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\ConfirmResultRequestDTO.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\ConfirmResultRequestDTO.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\ConfirmResultRequestDTO.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\ConfirmResultRequestDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-28T05:49:28.256Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CheckResultRepository.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\CheckResultRepository.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Implementation\\CheckResultRepository.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\CheckResultRepository.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Implementation\\CheckResultRepository.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAAwFsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T08:54:03.464Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ItemController.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\ItemController.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\ItemController.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\ItemController.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Controllers\\ItemController.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAQwFgAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T03:05:27.148Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SheetItemServices.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\SheetItemServices.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Services\\SheetItemServices.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\SheetItemServices.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Services\\SheetItemServices.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAgwG8AAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-27T03:17:47.367Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "CheckResultController.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\CheckResultController.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\CheckResultController.cs",
               "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\CheckResultController.cs",
               "RelativeToolTip": "QACheckSheetAPI\\Controllers\\CheckResultController.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAswDEAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAkwBkAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-26T01:37:05.762Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ICheckResultRepository.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\ICheckResultRepository.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Interface\\ICheckResultRepository.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\ICheckResultRepository.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Interface\\ICheckResultRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAxAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Program.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Program.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Program.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Program.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAEkAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T08:09:24.035Z",
+              "WhenOpened": "2025-08-25T08:55:03.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserServices.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\UserServices.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Services\\UserServices.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\UserServices.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Services\\UserServices.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAiwDUAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-28T10:29:52.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NgDetailController.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\NgDetailController.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\NgDetailController.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\NgDetailController.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Controllers\\NgDetailController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABcAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T06:43:00.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NGDetailDTO.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\NGDetailDTO.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\NGDetailDTO.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\NGDetailDTO.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\NGDetailDTO.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAgwA4AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T07:29:42.152Z",
               "EditorCaption": ""
             },
             {
@@ -218,98 +301,454 @@
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Services\\CheckResultServices.cs",
               "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\CheckResultServices.cs",
               "RelativeToolTip": "QACheckSheetAPI\\Services\\CheckResultServices.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAiwGMAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAAAFIAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-25T08:54:30.13Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "DeviceServices.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\DeviceServices.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Services\\DeviceServices.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\DeviceServices.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Services\\DeviceServices.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAcwCwAAAAnAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "CheckResultRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\CheckResultRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Implementation\\CheckResultRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\CheckResultRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Implementation\\CheckResultRepository.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAACcAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T09:08:17.398Z"
+              "WhenOpened": "2025-08-25T08:54:03.464Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UpdateCheckResultRequestDTO.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\UpdateCheckResultRequestDTO.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\UpdateCheckResultRequestDTO.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\UpdateCheckResultRequestDTO.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\UpdateCheckResultRequestDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 19,
+              "Title": "NGDetail.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\Domain\\NGDetail.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\Domain\\NGDetail.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\Domain\\NGDetail.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\NGDetail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T09:27:29.951Z"
+              "WhenOpened": "2025-09-03T04:01:59.286Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UserServices.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\UserServices.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Services\\UserServices.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\UserServices.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Services\\UserServices.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-28T10:29:52.873Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "CheckResultDTO.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\CheckResultDTO.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\CheckResultDTO.cs",
               "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\CheckResultDTO.cs",
               "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\CheckResultDTO.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAYwCEAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAxwCgAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T08:57:22.953Z"
+              "WhenOpened": "2025-08-25T08:57:22.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\UserController.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Controllers\\UserController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowDoAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T09:29:59.258Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "CheckResult.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\Domain\\CheckResult.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\Domain\\CheckResult.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\Domain\\CheckResult.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\CheckResult.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
+              "Title": "IRoleRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\IRoleRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Interface\\IRoleRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\IRoleRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Interface\\IRoleRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-28T04:38:57.625Z"
+              "WhenOpened": "2025-09-04T02:23:23.587Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RoleRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\RoleRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Implementation\\RoleRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\RoleRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Implementation\\RoleRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T02:23:53.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RoleController.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\RoleController.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\RoleController.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\RoleController.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Controllers\\RoleController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T02:27:23.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "RoleServices.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\RoleServices.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Services\\RoleServices.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\RoleServices.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Services\\RoleServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T02:25:01.59Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "CreateCheckResultRequestDTO.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\CreateCheckResultRequestDTO.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\CreateCheckResultRequestDTO.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\CreateCheckResultRequestDTO.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\CreateCheckResultRequestDTO.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAcwCAAAAArAAAAAAAAAA==",
+              "Title": "DeviceController.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\DeviceController.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\DeviceController.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\DeviceController.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Controllers\\DeviceController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwBwAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T08:57:49.21Z"
+              "WhenOpened": "2025-09-03T06:48:29.362Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
+              "Title": "DeviceServices.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\DeviceServices.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Services\\DeviceServices.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\DeviceServices.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Services\\DeviceServices.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwB4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T09:08:17.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DeviceRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\DeviceRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Implementation\\DeviceRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\DeviceRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Implementation\\DeviceRepository.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAiwCkAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T06:51:50.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "AutoMapperProfile.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Mapping\\AutoMapperProfile.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Mapping\\AutoMapperProfile.cs",
               "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Mapping\\AutoMapperProfile.cs",
               "RelativeToolTip": "QACheckSheetAPI\\Mapping\\AutoMapperProfile.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAgwEcAAABLAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAgwEYAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T09:03:33.55Z"
+              "WhenOpened": "2025-08-25T09:03:33.55Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
+              "Title": "ICheckResultRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\ICheckResultRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Interface\\ICheckResultRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\ICheckResultRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Interface\\ICheckResultRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T08:09:24.035Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "NgDetailDTO.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\NgDetail\\NgDetailDTO.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\NgDetail\\NgDetailDTO.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\NgDetail\\NgDetailDTO.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\NgDetail\\NgDetailDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T06:31:49.125Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "NgDetailRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\NgDetailRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Implementation\\NgDetailRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\NgDetailRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Implementation\\NgDetailRepository.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAiwBkAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T06:33:49.375Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "NgDetailServices.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\NgDetailServices.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Services\\NgDetailServices.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\NgDetailServices.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Services\\NgDetailServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T06:40:43.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "QACheckSheetAPI.http",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\QACheckSheetAPI.http",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\QACheckSheetAPI.http",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\QACheckSheetAPI.http",
+              "RelativeToolTip": "QACheckSheetAPI\\QACheckSheetAPI.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-09-03T06:54:42.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "INgDetailRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\INgDetailRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Interface\\INgDetailRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\INgDetailRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Interface\\INgDetailRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T06:32:35.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "SheetItemRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\SheetItemRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Implementation\\SheetItemRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\SheetItemRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Implementation\\SheetItemRepository.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T06:37:27.281Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "CreateCheckResultRequestDTO.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\CreateCheckResultRequestDTO.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\CreateCheckResultRequestDTO.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\CreateCheckResultRequestDTO.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\CreateCheckResultRequestDTO.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAqwCEAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T08:57:49.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "UpdateCheckResultRequestDTO.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\UpdateCheckResultRequestDTO.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\UpdateCheckResultRequestDTO.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\UpdateCheckResultRequestDTO.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\UpdateCheckResultRequestDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T09:27:29.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "20250903044039_Update NGDetaill.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Migrations\\20250903044039_Update NGDetaill.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Migrations\\20250903044039_Update NGDetaill.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Migrations\\20250903044039_Update NGDetaill.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Migrations\\20250903044039_Update NGDetaill.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T04:40:39.673Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\UserRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Implementation\\UserRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\UserRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Implementation\\UserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T01:43:21.664Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ConfirmResultRequestDTO.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\ConfirmResultRequestDTO.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\ConfirmResultRequestDTO.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\CheckResult\\ConfirmResultRequestDTO.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\CheckResult\\ConfirmResultRequestDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-28T05:49:28.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ChangePasswordRequestDTO.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\Auth\\ChangePasswordRequestDTO.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\Auth\\ChangePasswordRequestDTO.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\Auth\\ChangePasswordRequestDTO.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\Auth\\ChangePasswordRequestDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T01:39:33.259Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "AuthServices.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\AuthServices.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Services\\AuthServices.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\AuthServices.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Services\\AuthServices.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAkwCEAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T01:39:56.99Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "IAuthRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\IAuthRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Interface\\IAuthRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\IAuthRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Interface\\IAuthRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T01:42:49.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Interface\\IUserRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Interface\\IUserRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Interface\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T01:43:41.328Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "AuthRepository.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\AuthRepository.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Implementation\\AuthRepository.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\AuthRepository.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Repositories\\Implementation\\AuthRepository.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowCUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T01:43:50.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "LoginRequestDTO.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\Auth\\LoginRequestDTO.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\Auth\\LoginRequestDTO.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\Auth\\LoginRequestDTO.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Models\\DTO\\Auth\\LoginRequestDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T01:41:53.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\Domain\\User.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\Domain\\User.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\Domain\\User.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Models\\Domain\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T01:41:19.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "ItemController.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\ItemController.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\ItemController.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\ItemController.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Controllers\\ItemController.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAQwFgAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T03:05:27.148Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwCUAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T03:05:07.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "SheetItemServices.cs",
+              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\SheetItemServices.cs",
+              "RelativeDocumentMoniker": "QACheckSheetAPI\\Services\\SheetItemServices.cs",
+              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\SheetItemServices.cs",
+              "RelativeToolTip": "QACheckSheetAPI\\Services\\SheetItemServices.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAgwG8AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-27T03:17:47.367Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
               "Title": "DeviceTypeController.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\DeviceTypeController.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\DeviceTypeController.cs",
@@ -321,7 +760,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 41,
               "Title": "SheetDeviceTypeController.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\SheetDeviceTypeController.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\SheetDeviceTypeController.cs",
@@ -333,7 +772,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 44,
               "Title": "DeviceTypeServices.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Services\\DeviceTypeServices.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Services\\DeviceTypeServices.cs",
@@ -345,7 +784,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 43,
               "Title": "SheetItemMST.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\Domain\\SheetItemMST.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\Domain\\SheetItemMST.cs",
@@ -357,7 +796,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 42,
               "Title": "UpdateItemRequestDTO.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\DTO\\SheetItem\\UpdateItemRequestDTO.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\DTO\\SheetItem\\UpdateItemRequestDTO.cs",
@@ -369,19 +808,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Program.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Program.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Program.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Program.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAADoAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T08:55:03.064Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 45,
               "Title": "DeviceTypeRepository.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\DeviceTypeRepository.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Implementation\\DeviceTypeRepository.cs",
@@ -393,7 +820,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 46,
               "Title": "DeviceTypeMST.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\Domain\\DeviceTypeMST.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\Domain\\DeviceTypeMST.cs",
@@ -405,7 +832,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 47,
               "Title": "DeviceMST.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\Domain\\DeviceMST.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\Domain\\DeviceMST.cs",
@@ -417,7 +844,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 48,
               "Title": "ConfirmApprove.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Models\\Domain\\ConfirmApprove.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Models\\Domain\\ConfirmApprove.cs",
@@ -429,7 +856,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 49,
               "Title": "SheetRepository.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Repositories\\Implementation\\SheetRepository.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Repositories\\Implementation\\SheetRepository.cs",
@@ -441,7 +868,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 50,
               "Title": "SheetController.cs",
               "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\SheetController.cs",
               "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\SheetController.cs",
@@ -450,18 +877,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-22T03:05:24.614Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "QACheckSheetAPI\\Controllers\\AuthController.cs",
-              "ToolTip": "D:\\IT-03-Code\\01-MAIN\\07.QA-CheckSheet\\API\\QACheckSheetAPI\\QACheckSheetAPI\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "QACheckSheetAPI\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T03:05:07.615Z"
             }
           ]
         }

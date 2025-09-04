@@ -6,25 +6,32 @@ import {
     Typography,
     Button,
     Avatar,
+    Divider,
+    type AlertColor,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { changePassword } from "./services/authAPI";
 
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserProvider";
+import type { ChangePwdRequest } from "./type/auth";
+import ChangePwdDialog from "./components/ChangePwdDialog";
+import Notification from "../../shared/components/Notification";
 
 const ProfilePage: React.FC = () => {
     //   const [user, setUser] = useState({});
 
     const { user } = useContext(UserContext);
+    const { logoutUser } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const [open, setOpen] = useState(false);
-    const [oldPassword, setOldPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [snackbar, setSnackbar] = useState({
+    const [open, setOpen] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [snackbar, setSnackbar] = useState<{
+        open: boolean;
+        message: string;
+        severity: AlertColor;
+    }>({
         open: false,
         message: "",
         severity: "success",
@@ -32,62 +39,41 @@ const ProfilePage: React.FC = () => {
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const handleSnackbarClose = () =>
-        setSnackbar((prev) => ({ ...prev, open: false }));
 
-    const handleChangePassword = async () => {
-        if (!oldPassword || !newPassword || !confirmPassword) {
-            setSnackbar({
-                open: true,
-                message: "Vui lòng điền đầy đủ thông tin.",
-                severity: "warning",
-            });
-            return;
-        }
-        if (newPassword !== confirmPassword) {
-            setSnackbar({
-                open: true,
-                message: "Mật khẩu mới và xác nhận không khớp.",
-                severity: "error",
-            });
-            return;
-        }
-
+    // onSubmit sẽ được truyền xuống dialog
+    const handleChangePassword = async (payload: ChangePwdRequest) => {
         setLoading(true);
         try {
-            // Call API đổi mật khẩu
-            const response = await changePassword();
+            // gọi API của bạn, ví dụ changePassword(payload)
+            const res = await changePassword({
+                userCode: payload.userCode,
+                oldPassword: payload.oldPassword,
+                newPassword: payload.newPassword,
+            });
 
-            if (response !== null) {
-                setSnackbar({
-                    open: true,
-                    message: "Đổi mật khẩu thành công!",
-                    severity: "success",
-                });
-                handleClose();
-                // Reset form
-                setOldPassword("");
-                setNewPassword("");
-                setConfirmPassword("");
+            // giả sử API trả về success boolean hoặc object
+            setSnackbar({
+                open: true,
+                message: "Cập nhật thành công",
+                severity: "success",
+            });
 
-                setTimeout(() => {
-                    // Logout user
-                    // logoutUser();
-                    navigate("/login");
-                }, 2000);
-            } else {
-                setSnackbar({
-                    open: true,
-                    message: "Đổi mật khẩu thất bại, vui lòng thử lại.",
-                    severity: "error",
-                });
-            }
-        } catch (error) {
-            console.error(error);
+            // logout + chuyển về login sau 2s
+            setTimeout(() => {
+                logoutUser();
+                navigate("/login");
+            }, 2000);
+
+            return true; // báo thành công cho dialog
+        } catch (error: any) {
             const msg =
-                error.response?.data?.message ||
-                "Lỗi hệ thống, vui lòng thử lại sau.";
-            setSnackbar({ open: true, message: msg, severity: "error" });
+                error?.response?.data?.message || "Đổi mật khẩu thất bại";
+            setSnackbar({
+                open: true,
+                message: "Đổi mật khẩu thất bại",
+                severity: "error",
+            });
+            return false; // báo thất bại cho dialog (nếu muốn)
         } finally {
             setLoading(false);
         }
@@ -151,6 +137,20 @@ const ProfilePage: React.FC = () => {
                     <strong>Quyền:</strong> {user?.roles}
                 </Typography>
             </Paper>
+
+            {/* Dialog đổi mật khẩu */}
+            <ChangePwdDialog
+                open={open}
+                onClose={handleClose}
+                userCode={user?.userCode}
+                loading={loading}
+                onSubmit={handleChangePassword}
+            />
+
+            <Notification
+                {...snackbar}
+                onClose={() => setSnackbar({ ...snackbar, open: false })}
+            />
         </Container>
     );
 };

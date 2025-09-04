@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -9,11 +9,11 @@ import VerticalAlignCenterIcon from "@mui/icons-material/VerticalAlignCenter";
 import GroupIcon from "@mui/icons-material/Group";
 import CategoryIcon from "@mui/icons-material/Category";
 import SummarizeIcon from "@mui/icons-material/Summarize";
+import EditDocumentIcon from "@mui/icons-material/EditDocument";
 
 import QAIcon from "../assets/img/assurance.png";
 import { useMediaQuery, useTheme } from "@mui/material";
-
-const isAdmin = true;
+import { UserContext } from "../contexts/UserProvider";
 interface MenuItem {
     label: string;
     path: string;
@@ -22,15 +22,16 @@ interface MenuItem {
 
 const menu: MenuItem[] = [
     { label: "Dashboard", path: "/app/dashboard", Icon: HomeIcon },
-    { label: "Report", path: "/app/report", Icon: BarChartIcon },
     {
         label: "NG-Detail",
         path: "/app/ngDetail",
         Icon: SecurityUpdateWarningIcon,
     },
+    { label: "Report", path: "/app/report", Icon: BarChartIcon },
 ];
 
 const admin: MenuItem[] = [
+    { label: "Edit-Data", path: "/app/editData", Icon: EditDocumentIcon },
     { label: "Categories", path: "/app/deviceType", Icon: CategoryIcon },
     { label: "Device", path: "/app/device", Icon: DevicesOtherIcon },
     { label: "Template", path: "/app/sheet", Icon: SummarizeIcon },
@@ -44,10 +45,18 @@ const admin: MenuItem[] = [
 ];
 
 export const Sidebar: React.FC = () => {
-    const [collapsed, setCollapsed] = useState(false);
+    // const [collapsed, setCollapsed] = useState(false);
     const theme = useTheme();
     const isTabletOrSmaller = useMediaQuery(theme.breakpoints.down("md"));
     const [isOpen, setIsOpen] = useState(!isTabletOrSmaller);
+
+    const { user } = useContext(UserContext);
+
+    useEffect(() => {
+        setIsOpen(!isTabletOrSmaller);
+    }, [isTabletOrSmaller]);
+
+    const isAdmin = String(user?.roles).toLowerCase().includes("admin");
 
     return (
         <div

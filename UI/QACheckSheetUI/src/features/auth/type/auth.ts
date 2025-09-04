@@ -13,7 +13,7 @@ export interface LoginResponse {
 }
 
 export interface ChangePwdRequest {
-    userId: number;
+    userCode: string | null | undefined;
     oldPassword: string;
     newPassword: string;
 }

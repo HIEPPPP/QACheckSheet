@@ -24,6 +24,16 @@ export const getListDevice = async () => {
     }
 };
 
+// Lấy danh sách thiết bị cho dashboard
+export const getListDeviceDashboard = async () => {
+    try {
+        const res = await apiClient.get("/getListDeviceDashboard");
+        return res.data.data;
+    } catch (error) {
+        return handleError(error);
+    }
+};
+
 // Lấy danh sách thiết bị theo id
 export const getDeviceById = async (deviceID: number) => {
     try {

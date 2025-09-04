@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Dialog,
     DialogActions,
@@ -23,6 +23,10 @@ interface ItemChildDialogProps {
     onClose: () => void;
 }
 
+type Errors = {
+    title?: string;
+};
+
 const ItemChildDialog: React.FC<ItemChildDialogProps> = ({
     open,
     formData,
@@ -30,7 +34,29 @@ const ItemChildDialog: React.FC<ItemChildDialogProps> = ({
     onSave,
     onClose,
 }) => {
-    const [errors, setErrors] = useState<Partial<CreateItemDTO>>({});
+    const [errors, setErrors] = useState<Errors>({});
+
+    useEffect(() => {
+        if (!open) setErrors({});
+    }, [open]);
+
+    const validate = async (): Promise<boolean> => {
+        const e: Errors = {};
+
+        if (!formData.title || formData.title.trim() === "") {
+            e.title = "Nội dung là bắt buộc";
+        }
+
+        setErrors(e);
+
+        return Object.keys(e).length === 0;
+    };
+
+    const handleSave = async () => {
+        const ok = await validate();
+        if (!ok) return;
+        onSave();
+    };
     return (
         <Dialog
             open={open}
@@ -67,13 +93,10 @@ const ItemChildDialog: React.FC<ItemChildDialogProps> = ({
                     onChange={(e) =>
                         setFormData({ ...formData, title: e.target.value })
                     }
+                    error={Boolean(errors.title)}
+                    helperText={errors.title}
                 />
-                <FormControl
-                    fullWidth
-                    margin="dense"
-                    required
-                    error={Boolean(errors.dataType)}
-                >
+                <FormControl fullWidth margin="dense" required>
                     <InputLabel id="data-type-label">Kiểu dữ liệu *</InputLabel>
                     <Select
                         labelId="data-type-label"
@@ -93,9 +116,7 @@ const ItemChildDialog: React.FC<ItemChildDialogProps> = ({
                         <MenuItem value="NUMBER">NUMBER</MenuItem>
                         <MenuItem value="DATE">DATE</MenuItem>
                     </Select>
-                    {errors.dataType && (
-                        <FormHelperText>{errors.dataType}</FormHelperText>
-                    )}
+
                     <TextField
                         label="Min"
                         fullWidth
@@ -126,7 +147,7 @@ const ItemChildDialog: React.FC<ItemChildDialogProps> = ({
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Hủy</Button>
-                <Button onClick={onSave} variant="contained">
+                <Button onClick={handleSave} variant="contained">
                     Lưu
                 </Button>
             </DialogActions>

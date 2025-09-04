@@ -36,7 +36,7 @@ namespace QACheckSheetAPI.Services
             if (!string.IsNullOrWhiteSpace(dto.Status))
                 result.Status = dto.Status;
             if (!string.IsNullOrWhiteSpace(dto.UpdateBy))
-                result.UpdateBy = dto.UpdateBy;            
+                result.UpdateBy = dto.UpdateBy;          
 
             await checkResultRepository.UpdateResult(result);
             return mapper.Map<CheckResultDTO>(result);
@@ -78,10 +78,10 @@ namespace QACheckSheetAPI.Services
             return mapper.Map<List<CheckResultDTO>>(updatedEntities);
         }
 
-        public async Task<List<CheckResultDTO>> GetListResultNG()
+        public async Task<List<NGDetailDTO>> GetListResultNG()
         {
             var list = await checkResultRepository.GetlistResultNG();
-            return mapper.Map<List<CheckResultDTO>>(list);
+            return list;
         }
 
         public async Task<List<CheckResult>> GetListResultDayBySDCode(string sheetCode, string deviceCode)

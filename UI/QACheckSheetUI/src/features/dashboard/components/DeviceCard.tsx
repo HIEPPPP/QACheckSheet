@@ -79,17 +79,21 @@ const DeviceCard: React.FC<DeviceProps> = ({
                             className="text-green-600"
                         />
                         <div className="text-xs text-gray-600">
-                            Đã xác nhận bởi {entry.confirmBy}
+                            Đã xác nhận bởi <strong>{entry.confirmBy}</strong>
                         </div>
                     </div>
                 )}
 
-                {/* {entry && (
-                    <div className="mt-2 text-xs text-gray-500">
-                        OK: {entry.okCount} • NG: {entry.ngCount} • Pending:{" "}
-                        {entry.pendingCount}
+                {/* OK: {entry.okCount} • NG: {entry.ngCount} • Pending:{" "}
+                        {entry.pendingCount} */}
+                {/*                           
+                {entry && (
+                    <div className="mt-2 text-xs text-gray-400 pl-22 mt-3">                        
+                        OK: {entry.okCount} • NG: {entry.ngCount}
                     </div>
-                )} */}
+                )}
+                
+                */}
             </div>
         </div>
     );

@@ -1,11 +1,13 @@
 import {
     Autocomplete,
     Button,
+    colors,
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
     FormControl,
+    FormHelperText,
     InputLabel,
     MenuItem,
     Select,
@@ -29,6 +31,16 @@ interface DeviceFormDialogProps {
     onClose: () => void;
 }
 
+type Errors = {
+    typeName?: string;
+    deviceName?: string;
+    seriNumber?: string;
+    model?: string;
+    location?: string;
+    factory?: string;
+    status?: string;
+};
+
 const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
     open,
     formData,
@@ -37,6 +49,7 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
     onClose,
 }) => {
     const [deviceTypes, setDeviceTypes] = useState<DeviceType[]>([]);
+    const [errors, setErrors] = useState<Errors>({});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -49,6 +62,52 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
         };
         fetchData();
     }, []);
+
+    useEffect(() => {
+        if (!open) setErrors({});
+    }, [open]);
+
+    const validate = async (): Promise<boolean> => {
+        const e: Errors = {};
+
+        if (!formData.typeName || formData.typeName.trim() === "") {
+            e.typeName = "Loại thiết bị là bắt buộc";
+        }
+
+        if (!formData.deviceName || formData.deviceName.trim() === "") {
+            e.deviceName = "Tên thiết bị là bắt buộc";
+        }
+
+        if (!formData.seriNumber || formData.seriNumber.trim() === "") {
+            e.seriNumber = "Số serial là bắt buộc";
+        }
+
+        if (!formData.model || formData.model.trim() === "") {
+            e.model = "Model thiết bị là bắt buộc";
+        }
+
+        if (!formData.location || formData.location.trim() === "") {
+            e.location = "Vị trí để thiết bị là bắt buộc";
+        }
+
+        if (!formData.factory || formData.factory.trim() === "") {
+            e.factory = "Nhà máy là bắt buộc";
+        }
+
+        if (!formData.status || formData.status.trim() === "") {
+            e.status = "Trạng thái là bắt buộc";
+        }
+
+        setErrors(e);
+
+        return Object.keys(e).length === 0;
+    };
+
+    const handleSave = async () => {
+        const ok = await validate();
+        if (!ok) return;
+        onSave();
+    };
 
     return (
         <Dialog
@@ -85,6 +144,8 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                             {...params}
                             label="Loại Thiết Bị"
                             variant="outlined"
+                            error={Boolean(errors.typeName)}
+                            helperText={errors.typeName}
                         />
                     )}
                 />
@@ -96,6 +157,8 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                     onChange={(e) =>
                         setFormData({ ...formData, deviceName: e.target.value })
                     }
+                    error={Boolean(errors.deviceName)}
+                    helperText={errors.deviceName}
                 />
                 <TextField
                     label="Số Serial"
@@ -105,6 +168,8 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                     onChange={(e) =>
                         setFormData({ ...formData, seriNumber: e.target.value })
                     }
+                    error={Boolean(errors.seriNumber)}
+                    helperText={errors.seriNumber}
                 />
                 <TextField
                     label="Model"
@@ -114,6 +179,8 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                     onChange={(e) =>
                         setFormData({ ...formData, model: e.target.value })
                     }
+                    error={Boolean(errors.model)}
+                    helperText={errors.model}
                 />
                 <TextField
                     label="Vị trí"
@@ -123,6 +190,8 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                     onChange={(e) =>
                         setFormData({ ...formData, location: e.target.value })
                     }
+                    error={Boolean(errors.location)}
+                    helperText={errors.location}
                 />
                 <FormControl fullWidth margin="dense">
                     <InputLabel id="factory">Nhà máy</InputLabel>
@@ -137,10 +206,14 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                                 factory: e.target.value,
                             })
                         }
+                        error={Boolean(errors.factory)}
                     >
                         <MenuItem value={"F1"}>Nhà máy 1</MenuItem>
                         <MenuItem value={"F2"}>Nhà máy 2</MenuItem>
                     </Select>
+                    {errors.factory && (
+                        <FormHelperText>{errors.factory}</FormHelperText>
+                    )}
                 </FormControl>
                 <FormControl fullWidth margin="dense">
                     <InputLabel id="status">Trạng thái hoạt động</InputLabel>
@@ -155,6 +228,7 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                                 status: e.target.value,
                             })
                         }
+                        error={Boolean(errors.status)}
                     >
                         <MenuItem value={"Đang sử dụng"}>
                             Sử dụng{" "}
@@ -175,6 +249,9 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                             </span>
                         </MenuItem>
                     </Select>
+                    {errors.status && (
+                        <FormHelperText>{errors.status}</FormHelperText>
+                    )}
                 </FormControl>
                 <TextField
                     type="number"
@@ -204,7 +281,7 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Hủy</Button>
-                <Button onClick={onSave} variant="contained">
+                <Button onClick={handleSave} variant="contained">
                     Lưu
                 </Button>
             </DialogActions>

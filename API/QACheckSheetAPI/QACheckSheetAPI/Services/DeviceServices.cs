@@ -23,6 +23,13 @@ namespace QACheckSheetAPI.Services
             return mapper.Map<List<DeviceDTO>>(listDevice);
         }
 
+        public async Task<List<DeviceDTO>> GetListDeviceDashboard()
+        {
+            var listDevice = await deviceRepository.GetListAsync();
+            var deviceFilters = listDevice.Where(x => x.Status.Contains("Đang sử dụng")).ToList();
+            return mapper.Map<List<DeviceDTO>>(deviceFilters);
+        }
+
         public async Task<DeviceDTO?> GetDeviceById(int id)
         {
             var device = await deviceRepository.GetAsync(id);

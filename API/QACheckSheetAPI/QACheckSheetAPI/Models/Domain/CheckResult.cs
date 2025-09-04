@@ -45,6 +45,6 @@ namespace QACheckSheetAPI.Models.Domain
         public string ConfirmBy { get; set; } = string.Empty;
         public DateTime? ConfirmDate { get; set; }
         public string UpdateBy { get; set; } = string.Empty;
-        public DateTime UpdateAt { get; set; } = DateTime.Now;
+        public DateTime UpdateAt { get; set; } = DateTime.Now;        
     }
 }

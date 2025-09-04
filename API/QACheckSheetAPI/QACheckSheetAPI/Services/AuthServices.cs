@@ -26,7 +26,7 @@ namespace QACheckSheetAPI.Services
         public async Task<bool> ChangePasswordAsync(ChangePasswordRequestDTO dto)
         {
             // 1. Lấy user theo ID
-            var user = await authRepository.GetByIdAsync(dto.UserId);
+            var user = await authRepository.GetByCodeAsync(dto.UserCode);
             if (user == null)
                 throw new KeyNotFoundException("User không tồn tại.");
 

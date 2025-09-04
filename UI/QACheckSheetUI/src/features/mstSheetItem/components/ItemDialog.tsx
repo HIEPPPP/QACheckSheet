@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Dialog,
     DialogActions,
@@ -26,6 +26,11 @@ interface ItemDialogProps {
     sheets: Sheet[];
 }
 
+type Errors = {
+    sheetId?: string;
+    title?: string;
+};
+
 const ItemDialog: React.FC<ItemDialogProps> = ({
     open,
     formData,
@@ -34,7 +39,32 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
     onClose,
     sheets,
 }) => {
-    const [errors, setErrors] = useState<Partial<ItemDTO>>({});
+    const [errors, setErrors] = useState<Errors>({});
+
+    useEffect(() => {
+        if (!open) setErrors({});
+    }, [open]);
+
+    const validate = async (): Promise<boolean> => {
+        const e: Errors = {};
+        if (!formData.sheetId) {
+            e.sheetId = "Sheet ID là bắt buộc";
+        }
+
+        if (!formData.title || formData.title.trim() === "") {
+            e.title = "Nội dung là bắt buộc";
+        }
+
+        setErrors(e);
+
+        return Object.keys(e).length === 0;
+    };
+
+    const handleSave = async () => {
+        const ok = await validate();
+        if (!ok) return;
+        onSave();
+    };
 
     return (
         <Dialog
@@ -68,7 +98,12 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
                         }
                     }}
                     renderInput={(params) => (
-                        <TextField {...params} label="Sheet ID" />
+                        <TextField
+                            {...params}
+                            label="Sheet ID"
+                            error={Boolean(errors.sheetId)}
+                            helperText={errors.sheetId}
+                        />
                     )}
                     sx={{ marginTop: 2 }}
                     disabled={formData.itemId !== null}
@@ -81,14 +116,11 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
                     onChange={(e) =>
                         setFormData({ ...formData, title: e.target.value })
                     }
+                    error={Boolean(errors.title)}
+                    helperText={errors.title}
                 />
-                <FormControl
-                    fullWidth
-                    margin="dense"
-                    required
-                    error={Boolean(errors.dataType)}
-                >
-                    <InputLabel id="data-type-label">Kiểu dữ liệu *</InputLabel>
+                <FormControl fullWidth margin="dense">
+                    <InputLabel id="data-type-label">Kiểu dữ liệu</InputLabel>
                     <Select
                         labelId="data-type-label"
                         id="data-type-select"
@@ -107,9 +139,9 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
                         <MenuItem value="NUMBER">NUMBER</MenuItem>
                         <MenuItem value="DATE">DATE</MenuItem>
                     </Select>
-                    {errors.dataType && (
+                    {/* {errors.dataType && (
                         <FormHelperText>{errors.dataType}</FormHelperText>
-                    )}
+                    )} */}
                     <TextField
                         label="Min"
                         fullWidth
@@ -140,7 +172,7 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Hủy</Button>
-                <Button onClick={onSave} variant="contained">
+                <Button onClick={handleSave} variant="contained">
                     Lưu
                 </Button>
             </DialogActions>

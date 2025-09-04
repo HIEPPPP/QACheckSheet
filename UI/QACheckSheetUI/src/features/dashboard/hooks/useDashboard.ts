@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Device } from "../../mstDevice/types/device";
-import { getListDevice } from "../../mstDevice/services/deviceServices";
+import { getListDeviceDashboard } from "../../mstDevice/services/deviceServices";
 
 type UseDashboardResult = {
     devices: Device[];
@@ -17,7 +17,7 @@ export const useDashboard = (): UseDashboardResult => {
         setLoading(true);
         setError(null);
         try {
-            const res = await getListDevice();
+            const res = await getListDeviceDashboard();
             if (res) setDevice(res);
         } catch (err: any) {
             setError(err.message || "Lỗi khi lấy danh sách");
