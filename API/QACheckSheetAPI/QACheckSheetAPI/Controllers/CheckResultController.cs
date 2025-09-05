@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using QACheckSheetAPI.Models;
 using QACheckSheetAPI.Models.Domain;
 using QACheckSheetAPI.Models.DTO.CheckResult;
 using QACheckSheetAPI.Models.DTO.DeviceType;
+using QACheckSheetAPI.Models.DTO.SheetDeviceTypeDTO;
 using QACheckSheetAPI.Services;
 
 namespace QACheckSheetAPI.Controllers
@@ -41,7 +43,23 @@ namespace QACheckSheetAPI.Controllers
         {
             var results = await checkResultServices.GetListResultDay();
             return Ok(new ApiResponse<List<CheckResult>>(200, "OK", results));
-        }       
+        }
+
+        // GET: api/CheckResult/getListResultApproveConfirmByMonth
+        [HttpGet("getListResultApproveConfirmByMonth")]
+        public async Task<IActionResult> GetListResultApproveConfirmByMonth(DateTime monthRef)
+        {
+            var results = await checkResultServices.GetListResultApproveConfirmByMonth(monthRef);
+            return Ok(new ApiResponse<List<ApproveConfirmResultDTO>>(200, "OK", results));
+        }
+
+        // GET: api/CheckResult/getHeaderReport
+        [HttpGet("getHeaderReport")]
+        public async Task<IActionResult> GetHeaderReport(string sheetCode, string deviceCode, DateTime monthRef)
+        {
+            var header = await checkResultServices.GetHeaderReport(sheetCode, deviceCode, monthRef);
+            return Ok(new ApiResponse<List<SheetDeviceTypeReportDTO>>(200, "OK", header));
+        }
 
         // POST: api/CheckResult
         [HttpPost]

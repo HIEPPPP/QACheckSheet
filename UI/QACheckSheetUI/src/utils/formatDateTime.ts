@@ -14,3 +14,20 @@ export const formatDateTime = (date: Date | string | null) => {
 
     return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 };
+
+// utils/date.ts
+export const toMonthStartString = (d: Date) =>
+    `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-01`;
+
+/**
+ * Nhận một string có thể là "YYYY-MM" hoặc "YYYY-MM-01" -> trả về Date object
+ * Tạo Date bằng new Date(year, monthIndex, 1) để tránh lỗi timezone.
+ */
+export const parseMonthRefToDate = (monthRef?: string): Date => {
+    if (!monthRef) return new Date(); // fallback: today
+    // tách phần năm-tháng
+    const parts = monthRef.split("-");
+    const year = Number(parts[0]);
+    const month = Number(parts[1]) - 1; // monthIndex
+    return new Date(year, month, 1);
+};

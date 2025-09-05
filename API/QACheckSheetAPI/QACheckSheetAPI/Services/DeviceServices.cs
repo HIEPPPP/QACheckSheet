@@ -25,9 +25,8 @@ namespace QACheckSheetAPI.Services
 
         public async Task<List<DeviceDTO>> GetListDeviceDashboard()
         {
-            var listDevice = await deviceRepository.GetListAsync();
-            var deviceFilters = listDevice.Where(x => x.Status.Contains("Đang sử dụng")).ToList();
-            return mapper.Map<List<DeviceDTO>>(deviceFilters);
+            var listDevice = await deviceRepository.GetListDeviceDashboard();            
+            return mapper.Map<List<DeviceDTO>>(listDevice);
         }
 
         public async Task<DeviceDTO?> GetDeviceById(int id)
@@ -58,12 +57,11 @@ namespace QACheckSheetAPI.Services
                 ?? throw new Exception("Device không tồn tại");
 
             device.UpdateAt = DateTime.Now;
+            device.FrequencyOverride = dto.FrequencyOverride;
             if(dto.TypeId.HasValue)
                 device.TypeId = dto.TypeId.Value;
             if(!string.IsNullOrWhiteSpace(dto.DeviceName))
                 device.DeviceName = dto.DeviceName;
-            if(dto.FrequencyOverride.HasValue)
-                device.FrequencyOverride = dto.FrequencyOverride;
             if(!string.IsNullOrWhiteSpace(dto.Status))
                 device.Status = dto.Status;
             if(!string.IsNullOrWhiteSpace(dto.Description)) 

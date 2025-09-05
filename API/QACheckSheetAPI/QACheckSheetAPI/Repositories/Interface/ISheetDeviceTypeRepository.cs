@@ -1,4 +1,5 @@
 ﻿using QACheckSheetAPI.Models.Domain;
+using QACheckSheetAPI.Models.DTO.SheetDeviceTypeDTO;
 
 namespace QACheckSheetAPI.Repositories.Interface
 {
@@ -9,6 +10,6 @@ namespace QACheckSheetAPI.Repositories.Interface
         Task<SheetDeviceTypeMST> CreateAsync(SheetDeviceTypeMST sheetDevice);
         Task<SheetDeviceTypeMST?> UpdateAsync(SheetDeviceTypeMST sheetDevice);
         Task DeleteAsync(SheetDeviceTypeMST sheetDevice);
-        Task<bool> IsSheetDeviceTypeExistAsync(int deviceTypeId, int sheetId);
+        Task<bool> IsSheetDeviceTypeExistAsync(int deviceTypeId, int sheetId);        
     }
 }

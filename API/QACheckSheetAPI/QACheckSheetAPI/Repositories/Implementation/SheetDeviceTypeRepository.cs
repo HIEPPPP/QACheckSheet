@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using QACheckSheetAPI.Data;
 using QACheckSheetAPI.Models.Domain;
+using QACheckSheetAPI.Models.DTO.CheckResult;
+using QACheckSheetAPI.Models.DTO.SheetDeviceTypeDTO;
 using QACheckSheetAPI.Repositories.Interface;
 
 namespace QACheckSheetAPI.Repositories.Implementation
@@ -37,7 +40,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
         public async Task<SheetDeviceTypeMST?> GetAsync(int id)
         {
             return await context.SheetDeviceTypes.Include(x => x.DeviceTypeMST).Include(x => x.SheetMST).FirstOrDefaultAsync(x => x.Id == id);
-        }
+        }        
 
         public async Task<List<SheetDeviceTypeMST>> GetListAsync()
         {

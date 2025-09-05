@@ -70,7 +70,7 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
     const validate = async (): Promise<boolean> => {
         const e: Errors = {};
 
-        if (!formData.typeName || formData.typeName.trim() === "") {
+        if (!formData.typeId) {
             e.typeName = "Loại thiết bị là bắt buộc";
         }
 
@@ -259,12 +259,13 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                     fullWidth
                     margin="dense"
                     value={formData.frequencyOverride ?? ""}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                        const val = e.target.value;
                         setFormData({
                             ...formData,
-                            frequencyOverride: Number(e.target.value),
-                        })
-                    }
+                            frequencyOverride: val === "" ? null : Number(val),
+                        });
+                    }}
                 />
                 <TextField
                     label="Mô tả"

@@ -1,5 +1,6 @@
 ﻿using QACheckSheetAPI.Models.Domain;
 using QACheckSheetAPI.Models.DTO.CheckResult;
+using QACheckSheetAPI.Models.DTO.SheetDeviceTypeDTO;
 
 namespace QACheckSheetAPI.Repositories.Interface
 {
@@ -13,5 +14,8 @@ namespace QACheckSheetAPI.Repositories.Interface
         Task<List<CheckResult>> GetListResultDayBySDCode(string sheetCode, string deviceCode);
         Task<List<CheckResult>> ConfirmResult(List<CheckResult> results);
         Task<List<CheckResult>> GetListReusltDay();
+        //Report
+        Task<List<ApproveConfirmResultDTO>> GetListResultApproveConfirmByMonth(DateTime monthRef);
+        Task<List<SheetDeviceTypeReportDTO>> GetHeaderReport(string sheetCode, string deviceCode, DateTime monthRef);
     }
 }

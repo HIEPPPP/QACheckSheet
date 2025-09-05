@@ -42,6 +42,27 @@ namespace QACheckSheetAPI.Repositories.Implementation
             return await context.Devices.Include(x => x.DeviceTypeMST).ToListAsync();
         }
 
+        public async Task<List<DeviceMST>> GetListDeviceDashboard()
+        {
+            var todayIsMonday = DateTime.Now.DayOfWeek == DayOfWeek.Monday;
+
+            return await context.Devices
+                .Include(d => d.DeviceTypeMST)
+                .Where(d =>
+                    d.Status == "Đang sử dụng" &&
+                    (
+                        // effective frequency = FrequencyOverride ?? DeviceTypeMST.DefaultFrequency
+                        ((d.FrequencyOverride ?? d.DeviceTypeMST.DefaultFrequency) == 1) // hàng ngày
+                        ||
+                        (
+                            (d.FrequencyOverride ?? d.DeviceTypeMST.DefaultFrequency) == 7
+                            && todayIsMonday // chỉ lấy khi hôm nay là Monday
+                        )
+                    )
+                )
+                .ToListAsync();
+        }
+
         public async Task<bool> IsDeviceCodeExistAsync(string deviceCode)
         {
             return await context.Devices.AnyAsync(x => x.DeviceCode == deviceCode);

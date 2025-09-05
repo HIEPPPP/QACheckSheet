@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.Data.SqlClient;
 using QACheckSheetAPI.Models.Domain;
 using QACheckSheetAPI.Models.DTO.CheckResult;
 using QACheckSheetAPI.Models.DTO.DeviceType;
+using QACheckSheetAPI.Models.DTO.SheetDeviceTypeDTO;
 using QACheckSheetAPI.Repositories.Implementation;
 using QACheckSheetAPI.Repositories.Interface;
 
@@ -98,6 +100,17 @@ namespace QACheckSheetAPI.Services
         public async Task<List<CheckResult>> GetListResultDay()
         {
             return await checkResultRepository.GetListReusltDay();
+        }
+
+        //Report
+        public async Task<List<ApproveConfirmResultDTO>> GetListResultApproveConfirmByMonth(DateTime monthRef)
+        {
+            return await checkResultRepository.GetListResultApproveConfirmByMonth(monthRef);
+        }
+
+        public async Task<List<SheetDeviceTypeReportDTO>> GetHeaderReport(string sheetCode, string deviceCode, DateTime monthRef)
+        {
+            return await checkResultRepository.GetHeaderReport(sheetCode, deviceCode, monthRef);
         }
     }
 }
