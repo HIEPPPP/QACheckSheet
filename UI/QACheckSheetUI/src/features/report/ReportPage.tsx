@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import ReportTable from "./components/ReportTable";
 import Report from "./components/Report";
 import { useReport } from "./hooks/useReport";
-import type { ConfirmApproveResult, ReportHeader } from "./types/report";
+import type {
+    ConfirmApproveResult,
+    ReportData,
+    ReportHeader,
+} from "./types/report";
 
 const ReportPage: React.FC = () => {
     const {
@@ -13,10 +17,14 @@ const ReportPage: React.FC = () => {
         monthRef,
         setMonthRef,
         fetchHeaderReport,
+        headerReport,
+        setHeaderReport,
+        fetchReportData,
+        reportData,
+        setReportData,
     } = useReport();
 
     const [open, setOpen] = useState(false);
-    const [reportHeader, setReportHeader] = useState<ReportHeader | null>(null);
 
     const handleViewSheet = async (row: ConfirmApproveResult) => {
         try {
@@ -26,14 +34,20 @@ const ReportPage: React.FC = () => {
                 row.deviceCode ?? "",
                 monthRef
             );
-            console.log("fetchHeaderReport returned:", res);
+
+            const report = await fetchReportData(
+                row.sheetCode ?? "",
+                row.deviceCode ?? "",
+                monthRef
+            );
+
             if (res) {
-                setReportHeader(res);
                 setOpen(true);
             } else {
                 // xử lý khi API trả null
-                setReportHeader(null);
-                // bạn có thể show toast / message ở đây
+                setHeaderReport(null);
+                setReportData([]);
+                // show toast / message ở đây
                 console.warn("Không có header trả về từ API");
             }
         } catch (err: any) {
@@ -49,7 +63,13 @@ const ReportPage: React.FC = () => {
                 monthRef={monthRef}
                 setMonthRef={setMonthRef}
             />
-            {open && <Report reportHeader={reportHeader} monthRef={monthRef} />}
+            {open && (
+                <Report
+                    reportHeader={headerReport}
+                    monthRef={monthRef}
+                    reportData={reportData}
+                />
+            )}
             {error && <div className="text-red-600">{error}</div>}
         </div>
     );

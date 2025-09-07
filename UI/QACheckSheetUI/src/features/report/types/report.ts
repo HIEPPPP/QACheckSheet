@@ -17,3 +17,8 @@ export interface ReportHeader {
     confirmedBy?: string;
     approvedBy?: string;
 }
+
+export type ReportData = {
+    content: string;
+    [key: string]: string | number | null | undefined;
+};

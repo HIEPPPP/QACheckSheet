@@ -182,5 +182,189 @@ namespace QACheckSheetAPI.Repositories.Implementation
                                new SqlParameter("@MonthRef", monthRef)
                            ).ToListAsync();
         }
+
+        public async Task<List<ResultReportDTO>> GetResultReport(string sheetCode, string deviceCode, DateTime monthRef)
+        {
+            var query = @"-- Start/End của tháng
+                            DECLARE @StartDate DATE = DATEFROMPARTS(YEAR(@MonthRef), MONTH(@MonthRef), 1);
+                            DECLARE @EndDate   DATE   = DATEADD(MONTH, 1, @StartDate);
+
+                            --------------------------------------------------------------------------------
+                            -- 1) Lấy dữ liệu thô (map ký hiệu cho BOOLEAN)
+                            --------------------------------------------------------------------------------
+                            ;WITH Results AS (
+                                SELECT
+                                    cr.ItemId,
+                                    cr.PathTitles,
+                                    cr.OrderNumber,
+                                    cr.Level,
+                                    DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)) AS CheckedDay,
+                                    cr.DataType,
+                                    CASE 
+                                        WHEN UPPER(ISNULL(cr.DataType,'')) = 'BOOLEAN' THEN
+                                            CASE UPPER(ISNULL(cr.Value,'')) 
+                                                WHEN 'OK'      THEN N'✓'
+                                                WHEN 'NG'      THEN N'x'
+                                                WHEN 'UPDATED' THEN N'o'
+                                                ELSE cr.Value
+                                            END
+                                        ELSE cr.Value
+                                    END AS ValueText,
+                                    cr.CheckedBy,
+                                    cr.ConfirmBy,
+                                    COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) AS _EventDateTime -- để debug / tham chiếu
+                                FROM CheckResults cr
+                                WHERE cr.SheetCode  = @SheetCode
+                                    AND cr.DeviceCode = @DeviceCode
+                                    AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) >= @StartDate
+                                    AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) <  @EndDate
+                            ),
+
+                            --------------------------------------------------------------------------------
+                            -- 2) Tạo hàng Giờ kiểm tra: 1 row/ngày với thời gian (MIN datetime trong ngày) -> format HH:MM
+                            --------------------------------------------------------------------------------
+                            CheckerTime AS (
+                                SELECT
+                                    DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)) AS CheckedDay,
+                                    N'Giờ kiểm tra' AS Content,
+                                    -- Lấy MIN datetime trong ngày, format hh:mm (lấy 5 ký tự đầu của 108 = hh:mi:ss)
+                                    LEFT(CONVERT(VARCHAR(8), MIN(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)), 108), 5) AS ValueText,
+                                    1 AS GroupSort,
+                                    -- sort path để giờ kiểm tra xuất trước Người kiểm tra
+                                    'A|' + RIGHT('000' + ISNULL(CAST(MIN(cr.Level) AS VARCHAR(10)), '000'), 3) 
+                                            + '|' + ISNULL(LEFT(CONVERT(VARCHAR(16), MIN(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)), 120), 16),'') 
+                                            AS SortPath
+                                FROM CheckResults cr
+                                WHERE cr.SheetCode  = @SheetCode
+                                    AND cr.DeviceCode = @DeviceCode
+                                    AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) >= @StartDate
+                                    AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) <  @EndDate
+                                GROUP BY DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate))
+                            ),
+
+                            --------------------------------------------------------------------------------
+                            -- 3) Dedupe ""Người kiểm tra"" và ""Người xác nhận"": 1 row/ngày
+                            --------------------------------------------------------------------------------
+                            CheckerDistinct AS (
+                                SELECT
+                                    DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)) AS CheckedDay,
+                                    N'Người kiểm tra' AS Content,
+                                    ISNULL(cr.CheckedBy, '') AS ValueText,
+                                    1 AS GroupSort,
+                                    'C|' + ISNULL(cr.CheckedBy,'') AS SortPath
+                                FROM CheckResults cr
+                                WHERE cr.SheetCode  = @SheetCode
+                                    AND cr.DeviceCode = @DeviceCode
+                                    AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) >= @StartDate
+                                    AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) <  @EndDate
+                                    AND ISNULL(cr.CheckedBy,'') <> ''
+                                GROUP BY DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)), cr.CheckedBy
+
+                            ),
+
+                            ConfirmerDistinct AS (
+                                SELECT
+                                    DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)) AS CheckedDay,
+                                    N'Người xác nhận' AS Content,
+                                    ISNULL(cr.ConfirmBy, '') AS ValueText,
+                                    2 AS GroupSort,
+                                    'F|' + ISNULL(cr.ConfirmBy,'') AS SortPath
+                                FROM CheckResults cr
+                                WHERE cr.SheetCode  = @SheetCode
+                                    AND cr.DeviceCode = @DeviceCode
+                                    AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) >= @StartDate
+                                    AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) <  @EndDate
+                                    AND ISNULL(cr.ConfirmBy,'') <> ''
+                                GROUP BY DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)), cr.ConfirmBy
+                            ),
+
+                            --------------------------------------------------------------------------------
+                            -- 4) Item rows: Content = PathTitles; SortPath từ Level + OrderNumber để sort theo Level rồi OrderNumber
+                            --------------------------------------------------------------------------------
+                            ItemRows AS (
+                                SELECT
+                                    r.CheckedDay,
+                                    ISNULL(r.PathTitles, '') AS Content,
+                                    r.ValueText,
+                                    0 AS GroupSort,
+                                    -- Pad Level + OrderNumber để sắp xếp lexicographically đúng: Level trước, sau đó OrderNumber
+                                    RIGHT('000' + ISNULL(CAST(r.Level AS VARCHAR(10)), '000'), 3)
+                                    + '.' +
+                                    RIGHT('000' + ISNULL(CAST(r.OrderNumber AS VARCHAR(10)), '000'), 3)
+                                    + '|' + ISNULL(r.PathTitles,'') AS SortPath
+                                FROM Results r
+                            ),
+
+                            --------------------------------------------------------------------------------
+                            -- 5) Gộp nguồn để pivot (ItemRows + CheckerTime + CheckerDistinct + ConfirmerDistinct)
+                            --------------------------------------------------------------------------------
+                            srcAll AS (
+                                SELECT * FROM ItemRows
+                                UNION ALL
+                                SELECT CheckedDay, Content, ValueText, GroupSort, SortPath FROM CheckerTime
+                                UNION ALL
+                                SELECT CheckedDay, Content, ValueText, GroupSort, SortPath FROM CheckerDistinct
+                                UNION ALL
+                                SELECT CheckedDay, Content, ValueText, GroupSort, SortPath FROM ConfirmerDistinct
+                            ),
+
+                            --------------------------------------------------------------------------------
+                            -- 6) Pivot days -> Day1..Day31
+                            --------------------------------------------------------------------------------
+                            pivoted AS (
+                                SELECT
+                                    GroupSort,
+                                    Content,
+                                    SortPath,
+                                    [1],[2],[3],[4],[5],[6],[7],[8],[9],
+                                    [10],[11],[12],[13],[14],[15],[16],[17],[18],[19],
+                                    [20],[21],[22],[23],[24],[25],[26],[27],[28],
+                                    [29],[30],[31]
+                                FROM (
+                                    SELECT GroupSort, Content, SortPath, CheckedDay, ValueText
+                                    FROM srcAll
+                                ) AS s
+                                PIVOT (
+                                    MAX(ValueText) FOR CheckedDay IN (
+                                        [1],[2],[3],[4],[5],[6],[7],[8],[9],
+                                        [10],[11],[12],[13],[14],[15],[16],[17],[18],[19],
+                                        [20],[21],[22],[23],[24],[25],[26],[27],[28],
+                                        [29],[30],[31]
+                                    )
+                                ) AS pvt
+                            ),
+
+                            --------------------------------------------------------------------------------
+                            -- 7) Final select: Content + Day1..Day31, sắp xếp theo ưu tiên (Giờ kiểm tra lên đầu), GroupSort, SortPath
+                            Final AS (
+                                SELECT
+                                    GroupSort, Content, SortPath,
+                                    [1] AS Day1,[2] AS Day2,[3] AS Day3,[4] AS Day4,[5] AS Day5,[6] AS Day6,[7] AS Day7,[8] AS Day8,[9] AS Day9,
+                                    [10]AS Day10,[11]AS Day11,[12]AS Day12,[13]AS Day13,[14]AS Day14,[15]AS Day15,[16]AS Day16,[17]AS Day17,[18]AS Day18,[19]AS Day19,
+                                    [20]AS Day20,[21]AS Day21,[22]AS Day22,[23]AS Day23,[24]AS Day24,[25]AS Day25,[26]AS Day26,[27]AS Day27,[28]AS Day28,
+                                    [29]AS Day29,[30]AS Day30,[31]AS Day31,
+                                    -- Ưu tiên: Giờ kiểm tra lên đầu
+                                    CASE WHEN Content = N'Giờ kiểm tra' THEN 0 ELSE 1 END AS SortPriority
+                                FROM pivoted
+                            )
+
+                            SELECT
+                                Content,
+                                Day1,Day2,Day3,Day4,Day5,Day6,Day7,Day8,Day9,
+                                Day10,Day11,Day12,Day13,Day14,Day15,Day16,Day17,Day18,Day19,
+                                Day20,Day21,Day22,Day23,Day24,Day25,Day26,Day27,Day28,
+                                Day29,Day30,Day31
+                            FROM Final
+                            WHERE NOT (ISNULL(Content,'') = '' 
+                                        AND ISNULL(Day1,'') = '' AND ISNULL(Day2,'') = '' )
+                            ORDER BY SortPriority, GroupSort, SortPath
+                            OPTION (MAXRECURSION 0);";
+            return await context.Database.SqlQueryRaw<ResultReportDTO>(
+                               query,
+                               new SqlParameter("@SheetCode", sheetCode),
+                               new SqlParameter("@DeviceCode", deviceCode),
+                               new SqlParameter("@MonthRef", monthRef)
+                           ).ToListAsync();
+        }
     }
 }

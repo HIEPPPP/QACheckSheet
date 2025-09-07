@@ -184,6 +184,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "GetResultReport",
+    "RelativePath": "api/CheckResult/getResultReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sheetCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "deviceCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "monthRef",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
     "Method": "GetListDevice",
     "RelativePath": "api/Device",

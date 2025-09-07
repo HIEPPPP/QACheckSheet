@@ -61,6 +61,14 @@ namespace QACheckSheetAPI.Controllers
             return Ok(new ApiResponse<List<SheetDeviceTypeReportDTO>>(200, "OK", header));
         }
 
+        // GET: api/CheckResult/getListResultReport
+        [HttpGet("getResultReport")]
+        public async Task<IActionResult> GetResultReport(string sheetCode, string deviceCode, DateTime monthRef)
+        {
+            var reports = await checkResultServices.GetResultReport(sheetCode, deviceCode, monthRef);
+            return Ok(new ApiResponse<List<ResultReportDTO>>(200, "OK", reports));
+        }
+
         // POST: api/CheckResult
         [HttpPost]
         public async Task<IActionResult> CreateResults(List<CreateCheckResultRequestDTO> dto)

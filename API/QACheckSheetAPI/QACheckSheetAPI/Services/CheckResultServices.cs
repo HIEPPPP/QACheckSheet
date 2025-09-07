@@ -112,5 +112,10 @@ namespace QACheckSheetAPI.Services
         {
             return await checkResultRepository.GetHeaderReport(sheetCode, deviceCode, monthRef);
         }
+
+        public async Task<List<ResultReportDTO>> GetResultReport(string sheetCode, string deviceCode, DateTime monthRef)
+        {
+            return await checkResultRepository.GetResultReport(sheetCode, deviceCode, monthRef);
+        }
     }
 }

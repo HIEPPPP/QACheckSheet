@@ -1,8 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import type { ConfirmApproveResult, ReportHeader } from "../types/report";
+import type {
+    ConfirmApproveResult,
+    ReportData,
+    ReportHeader,
+} from "../types/report";
 import {
     getHeaderReport,
     getListResultApproveConfirmByMonth,
+    getResultReport,
 } from "../services/result.service";
 import { toMonthStartString } from "../../../utils/formatDateTime";
 
@@ -15,6 +20,7 @@ export const useReport = () => {
     const [error, setError] = useState<string | null>(null);
 
     const [headerReport, setHeaderReport] = useState<ReportHeader | null>(null);
+    const [reportData, setReportData] = useState<ReportData[]>([]);
     const [monthRef, setMonthRef] = useState<string>(() =>
         toMonthStartString(new Date())
     );
@@ -59,6 +65,24 @@ export const useReport = () => {
         []
     );
 
+    const fetchReportData = useCallback(
+        async (sheetCode: string, deviceCode: string, mRef: Date | string) => {
+            setLoadingHeader(true);
+            setError(null);
+            try {
+                const res = await getResultReport(sheetCode, deviceCode, mRef);
+                setReportData(res ?? []);
+                return res ?? [];
+            } catch (err: any) {
+                setError(err?.message ?? "Lỗi khi lấy report");
+                return null;
+            } finally {
+                setLoadingHeader(false);
+            }
+        },
+        []
+    );
+
     return {
         confirmApproveResults,
         loadingList,
@@ -69,5 +93,9 @@ export const useReport = () => {
         setMonthRef,
         fetchHeaderReport,
         headerReport,
+        setHeaderReport,
+        fetchReportData,
+        reportData,
+        setReportData,
     };
 };

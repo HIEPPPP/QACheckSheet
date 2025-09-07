@@ -37,7 +37,7 @@ const admin: MenuItem[] = [
     { label: "Template", path: "/app/sheet", Icon: SummarizeIcon },
     { label: "Content", path: "/app/item", Icon: ChecklistRtlIcon },
     {
-        label: "Relations   ",
+        label: "Relationship",
         path: "/app/typeSheet",
         Icon: VerticalAlignCenterIcon,
     },

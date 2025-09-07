@@ -1,11 +1,13 @@
 import React from "react";
-import type { ReportHeader } from "../types/report";
+import type { ReportData, ReportHeader } from "../types/report";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import PanoramaFishEyeRoundedIcon from "@mui/icons-material/PanoramaFishEyeRounded";
+import ReportDataComponent from "./ReportDataComponent";
 
 type Props = {
     reportHeader?: ReportHeader | null;
+    reportData?: ReportData[] | null;
     monthRef?: string;
 };
 
@@ -16,7 +18,7 @@ const formatMonthYear = (monthRef?: string) => {
     return { month: m ?? "--", year: y ?? "--" };
 };
 
-const Report: React.FC<Props> = ({ reportHeader, monthRef }) => {
+const Report: React.FC<Props> = ({ reportHeader, monthRef, reportData }) => {
     const { month, year } = formatMonthYear(monthRef ?? "");
 
     const frequency =
@@ -156,6 +158,9 @@ const Report: React.FC<Props> = ({ reportHeader, monthRef }) => {
             </div>
 
             {/* Report Data */}
+            <div className="mt-6">
+                <ReportDataComponent rows={reportData ?? []} days={31} />
+            </div>
 
             {/* NG Table */}
         </div>

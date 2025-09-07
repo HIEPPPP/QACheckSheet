@@ -17,5 +17,6 @@ namespace QACheckSheetAPI.Repositories.Interface
         //Report
         Task<List<ApproveConfirmResultDTO>> GetListResultApproveConfirmByMonth(DateTime monthRef);
         Task<List<SheetDeviceTypeReportDTO>> GetHeaderReport(string sheetCode, string deviceCode, DateTime monthRef);
+        Task<List<ResultReportDTO>> GetResultReport(string sheetCode, string deviceCode, DateTime monthRef); 
     }
 }
