@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-    CheckRounded,
-    Info,
-    RotateRightRounded,
-    Search,
-} from "@mui/icons-material";
+import { CheckRounded, Info, RotateRightRounded } from "@mui/icons-material";
 import {
     Table,
     TableBody,
@@ -16,7 +11,6 @@ import {
     IconButton,
     Box,
     TextField,
-    Button,
 } from "@mui/material";
 import type { ConfirmApproveResult } from "../types/report";
 

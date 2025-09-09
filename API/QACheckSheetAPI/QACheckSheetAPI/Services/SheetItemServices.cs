@@ -13,12 +13,14 @@ namespace QACheckSheetAPI.Services
         private readonly ISheetItemRepository sheetItemRepository;
         private readonly IMapper mapper;
         private readonly QACheckSheetDBContext context;
+        private readonly ISheetRepository sheetRepository;
 
-        public SheetItemServices(ISheetItemRepository sheetItemRepository, IMapper mapper, QACheckSheetDBContext context)
+        public SheetItemServices(ISheetItemRepository sheetItemRepository, IMapper mapper, QACheckSheetDBContext context, ISheetRepository sheetRepository)
         {
             this.sheetItemRepository = sheetItemRepository;
             this.mapper = mapper;
             this.context = context;
+            this.sheetRepository = sheetRepository;
         }
 
         public async Task<List<ItemDTO>> GetListItem()
@@ -190,56 +192,77 @@ namespace QACheckSheetAPI.Services
 
         public async Task<List<SheetGroupDTO>> GetTree()
         {
-            // Lấy tất cả items
-            var items = await sheetItemRepository.GetListAsync(); 
+            // Lấy tất cả sheets và items
+            var sheets = await sheetRepository.GetListAsync();       
+            var items = await sheetItemRepository.GetListAsync();
+
+            // map items sang DTO
             var itemDtos = items.Select(i => mapper.Map<ItemTreeDTO>(i)).ToList();
 
-            // Group by sheetId
-            var groups = itemDtos.GroupBy(x => x.SheetId)
-                                 .Select(g => new SheetGroupDTO
-                                 {
-                                     SheetId = g.Key,
-                                     SheetName = g.First().PathTitles != null ? null : null // placeholder; we'll set below
-                                                                                            // Items filled below
-                                 })
-                                 .ToDictionary(x => x.SheetId);
+            // Tạo groups từ bảng Sheet - đảm bảo luôn có 1 group cho mỗi sheet, kể cả khi chưa có item
+            var groups = sheets
+                .Select(s => new SheetGroupDTO
+                {
+                    SheetId = s.SheetId,
+                    SheetName = s.SheetName,
+                    SheetCode = s.SheetCode,
+                    Items = new List<ItemTreeDTO>()
+                })
+                .ToDictionary(x => x.SheetId);
 
-            // If your ItemDTO contains sheetName/sheetCode fields in mapping, use them
-            // For safety, build dictionary of sheet metadata from original domain items:
-            var sheetMeta = items.GroupBy(i => i.SheetId)
-                                 .ToDictionary(g => g.Key, g => new {
-                                     SheetName = g.First().SheetMST?.SheetName ?? g.First().PathTitles,
-                                     SheetCode = g.First().SheetMST?.SheetCode
-                                 });
+            // Nếu có item thuộc sheet lạ (không có trong sheets) thì thêm defensive group
+            foreach (var dto in itemDtos)
+            {
+                if (!groups.ContainsKey(dto.SheetId))
+                {
+                    groups[dto.SheetId] = new SheetGroupDTO
+                    {
+                        SheetId = dto.SheetId,
+                        SheetName = null,
+                        SheetCode = null,
+                        Items = new List<ItemTreeDTO>()
+                    };
+                }
+            }
 
-            // For each group, build tree from its flat items
+            // Tạo lookup để lấy items theo sheet nhanh
+            var itemsLookup = itemDtos.ToLookup(i => i.SheetId);
+
+            // Với mỗi sheet, build cây nếu có items
             foreach (var kv in groups)
             {
                 var sheetId = kv.Key;
                 var grpDto = kv.Value;
 
-                // assign metadata
-                if (sheetMeta.TryGetValue(sheetId, out var meta))
+                var flatForSheet = itemsLookup[sheetId].ToList();
+                if (flatForSheet.Count == 0)
                 {
-                    grpDto.SheetName = meta.SheetName;
-                    grpDto.SheetCode = meta.SheetCode;
+                    grpDto.Items = new List<ItemTreeDTO>(); // giữ rỗng
+                    continue;
                 }
 
-                // take flat items for this sheet
-                var flatForSheet = itemDtos.Where(x => x.SheetId == sheetId).ToList();
-
-                // build id -> node map
-                var map = flatForSheet.ToDictionary(i => i.ItemId, i => { i.Children = new List<ItemTreeDTO>(); return i; });
+                // build id -> node map, reset children
+                var map = flatForSheet.ToDictionary(
+                    i => i.ItemId,
+                    i => { i.Children = new List<ItemTreeDTO>(); return i; }
+                );
 
                 var roots = new List<ItemTreeDTO>();
                 foreach (var node in map.Values)
                 {
                     if (node.ParentItemId == null || node.ParentItemId == 0)
+                    {
                         roots.Add(node);
+                    }
                     else if (map.TryGetValue(node.ParentItemId.Value, out var parent))
+                    {
                         parent.Children.Add(node);
+                    }
                     else
-                        roots.Add(node); // defensive: parent missing -> treat as root
+                    {
+                        // parent missing -> biến thành root (phòng trường hợp dữ liệu bị rời rạc)
+                        roots.Add(node);
+                    }
                 }
 
                 // sort children recursively by OrderNumber
@@ -254,8 +277,9 @@ namespace QACheckSheetAPI.Services
                 grpDto.Items = roots;
             }
 
-            // return groups as list ordered by sheetId (or sheetName)
+            // trả về danh sách group, ordered by SheetName hoặc SheetId tùy bạn
             return groups.Values.OrderBy(g => g.SheetId).ToList();
         }
+
     }
 }

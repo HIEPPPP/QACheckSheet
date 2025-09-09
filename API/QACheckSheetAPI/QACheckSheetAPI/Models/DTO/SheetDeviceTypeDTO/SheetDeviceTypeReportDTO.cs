@@ -2,6 +2,7 @@
 {
     public class SheetDeviceTypeReportDTO
     {
+        public int? ConfirmApproveId { get; set; }
         public string? SheetCode { get; set; }
         public string? SheetName { get; set; }
         public string? DeviceCode { get; set; }

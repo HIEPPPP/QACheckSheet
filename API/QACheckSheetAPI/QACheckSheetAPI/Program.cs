@@ -50,6 +50,7 @@ builder.Services.AddScoped<ISheetItemRepository, SheetItemRepository>();
 builder.Services.AddScoped<ICheckResultRepository, CheckResultRepository>();
 builder.Services.AddScoped<INgDetailRepository, NgDetailRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IConfirmApproveRepository, ConfirmApproveRepository>();
 
 builder.Services.AddScoped<AuthServices>();
 builder.Services.AddScoped<UserServices>();
@@ -61,6 +62,7 @@ builder.Services.AddScoped<SheetItemServices>();
 builder.Services.AddScoped<CheckResultServices>();
 builder.Services.AddScoped<NgDetailServices>();
 builder.Services.AddScoped<RoleServices>();
+builder.Services.AddScoped<ConfirmApproveServices>();
 
 var app = builder.Build();
 

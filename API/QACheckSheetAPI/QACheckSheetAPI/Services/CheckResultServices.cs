@@ -91,6 +91,11 @@ namespace QACheckSheetAPI.Services
             return await checkResultRepository.GetListResultDayBySDCode(sheetCode, deviceCode);
         }
 
+        public async Task<List<CheckResult>> GetListResultDayBySDCodeAndDate(string sheetCode, string deviceCode, DateTime dayRef)
+        {
+            return await checkResultRepository.GetListResultDayBySDCodeAndDate(sheetCode, deviceCode, dayRef);
+        }
+
         public async Task<List<CheckResult>> ConfirmResult(List<ConfirmResultRequestDTO> dto)
         {
             var resultsDomain = mapper.Map<List<CheckResult>>(dto);
@@ -116,6 +121,11 @@ namespace QACheckSheetAPI.Services
         public async Task<List<ResultReportDTO>> GetResultReport(string sheetCode, string deviceCode, DateTime monthRef)
         {
             return await checkResultRepository.GetResultReport(sheetCode, deviceCode, monthRef);
+        }
+
+        public async Task<List<ResultNGDTO>> GetNGReport(string sheetCode, string deviceCode, DateTime monthRef)
+        {
+            return await checkResultRepository.GetNGReport(sheetCode, deviceCode, monthRef);
         }
     }
 }

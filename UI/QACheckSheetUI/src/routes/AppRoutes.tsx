@@ -15,7 +15,7 @@ import ReportPage from "../features/report/ReportPage";
 import NgDetailPage from "../features/ngDetail/NgDetailPage";
 import UsersPage from "../features/users/UsersPage";
 import ProfilePage from "../features/auth/ProfilePage";
-import EditPage from "../features/editData/EditPage";
+import EditPageContainer from "../features/editData/EditPageContainer";
 
 export const AppRoutes = createBrowserRouter([
     // PUBLIC routes (no sidebar/header)
@@ -50,7 +50,7 @@ export const AppRoutes = createBrowserRouter([
             { path: "ngDetail", element: <NgDetailPage /> },
             { path: "users", element: <UsersPage /> },
             { path: "profile", element: <ProfilePage /> },
-            { path: "editData", element: <EditPage /> },
+            { path: "editData", element: <EditPageContainer /> },
         ],
     },
 ]);

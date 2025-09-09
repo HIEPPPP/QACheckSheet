@@ -50,11 +50,11 @@ const TypeSheetDialogComponent: React.FC<TypeSheetDialogProps> = ({
     const validate = async (): Promise<boolean> => {
         const e: Errors = {};
 
-        if (!formData.sheetName || formData.sheetName.trim() === "") {
+        if (!formData.sheetId) {
             e.sheetName = "Check Sheet là bắt buộc";
         }
 
-        if (!formData.deviceTypeName || formData.deviceTypeName.trim() === "") {
+        if (!formData.deviceTypeId) {
             e.typeName = "Loại thiết bị là bắt buộc";
         }
 

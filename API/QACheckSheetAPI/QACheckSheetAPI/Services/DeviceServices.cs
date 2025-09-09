@@ -41,6 +41,12 @@ namespace QACheckSheetAPI.Services
             return device == null ? null : mapper.Map<DeviceDTO>(device);
         }
 
+        public async Task<List<DeviceSheetDTO>> GetListDeviceBySheetCode(string sheetCode)
+        {
+            var devices = await deviceRepository.GetListDeviceBySheetCodeAsync(sheetCode);
+            return devices;
+        }
+
         public async Task<DeviceDTO> CreateDevice(CreateDeviceRequestDTO dto)   
         {
             //if (await deviceRepository.IsDeviceCodeExistAsync(dto.DeviceCode))

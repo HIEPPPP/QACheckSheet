@@ -1,4 +1,5 @@
 ﻿using QACheckSheetAPI.Models.Domain;
+using QACheckSheetAPI.Models.DTO.Device;
 
 namespace QACheckSheetAPI.Repositories.Interface
 {
@@ -6,6 +7,7 @@ namespace QACheckSheetAPI.Repositories.Interface
     {
         Task<bool> IsDeviceCodeExistAsync (string deviceCode);
         Task<List<DeviceMST>> GetListAsync();
+        Task<List<DeviceSheetDTO>> GetListDeviceBySheetCodeAsync(string sheetCode);
         Task<List<DeviceMST>> GetListDeviceDashboard();
         Task<DeviceMST?> GetAsync(int deviceId);
         Task<DeviceMST?> GetByCodeAsync(string deviceCode);

@@ -3,10 +3,12 @@ import type {
     ConfirmApproveResult,
     ReportData,
     ReportHeader,
+    ReportNG,
 } from "../types/report";
 import {
     getHeaderReport,
     getListResultApproveConfirmByMonth,
+    getNGReport,
     getResultReport,
 } from "../services/result.service";
 import { toMonthStartString } from "../../../utils/formatDateTime";
@@ -19,13 +21,14 @@ export const useReport = () => {
     const [loadingHeader, setLoadingHeader] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const [headerReport, setHeaderReport] = useState<ReportHeader | null>(null);
+    const [reportHeader, setReportHeader] = useState<ReportHeader | null>(null);
     const [reportData, setReportData] = useState<ReportData[]>([]);
+    const [reportNG, setReportNG] = useState<ReportNG[]>([]); // chưa dùng
     const [monthRef, setMonthRef] = useState<string>(() =>
         toMonthStartString(new Date())
     );
 
-    const fetchList = useCallback(
+    const fetchListConfirmApprove = useCallback(
         async (monthRefString?: string) => {
             setLoadingList(true);
             setError(null);
@@ -44,8 +47,8 @@ export const useReport = () => {
     );
 
     useEffect(() => {
-        void fetchList(monthRef);
-    }, [fetchList, monthRef]);
+        void fetchListConfirmApprove(monthRef);
+    }, [fetchListConfirmApprove, monthRef]);
 
     const fetchHeaderReport = useCallback(
         async (sheetCode: string, deviceCode: string, mRef: Date | string) => {
@@ -53,7 +56,7 @@ export const useReport = () => {
             setError(null);
             try {
                 const res = await getHeaderReport(sheetCode, deviceCode, mRef);
-                setHeaderReport(res ?? null);
+                setReportHeader(res ?? null);
                 return res ?? null;
             } catch (err: any) {
                 setError(err?.message ?? "Lỗi khi lấy header report");
@@ -83,19 +86,43 @@ export const useReport = () => {
         []
     );
 
+    const fetchReportNG = useCallback(
+        async (sheetCode: string, deviceCode: string, mRef: Date | string) => {
+            setLoadingHeader(true);
+            setError(null);
+            try {
+                const res = await getNGReport(sheetCode, deviceCode, mRef);
+                setReportNG(res ?? []);
+                return res ?? [];
+            } catch (err: any) {
+                setError(err?.message ?? "Lỗi khi lấy report");
+                return null;
+            } finally {
+                setLoadingHeader(false);
+            }
+        },
+        []
+    );
+
     return {
         confirmApproveResults,
         loadingList,
         loadingHeader,
         error,
-        refresh: async () => await fetchList(monthRef),
+        refresh: async () => await fetchListConfirmApprove(monthRef),
         monthRef,
         setMonthRef,
+        // header
         fetchHeaderReport,
-        headerReport,
-        setHeaderReport,
+        reportHeader,
+        setReportHeader,
+        // data
         fetchReportData,
         reportData,
         setReportData,
+        // ng
+        fetchReportNG,
+        reportNG,
+        setReportNG,
     };
 };

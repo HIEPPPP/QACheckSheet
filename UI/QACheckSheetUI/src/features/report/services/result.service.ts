@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { toMonthStartString } from "../../../utils/formatDateTime";
-import type { ReportData, ReportHeader } from "../types/report";
+import type { ReportData, ReportHeader, ReportNG } from "../types/report";
 
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL + "/CheckResult",
@@ -75,6 +75,26 @@ export const getResultReport = async (
                 ? monthRef
                 : toMonthStartString(monthRef);
         const res = await apiClient.get("/getResultReport", {
+            params: { sheetCode, deviceCode, monthRef: monthRefStr },
+        });
+
+        return res.data.data;
+    } catch (error) {
+        return handleError(error);
+    }
+};
+
+export const getNGReport = async (
+    sheetCode: string,
+    deviceCode: string,
+    monthRef: Date | string
+): Promise<ReportNG[] | null> => {
+    try {
+        const monthRefStr =
+            typeof monthRef === "string"
+                ? monthRef
+                : toMonthStartString(monthRef);
+        const res = await apiClient.get("/getNGReport", {
             params: { sheetCode, deviceCode, monthRef: monthRefStr },
         });
 

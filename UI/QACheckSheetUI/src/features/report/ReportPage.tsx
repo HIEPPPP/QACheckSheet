@@ -3,52 +3,61 @@ import React, { useState } from "react";
 import ReportTable from "./components/ReportTable";
 import Report from "./components/Report";
 import { useReport } from "./hooks/useReport";
-import type {
-    ConfirmApproveResult,
-    ReportData,
-    ReportHeader,
-} from "./types/report";
+import type { ConfirmApproveResult } from "./types/report";
+import { ArticleRounded } from "@mui/icons-material";
 
 const ReportPage: React.FC = () => {
     const {
         confirmApproveResults,
+        refresh: refreshConfirmApprove,
         loadingHeader,
         error,
         monthRef,
         setMonthRef,
+        // header
         fetchHeaderReport,
-        headerReport,
-        setHeaderReport,
+        reportHeader,
+        setReportHeader,
+        // data
         fetchReportData,
         reportData,
         setReportData,
+        // ng
+        fetchReportNG,
+        reportNG,
+        setReportNG,
     } = useReport();
 
     const [open, setOpen] = useState(false);
 
     const handleViewSheet = async (row: ConfirmApproveResult) => {
         try {
-            // await fetch and get the returned header
-            const res = await fetchHeaderReport(
-                row.sheetCode ?? "",
-                row.deviceCode ?? "",
-                monthRef
-            );
+            const [headerData, reportData] = await Promise.all([
+                fetchHeaderReport(
+                    row.sheetCode ?? "",
+                    row.deviceCode ?? "",
+                    monthRef
+                ),
+                fetchReportData(
+                    row.sheetCode ?? "",
+                    row.deviceCode ?? "",
+                    monthRef
+                ),
+                fetchReportNG(
+                    row.sheetCode ?? "",
+                    row.deviceCode ?? "",
+                    monthRef
+                ),
+            ]);
 
-            const report = await fetchReportData(
-                row.sheetCode ?? "",
-                row.deviceCode ?? "",
-                monthRef
-            );
-
-            if (res) {
+            if (headerData || reportData) {
                 setOpen(true);
             } else {
                 // xử lý khi API trả null
-                setHeaderReport(null);
+                setReportHeader(null);
                 setReportData([]);
-                // show toast / message ở đây
-                console.warn("Không có header trả về từ API");
+                setReportNG([]);
+                // setOpen(false);
             }
         } catch (err: any) {
             console.error(err);
@@ -63,12 +72,21 @@ const ReportPage: React.FC = () => {
                 monthRef={monthRef}
                 setMonthRef={setMonthRef}
             />
-            {open && (
+            {open ? (
                 <Report
-                    reportHeader={headerReport}
+                    reportHeader={reportHeader}
+                    fetchHeaderReport={fetchHeaderReport}
+                    refreshConfirmApprove={refreshConfirmApprove}
                     monthRef={monthRef}
                     reportData={reportData}
+                    reportNG={reportNG}
                 />
+            ) : (
+                <div className="flex justify-center items-center h-185 text-gray-400 border rounded-sm bg-white p-10 shadow-xl">
+                    <ArticleRounded
+                        style={{ fontSize: 250, color: "#2196F3" }}
+                    />
+                </div>
             )}
             {error && <div className="text-red-600">{error}</div>}
         </div>

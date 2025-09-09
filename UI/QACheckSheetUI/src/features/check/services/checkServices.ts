@@ -86,7 +86,27 @@ export const getListResultDayBySDCode = async (
     }
 };
 
-// Lấy dữ liệu kết quả ngày
+// EDIT DATA: Lấy dữ liệu kết quả theo sheetCode, deviceCode và ngày
+export const getListResultBySDCodeAndDate = async (
+    sheetCode: string,
+    deviceCode: string,
+    dayRef: Date | string
+) => {
+    try {
+        const dayRefStr =
+            typeof dayRef === "string"
+                ? dayRef
+                : new Date(dayRef).toISOString().split("T")[0]; // Chuyển đổi sang định dạng 'YYYY-MM-DD'
+        const res = await apiClient.get(
+            `/getListResultBySDCodeAndDate?sheetCode=${sheetCode}&deviceCode=${deviceCode}&dayRef=${dayRef}`
+        );
+        return res.data.data ?? [];
+    } catch (error) {
+        return handleError(error);
+    }
+};
+
+// Lấy dữ liệu kết quả theo ngày
 export const getListResultDay = async () => {
     try {
         const res = await apiClient.get("/getListResultDay");

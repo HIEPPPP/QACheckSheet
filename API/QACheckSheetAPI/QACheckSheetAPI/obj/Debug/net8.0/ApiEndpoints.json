@@ -144,6 +144,32 @@
   },
   {
     "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "GetListResultDayBySDCodeAndDate",
+    "RelativePath": "api/CheckResult/getListResultBySDCodeAndDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sheetCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "deviceCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "dayRef",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
     "Method": "GetListResultDay",
     "RelativePath": "api/CheckResult/getListResultDay",
     "HttpMethod": "GET",
@@ -185,6 +211,32 @@
   },
   {
     "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "GetNGReport",
+    "RelativePath": "api/CheckResult/getNGReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sheetCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "deviceCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "monthRef",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
     "Method": "GetResultReport",
     "RelativePath": "api/CheckResult/getResultReport",
     "HttpMethod": "GET",
@@ -205,6 +257,43 @@
         "Name": "monthRef",
         "Type": "System.DateTime",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.ConfirmApproveController",
+    "Method": "CreateConfirm",
+    "RelativePath": "api/ConfirmApprove",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.ConfirmApprove.CreateConfirmRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.ConfirmApproveController",
+    "Method": "UpdateApprove",
+    "RelativePath": "api/ConfirmApprove/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.ConfirmApprove.UpdateApproveRequestDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -300,6 +389,22 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.DeviceController",
+    "Method": "GetDevicesBySheetCode",
+    "RelativePath": "api/Device/getDevicesBySheetCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sheetCode",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

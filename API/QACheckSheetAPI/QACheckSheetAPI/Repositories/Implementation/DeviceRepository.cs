@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QACheckSheetAPI.Data;
 using QACheckSheetAPI.Models.Domain;
+using QACheckSheetAPI.Models.DTO.Device;
 using QACheckSheetAPI.Repositories.Interface;
 
 namespace QACheckSheetAPI.Repositories.Implementation
@@ -40,6 +41,25 @@ namespace QACheckSheetAPI.Repositories.Implementation
         public async Task<List<DeviceMST>> GetListAsync()
         {
             return await context.Devices.Include(x => x.DeviceTypeMST).ToListAsync();
+        }
+
+        public async Task<List<DeviceSheetDTO>> GetListDeviceBySheetCodeAsync(string sheetCode)
+        {
+            var result = from s in context.Sheets
+                         join sd in context.SheetDeviceTypes on s.SheetId equals sd.SheetId
+                         join dt in context.DeviceTypes on sd.DeviceTypeId equals dt.TypeId
+                         join d in context.Devices on dt.TypeId equals d.TypeId
+                         where s.SheetCode == sheetCode
+                         select new DeviceSheetDTO
+                         {
+                             SheetCode = s.SheetCode,
+                             SheetName = s.SheetName,
+                             DeviceCode = d.DeviceCode,
+                             DeviceName = d.DeviceName
+                         };
+
+            var list = await result.ToListAsync();
+            return list;
         }
 
         public async Task<List<DeviceMST>> GetListDeviceDashboard()

@@ -37,6 +37,14 @@ namespace QACheckSheetAPI.Controllers
             return Ok(new ApiResponse<List<CheckResult>>(200, "OK", results));
         }
 
+        // GET: api/CheckResult/getListResultDayBySDCodeAndDate
+        [HttpGet("getListResultBySDCodeAndDate")]
+        public async Task<IActionResult> GetListResultDayBySDCodeAndDate([FromQuery] string sheetCode, [FromQuery] string deviceCode, [FromQuery] DateTime dayRef)
+        {
+            var results = await checkResultServices.GetListResultDayBySDCodeAndDate(sheetCode, deviceCode, dayRef);
+            return Ok(new ApiResponse<List<CheckResult>>(200, "OK", results));
+        }
+
         // GET: api/CheckResult/getListResultDay
         [HttpGet("getListResultDay")]
         public async Task<IActionResult> GetListResultDay()
@@ -67,6 +75,14 @@ namespace QACheckSheetAPI.Controllers
         {
             var reports = await checkResultServices.GetResultReport(sheetCode, deviceCode, monthRef);
             return Ok(new ApiResponse<List<ResultReportDTO>>(200, "OK", reports));
+        }
+
+        // GET: api/CheckResult/getListResultReport
+        [HttpGet("getNGReport")]
+        public async Task<IActionResult> GetNGReport(string sheetCode, string deviceCode, DateTime monthRef)
+        {
+            var reports = await checkResultServices.GetNGReport(sheetCode, deviceCode, monthRef);
+            return Ok(new ApiResponse<List<ResultNGDTO>>(200, "OK", reports));
         }
 
         // POST: api/CheckResult

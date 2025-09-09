@@ -13,6 +13,7 @@ namespace QACheckSheetAPI.Models.Domain
         public string NGContentDetail { get; set; } = string.Empty; // Chi tiết nội dung NG
         [MaxLength(700)]
         public string FixContent { get; set; } = string.Empty; // Nội dung khắc phục
+        public string FixedBy { get; set; } = string.Empty;
         public DateTime? FixedDate { get; set; }
         public string ConfirmedBy { get; set; } = string.Empty;
         public DateTime? ConfirmedDate { get; set; }

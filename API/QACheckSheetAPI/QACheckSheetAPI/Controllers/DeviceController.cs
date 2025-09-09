@@ -39,7 +39,7 @@ namespace QACheckSheetAPI.Controllers
         public async Task<IActionResult> GetDevice(int id)
         {
             var device = await deviceServices.GetDeviceById(id);
-            if(device == null)
+            if (device == null)
             {
                 return NotFound("Device không tồn tại");
             }
@@ -56,6 +56,18 @@ namespace QACheckSheetAPI.Controllers
                 return NotFound("Device không tồn tại");
             }
             return Ok(new ApiResponse<DeviceDTO>(200, "OK", device));
+        }
+
+        // GET: api/device/getDeviceBySheetCode
+        [HttpGet("getDevicesBySheetCode")]
+        public async Task<IActionResult> GetDevicesBySheetCode(string sheetCode)
+        {
+            var devices = await deviceServices.GetListDeviceBySheetCode(sheetCode);
+            if (devices == null)
+            {
+                return NotFound("Device không tồn tại");
+            }
+            return Ok(new ApiResponse<List<DeviceSheetDTO>>(200, "OK", devices));
         }
 
         // POST: api/deivce

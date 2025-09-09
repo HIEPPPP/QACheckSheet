@@ -324,6 +324,10 @@ namespace QACheckSheetAPI.Migrations
                         .HasMaxLength(700)
                         .HasColumnType("nvarchar(700)");
 
+                    b.Property<string>("FixedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("FixedDate")
                         .HasColumnType("datetime2");
 

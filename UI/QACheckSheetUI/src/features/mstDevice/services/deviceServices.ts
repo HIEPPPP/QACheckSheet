@@ -54,6 +54,18 @@ export const getDeviceByCode = async (deviceCode: string) => {
     }
 };
 
+// Lấy theo sheetCode
+export const getDevicesBySheetCode = async (sheetCode: string) => {
+    try {
+        const res = await apiClient.get(`/getDevicesBySheetCode`, {
+            params: { sheetCode },
+        });
+        return res.data.data;
+    } catch (error) {
+        return handleError(error);
+    }
+};
+
 // Tạo mới thiết bị
 export const createDevice = async (device: Device) => {
     try {

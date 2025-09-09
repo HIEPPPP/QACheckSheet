@@ -70,12 +70,12 @@ export const useCheck = (rawCode?: string, user?: any) => {
     // parse rawCode
     useEffect(() => {
         if (!rawCode) {
-            navigate("/");
+            navigate("/app");
             return;
         }
         const parts = rawCode.split("-");
         if (parts.length !== 2) {
-            navigate("/");
+            navigate("/app");
             return;
         }
         setDeviceCode(parts[0]);
