@@ -21,10 +21,14 @@ namespace QACheckSheetAPI.Repositories.Implementation
             return nGDetail;
         }
 
+        public async Task<NGDetail?> GetByIdAsync(int id)
+        {
+            return await context.NGDetails.FirstOrDefaultAsync(x => x.NgId == id);
+        }
+
         public Task<List<NGDetail>> GetListNgDetailAsync()
         {
             return context.NGDetails.Include(x => x.CheckResult)
-                                    .Where(x => x.CheckResult.Status == "NG")
                                     .AsNoTracking().ToListAsync();
         }
 

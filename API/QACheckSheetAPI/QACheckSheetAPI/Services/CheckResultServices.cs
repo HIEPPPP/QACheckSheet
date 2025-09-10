@@ -45,6 +45,21 @@ namespace QACheckSheetAPI.Services
 
         }
 
+        // Update Value
+        public async Task<CheckResultDTO> UpdateValueOrStatus(int resultId, UpdateValueRequestDTO dto)
+        {
+            var result = await checkResultRepository.GetCheckResultByIdAsync(resultId)
+                                ?? throw new KeyNotFoundException("Result không tồn tại");
+
+            if (!string.IsNullOrWhiteSpace(dto.Value))
+                result.Value = dto.Value;
+            if (!string.IsNullOrWhiteSpace(dto.Status))
+                result.Status = dto.Status;
+
+            await checkResultRepository.UpdateResult(result);
+            return mapper.Map<CheckResultDTO>(result);
+        }
+
         public async Task<List<CheckResultDTO>> BulkUpdateCheckResults(List<UpdateCheckResultRequestDTO> dtoList)
         {
             if (dtoList == null || dtoList.Count == 0) return new List<CheckResultDTO>();
@@ -69,6 +84,46 @@ namespace QACheckSheetAPI.Services
                     result.Status = dto.Status;
                 if (!string.IsNullOrWhiteSpace(dto.UpdateBy))
                     result.UpdateBy = dto.UpdateBy;
+
+                updatedEntities.Add(result);
+            }
+
+            // Lưu tất cả (repository thực hiện SaveChanges một lần trong transaction)
+            await checkResultRepository.UpdateResults(updatedEntities);
+
+            // Map để trả về
+            return mapper.Map<List<CheckResultDTO>>(updatedEntities);
+        }
+
+        // EDIT DATA
+        public async Task<List<CheckResultDTO>> BulkEditCheckResults(List<EditCheckResultRequestDTO> dtoList)
+        {
+            if (dtoList == null || dtoList.Count == 0) return new List<CheckResultDTO>();
+
+            // Lấy từng entity, cập nhật và lưu một lần (atomic)
+            var updatedEntities = new List<CheckResult>();
+
+            foreach (var dto in dtoList)
+            {
+                if (dto.ResultId == null)
+                    throw new KeyNotFoundException("ResultId is required for bulk update");
+
+                var result = await checkResultRepository.GetCheckResultByIdAsync(dto.ResultId.Value)
+                             ?? throw new KeyNotFoundException($"ResultId {dto.ResultId} không tồn tại");
+
+                result.UpdateAt = DateTime.Now;
+
+                // Chỉ cập nhật nếu DTO có giá trị (giữ logic hiện có)
+                if (!string.IsNullOrWhiteSpace(dto.Value))
+                    result.Value = dto.Value;
+                if (!string.IsNullOrWhiteSpace(dto.Status))
+                    result.Status = dto.Status;
+                if (!string.IsNullOrWhiteSpace(dto.UpdateBy))
+                    result.UpdateBy = dto.UpdateBy;
+                if (!string.IsNullOrWhiteSpace(dto.CheckedBy))
+                    result.CheckedBy = dto.CheckedBy;
+                if (!string.IsNullOrWhiteSpace(dto.ConfirmBy))
+                    result.ConfirmBy = dto.ConfirmBy;
 
                 updatedEntities.Add(result);
             }

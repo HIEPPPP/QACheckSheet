@@ -23,6 +23,7 @@ interface NgDialogProps {
 }
 
 type Errors = {
+    ngContentDetail?: string;
     fixContent?: string;
     value?: string;
 };
@@ -40,19 +41,24 @@ const NgDialog: React.FC<NgDialogProps> = ({
         if (!open) setErrors({});
     }, [open]);
 
-    // ensure default for BOOLEAN when dialog opens
     useEffect(() => {
         if (open && formData.dataType === "BOOLEAN" && !formData.status) {
             setFormData({ ...formData, status: "NG" });
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open, formData.dataType]); // intentionally not depending on formData.status to avoid extra runs
+    }, [open, formData.dataType]);
 
     const validate = async (): Promise<boolean> => {
         const e: Errors = {};
 
         if (!formData.fixContent || String(formData.fixContent).trim() === "") {
             e.fixContent = "Nội dung khắc phục là bắt buộc";
+        }
+
+        if (
+            !formData.ngContentDetail ||
+            String(formData.ngContentDetail).trim() === ""
+        ) {
+            e.fixContent = "Nội dung bất thường là bắt buộc";
         }
 
         if (formData.dataType === "NUMBER") {
@@ -149,13 +155,15 @@ const NgDialog: React.FC<NgDialogProps> = ({
                     label="Chi tiết nội dung bất thường"
                     fullWidth
                     margin="dense"
-                    value={formData.nGContentDetail ?? ""}
+                    value={formData.ngContentDetail ?? ""}
                     onChange={(e) =>
                         setFormData({
                             ...formData,
-                            nGContentDetail: e.target.value,
+                            ngContentDetail: e.target.value,
                         })
                     }
+                    error={Boolean(errors.ngContentDetail)}
+                    helperText={errors.ngContentDetail}
                 />
                 <TextField
                     label="Nội dung khắc phục"
@@ -177,16 +185,16 @@ const NgDialog: React.FC<NgDialogProps> = ({
                         <label>Giá trị kiểm tra: </label>
                         <ToggleButtonGroup
                             exclusive
-                            value={formData.status ?? "NG"}
+                            value={formData.value ?? "NG"}
                             onChange={(_, newValue) => {
                                 if (newValue === null) return;
-                                setFormData({ ...formData, status: newValue });
+                                setFormData({ ...formData, value: newValue });
                                 setErrors((prev) => ({
                                     ...prev,
                                     value: undefined,
                                 }));
                             }}
-                            aria-label="status"
+                            aria-label="value"
                         >
                             <ToggleButton
                                 value="NG"

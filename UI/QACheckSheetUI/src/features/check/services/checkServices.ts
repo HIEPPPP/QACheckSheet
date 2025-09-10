@@ -57,6 +57,25 @@ export const bulkUpdateResults = async (
     }
 };
 
+// Cập nhật phần EDIT DATA
+export const editResults = async (
+    items: {
+        resultId: number;
+        value?: string;
+        status?: string;
+        updateBy?: string;
+        checkedBy?: string;
+        confirmBy?: string;
+    }[]
+) => {
+    try {
+        const res = await apiClient.put("/editData", items);
+        return res.data.data; // ApiResponse from server
+    } catch (error) {
+        return handleError(error);
+    }
+};
+
 export const confirm = async (
     items: {
         resultId: number;

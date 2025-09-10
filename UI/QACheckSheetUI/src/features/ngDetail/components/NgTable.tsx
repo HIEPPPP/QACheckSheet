@@ -1,4 +1,5 @@
-import React from "react";
+// src/features/ng/components/NgTable.tsx
+import React, { useMemo, useState } from "react";
 import {
     Table,
     TableBody,
@@ -12,34 +13,59 @@ import {
     Pagination,
     TextField,
     MenuItem,
-    colors,
 } from "@mui/material";
-import { useState } from "react";
-import type { NgDetail } from "../types/ngDetail";
-import { Delete, Edit } from "@mui/icons-material";
-import { formatDateTime } from "../../../utils/formatDateTime";
-import { red } from "@mui/material/colors";
+import type { ConfirmNgPayload, NgDetail } from "../types/ngDetail";
+import { Edit } from "@mui/icons-material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { formatDateTime, vnTime } from "../../../utils/formatDateTime";
+import type { User } from "../../../shared/type/localstorage";
 
 interface NgTableProps {
     resultNgDetail?: NgDetail[];
     onEdit: (result: NgDetail) => void;
+    onConfirm: (payload: ConfirmNgPayload) => void;
+    user: User | null;
 }
 
-const NgTable: React.FC<NgTableProps> = ({ resultNgDetail = [], onEdit }) => {
+const NgTable: React.FC<NgTableProps> = ({
+    resultNgDetail = [],
+    onEdit,
+    onConfirm,
+    user,
+}) => {
     const [page, setPage] = useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
     const [searchText, setSearchText] = useState<string>("");
 
-    const filteredResults = resultNgDetail.filter((r) =>
-        `${r.sheetCode} ${r.sheetName} ${r.deviceCode} ${r.deviceName}`
-            .toLowerCase()
-            .includes(searchText.toLowerCase())
+    const rolesArr = useMemo(() => {
+        const raw = user?.roles;
+        if (!raw) return [] as string[];
+        if (Array.isArray(raw)) return raw.map((r) => String(r).toLowerCase());
+        return [String(raw).toLowerCase()];
+    }, [user?.roles]);
+
+    const isOperator = rolesArr.some((r) => r === "operator");
+
+    const filteredResults = useMemo(
+        () =>
+            resultNgDetail.filter((r) =>
+                `${r.sheetCode ?? ""} ${r.sheetName ?? ""} ${
+                    r.deviceCode ?? ""
+                } ${r.deviceName ?? ""}`
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase())
+            ),
+        [resultNgDetail, searchText]
     );
 
     // Dữ liệu sau phân trang
-    const paginatedResults = filteredResults.slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
+    const paginatedResults = useMemo(
+        () =>
+            filteredResults.slice(
+                page * rowsPerPage,
+                page * rowsPerPage + rowsPerPage
+            ),
+        [filteredResults, page, rowsPerPage]
     );
 
     const handleChangePage = (
@@ -125,44 +151,133 @@ const NgTable: React.FC<NgTableProps> = ({ resultNgDetail = [], onEdit }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {paginatedResults.map((r: NgDetail, index: number) => (
-                            <TableRow
-                                key={r.resultId}
-                                className="hover:bg-gray-100"
-                            >
-                                <TableCell>
-                                    {page * rowsPerPage + index + 1}
-                                </TableCell>
-                                <TableCell>
-                                    {formatDateTime(r.checkedDate ?? null)}
-                                </TableCell>
-                                <TableCell>{r.sheetCode}</TableCell>
-                                <TableCell>{r.sheetName}</TableCell>
-                                <TableCell>{r.deviceCode}</TableCell>
-                                <TableCell>{r.deviceName}</TableCell>
-                                <TableCell>{r.pathTitles}</TableCell>
-                                <TableCell>{r.nGContentDetail}</TableCell>
-                                <TableCell>{r.fixContent}</TableCell>
-                                <TableCell>{r.value}</TableCell>
-                                <TableCell
-                                    sx={{
-                                        fontWeight: 600,
-                                        color: "#FF0000",
-                                    }}
-                                    className="animate-pulse"
+                        {paginatedResults.map((r: NgDetail, index: number) => {
+                            // --- tính toán trạng thái disabled cho nút Check ---
+                            const dataType = String(
+                                r.dataType ?? ""
+                            ).toUpperCase();
+
+                            // 1) BOOLEAN: disabled nếu value === "NG"
+                            const booleanDisabled =
+                                dataType === "BOOLEAN" &&
+                                String(r.value ?? "").toUpperCase() === "NG";
+
+                            // 2) NUMBER: disabled nếu value không phải số hoặc không nằm trong [min,max]
+                            let numberDisabled = false;
+                            if (dataType === "NUMBER") {
+                                const num = Number(r.value);
+                                if (!Number.isFinite(num)) {
+                                    numberDisabled = true;
+                                } else {
+                                    const min =
+                                        r.min != null ? Number(r.min) : null;
+                                    const max =
+                                        r.max != null ? Number(r.max) : null;
+                                    if (min != null && max != null) {
+                                        numberDisabled = !(
+                                            num >= min && num <= max
+                                        );
+                                    } else if (min != null) {
+                                        numberDisabled = num < min;
+                                    } else if (max != null) {
+                                        numberDisabled = num > max;
+                                    } else {
+                                        numberDisabled = false;
+                                    }
+                                }
+                            }
+
+                            // 3) always disable if fixedBy is current user
+                            const fixedByIsCurrentUser =
+                                !!r.fixedBy &&
+                                r.fixedBy ===
+                                    (user?.userCode ??
+                                        (user as any)?.UserCode ??
+                                        "");
+
+                            const disabledCheckButton =
+                                booleanDisabled ||
+                                numberDisabled ||
+                                fixedByIsCurrentUser;
+
+                            return (
+                                <TableRow
+                                    key={r.resultId ?? `${page}-${index}`}
+                                    className="hover:bg-gray-100"
                                 >
-                                    {r.status}
-                                </TableCell>
-                                <TableCell>
-                                    <IconButton
-                                        color="warning"
-                                        onClick={() => onEdit(r)}
+                                    <TableCell>
+                                        {page * rowsPerPage + index + 1}
+                                    </TableCell>
+                                    <TableCell>
+                                        {formatDateTime(r.checkedDate ?? null)}
+                                    </TableCell>
+                                    <TableCell>{r.sheetCode}</TableCell>
+                                    <TableCell>{r.sheetName}</TableCell>
+                                    <TableCell>{r.deviceCode}</TableCell>
+                                    <TableCell>{r.deviceName}</TableCell>
+                                    <TableCell>{r.pathTitles}</TableCell>
+                                    <TableCell>{r.ngContentDetail}</TableCell>
+                                    <TableCell>{r.fixContent}</TableCell>
+                                    <TableCell>{r.value}</TableCell>
+                                    <TableCell
+                                        sx={{
+                                            fontWeight: 600,
+                                            color: "#FF0000",
+                                        }}
+                                        className="animate-pulse"
                                     >
-                                        <Edit />
-                                    </IconButton>
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                                        {r.status}
+                                    </TableCell>
+                                    {/* Hành động */}
+                                    <TableCell className="w-[120px]">
+                                        <IconButton
+                                            color="primary"
+                                            onClick={() => onEdit(r)}
+                                        >
+                                            <Edit />
+                                        </IconButton>
+
+                                        {/* Nếu user là operator thì ẩn nút fix, ngược lại hiển thị nhưng disable theo điều kiện */}
+                                        {!isOperator && (
+                                            <IconButton
+                                                color="success"
+                                                onClick={() =>
+                                                    onConfirm({
+                                                        ngId: r.ngId ?? 0,
+                                                        resultId:
+                                                            r.resultId ?? 0,
+                                                        confirmedBy:
+                                                            user?.userCode ??
+                                                            "",
+                                                        confirmedDate: new Date(
+                                                            vnTime
+                                                        ).toISOString(),
+                                                    })
+                                                }
+                                                disabled={disabledCheckButton}
+                                                title={
+                                                    disabledCheckButton
+                                                        ? fixedByIsCurrentUser
+                                                            ? "Bạn đã khắc phục mục này"
+                                                            : dataType ===
+                                                                  "BOOLEAN" &&
+                                                              booleanDisabled
+                                                            ? "Trạng thái NG"
+                                                            : dataType ===
+                                                                  "NUMBER" &&
+                                                              numberDisabled
+                                                            ? "Giá trị không nằm trong giới hạn"
+                                                            : "Không thể khắc phục"
+                                                        : "Khắc phục"
+                                                }
+                                            >
+                                                <CheckCircleIcon />
+                                            </IconButton>
+                                        )}
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
                     </TableBody>
                 </Table>
             </TableContainer>
@@ -170,7 +285,10 @@ const NgTable: React.FC<NgTableProps> = ({ resultNgDetail = [], onEdit }) => {
             {/* Phân trang */}
             <Box mt={2} display="flex" justifyContent="center">
                 <Pagination
-                    count={Math.ceil(filteredResults.length / rowsPerPage)}
+                    count={Math.max(
+                        1,
+                        Math.ceil(filteredResults.length / rowsPerPage)
+                    )}
                     page={page + 1}
                     onChange={handleChangePage}
                     color="primary"

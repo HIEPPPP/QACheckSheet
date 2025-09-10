@@ -100,7 +100,12 @@ namespace QACheckSheetAPI.Data
                 entity.Property(e => e.SheetCode)
                       .HasComputedColumnSql("'CS' + CAST([SheetId] AS VARCHAR(20))", stored: true);
                 entity.HasIndex(e => e.SheetCode).IsUnique();
-            });            
+            });
+
+            // Composite index
+            modelBuilder.Entity<CheckResult>()
+                .HasIndex(cr => new { cr.SheetCode, cr.DeviceCode, cr.CheckedDate })
+                .HasDatabaseName("IX_CheckResult_Sheet_Device_CheckedDate");
 
             base.OnModelCreating(modelBuilder);
         }

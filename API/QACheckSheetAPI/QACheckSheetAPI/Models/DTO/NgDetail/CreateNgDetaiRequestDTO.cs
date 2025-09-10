@@ -1,17 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace QACheckSheetAPI.Models.DTO.NgDetailDTO
+﻿namespace QACheckSheetAPI.Models.DTO.NgDetail
 {
-    public class NgDetailDTO
+    public class CreateNgDetaiRequestDTO
     {
-        public int NgId { get; set; }
         public long ResultId { get; set; }
         public string NGContentDetail { get; set; } = string.Empty; // Chi tiết nội dung NG
         public string FixContent { get; set; } = string.Empty; // Nội dung khắc phục
         public string FixedBy { get; set; } = string.Empty;
         public DateTime? FixedDate { get; set; }
-        public string ConfirmedBy { get; set; } = string.Empty;
-        public DateTime? ConfirmedDate { get; set; }
-        public string Note { get; set; } = string.Empty;
     }
 }

@@ -1,4 +1,4 @@
-import { vnTime } from "../../../utils/formatDateTime";
+import { localVnStringWithOffset, vnTime } from "../../../utils/formatDateTime";
 import type { User } from "../../users/types/users";
 
 export interface CheckResult {
@@ -259,7 +259,10 @@ export function buildEditResultsPayload(
     confirmer?: User,
     dayRef?: string
 ): CreateCheckResultRequestDTO[] {
+    console.log("dayRef", dayRef);
+
     const itemMap = buildItemNodeMap(itemsTree);
+    const iso06 = localVnStringWithOffset(dayRef, 6);
 
     const payloads: CreateCheckResultRequestDTO[] = [];
 
@@ -365,9 +368,9 @@ export function buildEditResultsPayload(
             value: valueStr,
             status: statusVal,
             checkedBy: checker?.userCode ?? "",
-            checkedDate: dayRef ?? new Date(vnTime).toISOString(),
+            checkedDate: iso06,
             confirmBy: confirmer?.userCode ?? "",
-            confirmDate: new Date(vnTime).toISOString(),
+            confirmDate: iso06,
             updateBy: currentUser?.userCode ?? "",
             updateAt: new Date(vnTime).toISOString(),
         };

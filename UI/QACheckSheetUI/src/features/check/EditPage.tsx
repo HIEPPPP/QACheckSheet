@@ -121,9 +121,10 @@ const EditPage: React.FC<EditPageProps> = ({
                                 options={users}
                                 getOptionLabel={(opt) => opt.userCode || ""}
                                 value={checker ?? null}
-                                onChange={(_, val) =>
-                                    setChecker(val ?? undefined)
-                                }
+                                onChange={(_, val) => {
+                                    setChecker(val ?? undefined);
+                                    setConfirmer(undefined);
+                                }}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
@@ -195,6 +196,12 @@ const EditPage: React.FC<EditPageProps> = ({
                                 variant="contained"
                                 color="primary"
                                 onClick={handleFinish}
+                                disabled={
+                                    !canSubmit ||
+                                    isLocked ||
+                                    !checker ||
+                                    !confirmer
+                                }
                             >
                                 Lưu
                             </Button>

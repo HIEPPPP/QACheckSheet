@@ -44,13 +44,17 @@ namespace QACheckSheetAPI.Repositories.Implementation
 	                       r.CheckedDate,
 	                       r.Value,
 	                       r.Status,
+						   s.Min,
+						   s.Max,
 	                       ng.NGContentDetail,
 	                       ng.FixContent,
 	                       ng.FixedDate,
+                           ng.FixedBy,
 	                       ng.ConfirmedBy,
 	                       ng.ConfirmedDate,
 	                       ng.Note
 	                       FROM CheckResults AS r
+				    INNER JOIN SheetItems AS s ON r.ItemId  = s.ItemId 
                     LEFT JOIN NGDetails AS ng ON r.ResultId = ng.ResultId
                     WHERE r.Status = 'NG'";
             return await context.Database.SqlQueryRaw<NGDetailDTO>(
@@ -248,39 +252,55 @@ namespace QACheckSheetAPI.Repositories.Implementation
                         ),
 
                         --------------------------------------------------------------------------------
-                        -- 3) Dedupe ""Người kiểm tra"" và ""Người xác nhận"": 1 row/ngày
+                        -- 3) Dedupe ""Người kiểm tra"": 1 row/ngày (gom tất cả CheckedBy trong cùng ngày)
                         --------------------------------------------------------------------------------
                         CheckerDistinct AS (
                             SELECT
-                                DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)) AS CheckedDay,
+                                t.CheckedDay,
                                 N'Người kiểm tra' AS Content,
-                                ISNULL(cr.CheckedBy, '') AS ValueText,
+                                -- gom tất cả CheckedBy trong ngày, phân tách bởi ', '
+                                ISNULL(STRING_AGG(t.CheckedBy, ', ') WITHIN GROUP (ORDER BY t.CheckedBy), '') AS ValueText,
                                 1 AS GroupSort,
-                                'C|' + ISNULL(cr.CheckedBy,'') AS SortPath
-                            FROM CheckResults cr
-                            WHERE cr.SheetCode  = @SheetCode
-                              AND cr.DeviceCode = @DeviceCode
-                              AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) >= @StartDate
-                              AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) <  @EndDate
-                              AND ISNULL(cr.CheckedBy,'') <> ''
-                            GROUP BY DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)), cr.CheckedBy
-
+                                -- SortPath cố định để pivot chỉ tạo 1 hàng ""Người kiểm tra""
+                                'C|000' AS SortPath
+                            FROM (
+                                -- lấy distinct CheckedBy trong từng ngày
+                                SELECT DISTINCT
+                                    DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)) AS CheckedDay,
+                                    LTRIM(RTRIM(ISNULL(cr.CheckedBy, ''))) AS CheckedBy
+                                FROM CheckResults cr
+                                WHERE cr.SheetCode  = @SheetCode
+                                  AND cr.DeviceCode = @DeviceCode
+                                  AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) >= @StartDate
+                                  AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) <  @EndDate
+                                  AND LTRIM(RTRIM(ISNULL(cr.CheckedBy, ''))) <> ''
+                            ) AS t
+                            GROUP BY t.CheckedDay
                         ),
 
+                        --------------------------------------------------------------------------------
+                        -- 3b) Dedupe ""Người xác nhận"": 1 row/ngày (gom tất cả ConfirmBy trong cùng ngày)
+                        --------------------------------------------------------------------------------
                         ConfirmerDistinct AS (
                             SELECT
-                                DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)) AS CheckedDay,
+                                t.CheckedDay,
                                 N'Người xác nhận' AS Content,
-                                ISNULL(cr.ConfirmBy, '') AS ValueText,
+                                ISNULL(STRING_AGG(t.ConfirmBy, ', ') WITHIN GROUP (ORDER BY t.ConfirmBy), '') AS ValueText,
                                 2 AS GroupSort,
-                                'F|' + ISNULL(cr.ConfirmBy,'') AS SortPath
-                            FROM CheckResults cr
-                            WHERE cr.SheetCode  = @SheetCode
-                              AND cr.DeviceCode = @DeviceCode
-                              AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) >= @StartDate
-                              AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) <  @EndDate
-                              AND ISNULL(cr.ConfirmBy,'') <> ''
-                            GROUP BY DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)), cr.ConfirmBy
+                                -- SortPath cố định để pivot chỉ tạo 1 hàng ""Người xác nhận""
+                                'F|000' AS SortPath
+                            FROM (
+                                SELECT DISTINCT
+                                    DAY(COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate)) AS CheckedDay,
+                                    LTRIM(RTRIM(ISNULL(cr.ConfirmBy, ''))) AS ConfirmBy
+                                FROM CheckResults cr
+                                WHERE cr.SheetCode  = @SheetCode
+                                  AND cr.DeviceCode = @DeviceCode
+                                  AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) >= @StartDate
+                                  AND COALESCE(cr.CheckedDate, cr.UpdateAt, cr.ConfirmDate) <  @EndDate
+                                  AND LTRIM(RTRIM(ISNULL(cr.ConfirmBy, ''))) <> ''
+                            ) AS t
+                            GROUP BY t.CheckedDay
                         ),
 
                         --------------------------------------------------------------------------------

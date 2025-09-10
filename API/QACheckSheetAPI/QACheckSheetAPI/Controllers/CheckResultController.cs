@@ -77,7 +77,7 @@ namespace QACheckSheetAPI.Controllers
             return Ok(new ApiResponse<List<ResultReportDTO>>(200, "OK", reports));
         }
 
-        // GET: api/CheckResult/getListResultReport
+        // GET: api/CheckResult/getNGReport
         [HttpGet("getNGReport")]
         public async Task<IActionResult> GetNGReport(string sheetCode, string deviceCode, DateTime monthRef)
         {
@@ -139,6 +139,28 @@ namespace QACheckSheetAPI.Controllers
             }
         }
 
+        // PUT: api/CheckResult/editData
+        [HttpPut("editData")]
+        public async Task<IActionResult> EditData([FromBody] List<EditCheckResultRequestDTO> dtoList)
+        {
+            if (dtoList == null || dtoList.Count == 0)
+                return BadRequest(new ApiResponse<object>(400, "No items to update"));
+
+            try
+            {
+                var updated = await checkResultServices.BulkEditCheckResults(dtoList);
+                return Ok(new ApiResponse<List<CheckResultDTO>>(200, "OK", updated));
+            }
+            catch (KeyNotFoundException knf)
+            {
+                return NotFound(new ApiResponse<object>(404, knf.Message));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse<object>(400, ex.Message));
+            }
+        }
+
         // PUT: api/CheckResult/confirm
         [HttpPut("confirm")]
         public async Task<IActionResult> ResultConfirm([FromBody] List<ConfirmResultRequestDTO> dto)
@@ -148,6 +170,21 @@ namespace QACheckSheetAPI.Controllers
             var results = await checkResultServices.ConfirmResult(dto);
             return results != null ? Ok(new ApiResponse<List<CheckResult>>(200, "Confirmed", results))
                                    : NotFound(new ApiResponse<string>(404, "Result not found"));
+        }
+
+        // PUT: api/CheckResult/updateValue
+        [HttpPut("updateValueOrStatus/{resultId}")]
+        public async Task<IActionResult> UpdateValueOrStatus(int resultId, UpdateValueRequestDTO dto)
+        {
+            try
+            {
+                var updated = await checkResultServices.UpdateValueOrStatus(resultId, dto);
+                return Ok(new ApiResponse<CheckResultDTO>(200, "OK", updated));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse<object>(400, ex.Message));
+            }
         }
     }
 }

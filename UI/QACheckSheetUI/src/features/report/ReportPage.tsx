@@ -71,6 +71,7 @@ const ReportPage: React.FC = () => {
                 onEdit={handleViewSheet}
                 monthRef={monthRef}
                 setMonthRef={setMonthRef}
+                setOpen={setOpen}
             />
             {open ? (
                 <Report

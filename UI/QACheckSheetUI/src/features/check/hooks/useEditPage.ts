@@ -20,6 +20,7 @@ import {
     bulkUpdateResults,
     confirm as apiConfirmResults,
     getListResultBySDCodeAndDate,
+    editResults,
 } from "../services/checkServices";
 import {
     buildCheckResultsPayload,
@@ -81,7 +82,7 @@ export const useEditPage = (rawCode?: string, user?: any) => {
 
     // parse rawCode
     useEffect(() => {
-        console.log("rawCode " + rawCode);
+        // console.log("rawCode " + rawCode);
 
         if (!rawCode) {
             navigate("/app");
@@ -393,7 +394,7 @@ export const useEditPage = (rawCode?: string, user?: any) => {
                 confirmer,
                 dayRef
             );
-            console.log("Prepared payloads:", payloads);
+            // console.log("Prepared payloads:", payloads);
 
             if (!payloads || payloads.length === 0) {
                 setLoading(false);
@@ -432,16 +433,19 @@ export const useEditPage = (rawCode?: string, user?: any) => {
                     value: u.dto.value ?? "",
                     status: (u.dto as any).status ?? "",
                     updateBy: user?.userCode ?? "",
+                    checkedBy: checker?.userCode ?? "",
+                    confirmBy: confirmer?.userCode ?? "",
                 }));
-                const bulkRes = await bulkUpdateResults(bulkItems);
+                const bulkRes = await editResults(bulkItems);
                 if (bulkRes) updatedCount = bulkItems.length;
             }
 
             // refetch
             try {
-                const latest = await getListResultDayBySDCode(
-                    template.sheetCode ?? template?.sheetCode ?? "",
-                    device?.deviceCode ?? ""
+                const latest = await getListResultBySDCodeAndDate(
+                    template?.sheetCode ?? "",
+                    device?.deviceCode ?? "",
+                    dayRef
                 );
                 const arrLatest = Array.isArray(latest)
                     ? latest
@@ -487,6 +491,10 @@ export const useEditPage = (rawCode?: string, user?: any) => {
         fetchedResults,
         user,
         buildAnswersFromResults,
+        checker,
+        confirmer,
+        dayRef,
+        users,
     ]);
 
     // confirmAll: chỉ cho phép khi isComplete && !dirty && role != Operator && checkedBy != current user
@@ -587,7 +595,6 @@ export const useEditPage = (rawCode?: string, user?: any) => {
                 const locked = arrLatest.some(
                     (r: any) => !!(r?.confirmBy ?? r?.ConfirmBy)
                 );
-                setIsLocked(locked);
                 setCheckedBy(
                     arrLatest[0]?.checkedBy ??
                         arrLatest[0]?.CheckedBy ??

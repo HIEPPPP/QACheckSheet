@@ -19,6 +19,7 @@ type ReportTableProps = {
     onEdit: (cd: ConfirmApproveResult) => void;
     monthRef: string;
     setMonthRef: (m: string) => void;
+    setOpen: (open: boolean) => void;
 };
 
 const ReportTable: React.FC<ReportTableProps> = ({
@@ -26,6 +27,7 @@ const ReportTable: React.FC<ReportTableProps> = ({
     onEdit,
     monthRef,
     setMonthRef,
+    setOpen,
 }) => {
     const [searchText, setSearchText] = useState<string>("");
     const [selectedRowId, setSelectedRowId] = useState<string | null>(null);
@@ -67,6 +69,8 @@ const ReportTable: React.FC<ReportTableProps> = ({
                             onChange={(e) => {
                                 // đặt state dạng "YYYY-MM-01"
                                 setMonthRef(`${e.target.value}-01`);
+                                // tắt report khi thay đổi tháng
+                                setOpen(false);
                             }}
                             InputLabelProps={{ shrink: true }}
                         />

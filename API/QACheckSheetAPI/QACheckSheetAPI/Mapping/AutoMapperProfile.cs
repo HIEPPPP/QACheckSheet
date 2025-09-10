@@ -5,6 +5,8 @@ using QACheckSheetAPI.Models.DTO.CheckResult;
 using QACheckSheetAPI.Models.DTO.ConfirmApprove;
 using QACheckSheetAPI.Models.DTO.Device;
 using QACheckSheetAPI.Models.DTO.DeviceType;
+using QACheckSheetAPI.Models.DTO.NgDetail;
+using QACheckSheetAPI.Models.DTO.NgDetailDTO;
 using QACheckSheetAPI.Models.DTO.Sheet;
 using QACheckSheetAPI.Models.DTO.SheetDeviceTypeDTO;
 using QACheckSheetAPI.Models.DTO.SheetItem;
@@ -76,6 +78,11 @@ namespace QACheckSheetAPI.Mapping
             // ConfirmApprove
             CreateMap<ConfirmApprove, ConfirmApproveDTO>().ReverseMap();
             CreateMap<ConfirmApprove, CreateConfirmRequestDTO>().ReverseMap();
+
+            // NGDetail
+            CreateMap<NGDetail, NgDetailDTO>().ReverseMap();
+            CreateMap<NGDetail, CreateNgDetaiRequestDTO>().ReverseMap();
+            CreateMap<NGDetail, UpdateNgDetailRequestDTO>().ReverseMap();
 
         }
     }

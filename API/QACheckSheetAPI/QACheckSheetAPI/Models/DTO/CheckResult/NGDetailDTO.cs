@@ -16,6 +16,8 @@
         // Result
         public string? Value { get; set; } = null!;
         public string? Status { get; set; }
+        public decimal? Min { get; set; }
+        public decimal? Max { get; set; }
         public string? CheckedBy { get; set; } = null!;
         public DateTime? CheckedDate { get; set; }
         //public string ConfirmBy { get; set; } = string.Empty;
@@ -28,6 +30,7 @@
         public string? NGContentDetail { get; set; }
         public string? FixContent { get; set; }
         public DateTime? FixedDate { get; set; }
+        public string? FixedBy { get; set; }
         public string? ConfirmedBy { get; set; }
         public DateTime? ConfirmedDate { get; set; }
         public string? Note { get; set; }

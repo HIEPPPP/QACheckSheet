@@ -102,6 +102,22 @@
   },
   {
     "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "EditData",
+    "RelativePath": "api/CheckResult/editData",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dtoList",
+        "Type": "System.Collections.Generic.List\u00601[[QACheckSheetAPI.Models.DTO.CheckResult.EditCheckResultRequestDTO, QACheckSheetAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
     "Method": "GetHeaderReport",
     "RelativePath": "api/CheckResult/getHeaderReport",
     "HttpMethod": "GET",
@@ -257,6 +273,27 @@
         "Name": "monthRef",
         "Type": "System.DateTime",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.CheckResultController",
+    "Method": "UpdateValueOrStatus",
+    "RelativePath": "api/CheckResult/updateValueOrStatus/{resultId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resultId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.CheckResult.UpdateValueRequestDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -611,6 +648,43 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.NgDetailController",
+    "Method": "CreateNgDetail",
+    "RelativePath": "api/NgDetail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.NgDetail.CreateNgDetaiRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QACheckSheetAPI.Controllers.NgDetailController",
+    "Method": "UpdateNgDetail",
+    "RelativePath": "api/NgDetail/{ngId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ngId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "QACheckSheetAPI.Models.DTO.NgDetail.UpdateNgDetailRequestDTO",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

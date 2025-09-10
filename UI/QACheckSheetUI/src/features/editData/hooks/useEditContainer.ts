@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Sheet } from "../../mstSheet/types/sheet";
-import type { DeviceSheet } from "../types/editData";
 import { getListSheet } from "../../mstSheet/services/sheetServices";
 import { getDevicesBySheetCode } from "../../mstDevice/services/deviceServices";
+import type { DeviceSheet } from "../types/EditData";
 
 type UseEditData = {
     sheets: Sheet[];
