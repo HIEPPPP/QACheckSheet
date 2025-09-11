@@ -68,16 +68,32 @@ export const useCheck = (rawCode?: string, user?: any) => {
     });
 
     // parse rawCode
+    // useEffect(() => {
+    //     if (!rawCode) {
+    //         navigate("/app");
+    //         return;
+    //     }
+    //     const parts = rawCode.split("-");
+    //     if (parts.length !== 2) {
+    //         navigate("/app");
+    //         return;
+    //     }
+    //     setDeviceCode(parts[0]);
+    //     setSheetCode(parts[1]);
+    // }, [rawCode, navigate]);
+
+    // parse rawCode
+    // decode on mount
     useEffect(() => {
-        if (!rawCode) {
-            navigate("/app");
-            return;
+        if (!rawCode) return navigate("/");
+        let raw;
+        try {
+            raw = atob(decodeURIComponent(rawCode));
+        } catch {
+            return navigate("/");
         }
-        const parts = rawCode.split("-");
-        if (parts.length !== 2) {
-            navigate("/app");
-            return;
-        }
+        const parts = raw.split("-");
+        if (parts.length !== 2) return navigate("/");
         setDeviceCode(parts[0]);
         setSheetCode(parts[1]);
     }, [rawCode, navigate]);

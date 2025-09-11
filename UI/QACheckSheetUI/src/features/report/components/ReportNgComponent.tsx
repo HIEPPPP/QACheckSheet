@@ -42,8 +42,8 @@ const ReportNgComponent: React.FC<ReportNgComponentProps> = ({ reportNG }) => {
                             <td className="border p-1">
                                 <span className="">{r?.pathTitles}</span>
                                 <span className="text-indigo-600 font-semibold">
-                                    {r.nGContentDetail
-                                        ? " (" + r.nGContentDetail + ")"
+                                    {r.ngContentDetail
+                                        ? " (" + r.ngContentDetail + ")"
                                         : ""}
                                 </span>
                             </td>

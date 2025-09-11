@@ -408,12 +408,11 @@ namespace QACheckSheetAPI.Repositories.Implementation
 	                                   r.Status, 
 	                                   ng.FixedBy, 
 	                                   ng.ConfirmedBy FROM CheckResults AS r
-                                LEFT JOIN NGDetails AS ng ON r.ResultId = ng.ResultId 
-                                WHERE r.Status = 'NG' 
+                                INNER JOIN NGDetails AS ng ON r.ResultId = ng.ResultId                                 
 	                                  AND r.DeviceCode = @DeviceCode 
 	                                  AND r.SheetCode = @SheetCode
-	                                  AND COALESCE(r.CheckedDate, r.UpdateAt, r.ConfirmDate) >= @StartDate
-                                      AND COALESCE(r.CheckedDate, r.UpdateAt, r.ConfirmDate) <  @EndDate";
+	                                  AND r.CheckedDate >= @StartDate
+                                      AND r.CheckedDate <  @EndDate";
             return await context.Database.SqlQueryRaw<ResultNGDTO>(
                                query,
                                new SqlParameter("@SheetCode", sheetCode),

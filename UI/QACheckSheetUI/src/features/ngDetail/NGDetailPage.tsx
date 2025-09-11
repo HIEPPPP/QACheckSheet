@@ -11,6 +11,7 @@ import type {
 import { vnTime } from "../../utils/formatDateTime";
 import Notification from "../../shared/components/Notification";
 import { UserContext } from "../../contexts/UserProvider";
+import { useStatus } from "../../contexts/StatusProvider";
 
 const NgDetailPage: React.FC = () => {
     const {
@@ -35,6 +36,7 @@ const NgDetailPage: React.FC = () => {
     });
 
     const { user } = useContext(UserContext);
+    const { refreshStatus } = useStatus();
 
     const [formData, setFormData] = useState<NgDetail>({
         resultId: null,
@@ -126,6 +128,7 @@ const NgDetailPage: React.FC = () => {
         );
         const confirmed = await confirmNGDetail(payload.ngId, payload);
         if (confirmed && updated) {
+            await refreshStatus();
             setSnackbar({
                 open: true,
                 message: "Xác nhận hoàn tất",

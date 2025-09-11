@@ -176,7 +176,7 @@ const CheckPage: React.FC = () => {
                     />
                 ))}
 
-                <div className="mt-6 pb-2 flex justify-end gap-4">
+                <div className="mt-6 pb-2 flex justify-center gap-4">
                     {/* Hoàn thành */}
                     <Tooltip
                         title={

@@ -61,6 +61,7 @@ namespace QACheckSheetAPI.Controllers
             return Ok(new ApiResponse<List<ApproveConfirmResultDTO>>(200, "OK", results));
         }
 
+        // REPORT
         // GET: api/CheckResult/getHeaderReport
         [HttpGet("getHeaderReport")]
         public async Task<IActionResult> GetHeaderReport(string sheetCode, string deviceCode, DateTime monthRef)

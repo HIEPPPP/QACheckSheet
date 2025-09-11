@@ -11,6 +11,14 @@ const LeafRow: React.FC<{
     const value = ans?.value ?? "";
     const status = ans?.status ?? null;
 
+    // map cho toggle: nếu backend trả "UPDATED", hiển thị như "OK"
+    const toggleValue: "OK" | "NG" | null = (() => {
+        if (status === "OK" || status === "NG") return status;
+        if (ans?.value === "OK" || ans?.value === "NG") return ans.value;
+        if (ans?.value === "UPDATED") return "OK"; // <-- giữ nguyên ans.value, nhưng toggle hiển thị OK
+        return null;
+    })();
+
     return (
         <Box
             className="flex items-center justify-between gap-4 mb-2"
@@ -47,29 +55,32 @@ const LeafRow: React.FC<{
                 {item.dataType === "BOOLEAN" && (
                     <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
                         <BooleanToggleSwitch
-                            value={status}
+                            value={toggleValue}
                             onChange={(v) => {
-                                if (v === "OK")
-                                    onChange(item.itemId, {
-                                        status: "OK",
-                                        value: "OK",
-                                    });
-                                else if (v === "NG")
-                                    onChange(item.itemId, {
-                                        status: "NG",
-                                        value: "OK",
-                                    });
-                                else
-                                    onChange(item.itemId, {
-                                        status: null,
-                                        value: null,
-                                    });
+                                // v is "OK" | "NG" | null
+                                // luôn cập nhật status = v
+                                // - Nếu trước đó ans.value === "UPDATED", giữ nguyên value = "UPDATED"
+                                // - Ngược lại, đặt value = v (OK/NG/null)
+                                const newValue =
+                                    ans?.value === "UPDATED"
+                                        ? // giữ nguyên UPDATED khi có sẵn
+                                          v === null
+                                            ? null
+                                            : "UPDATED"
+                                        : // nếu không có UPDATED trước đó thì chuẩn hoá value theo v
+                                          v;
+
+                                onChange(item.itemId, {
+                                    status: v,
+                                    value: newValue,
+                                });
                             }}
                             size={200}
                             disabled={disabled}
                         />
                     </Box>
                 )}
+
                 {/* NUMBER */}
                 {item.dataType === "NUMBER" && (
                     <TextField
@@ -111,6 +122,7 @@ const LeafRow: React.FC<{
                         }
                     />
                 )}
+
                 {/* TEXT */}
                 {(item.dataType === "TEXT" || item.dataType === "") && (
                     <TextField

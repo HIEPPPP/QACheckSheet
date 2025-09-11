@@ -28,7 +28,7 @@ export interface ReportNG {
     resultId?: number;
     checkedDate?: Date | string;
     pathTitles?: string;
-    nGContentDetail?: string;
+    ngContentDetail?: string;
     fixContent?: string;
     status?: string;
     fixedBy?: string;

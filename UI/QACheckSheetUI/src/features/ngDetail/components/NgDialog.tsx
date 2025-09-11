@@ -50,25 +50,63 @@ const NgDialog: React.FC<NgDialogProps> = ({
     const validate = async (): Promise<boolean> => {
         const e: Errors = {};
 
-        if (!formData.fixContent || String(formData.fixContent).trim() === "") {
-            e.fixContent = "Nội dung khắc phục là bắt buộc";
-        }
-
         if (
             !formData.ngContentDetail ||
             String(formData.ngContentDetail).trim() === ""
         ) {
-            e.fixContent = "Nội dung bất thường là bắt buộc";
+            e.ngContentDetail = "Nội dung bất thường là bắt buộc";
+        }
+
+        if (!formData.fixContent || String(formData.fixContent).trim() === "") {
+            e.fixContent = "Nội dung khắc phục là bắt buộc";
         }
 
         if (formData.dataType === "NUMBER") {
             const val = formData.value;
+
             if (val === null || val === undefined || val === "") {
                 e.value = "Giá trị số là bắt buộc";
             } else {
                 const num = Number(val);
                 if (Number.isNaN(num)) {
                     e.value = "Giá trị phải là số hợp lệ";
+                } else {
+                    // check min / max when provided
+                    const hasMin =
+                        formData.min !== undefined && formData.min !== null;
+                    const hasMax =
+                        formData.max !== undefined && formData.max !== null;
+
+                    const minNum = hasMin ? Number(formData.min) : undefined;
+                    const maxNum = hasMax ? Number(formData.max) : undefined;
+
+                    if (hasMin && Number.isNaN(minNum)) {
+                        e.value = "Giá trị min không hợp lệ";
+                    }
+
+                    if (hasMax && Number.isNaN(maxNum)) {
+                        e.value = "Giá trị max không hợp lệ";
+                    }
+
+                    if (!e.value) {
+                        if (
+                            minNum !== undefined &&
+                            maxNum !== undefined &&
+                            minNum > maxNum
+                        ) {
+                            e.value = `Sai ranh giới: min (${minNum}) > max (${maxNum})`;
+                        } else if (
+                            minNum !== undefined &&
+                            num < (minNum as number)
+                        ) {
+                            e.value = `Giá trị phải lớn hơn hoặc bằng ${minNum}`;
+                        } else if (
+                            maxNum !== undefined &&
+                            num > (maxNum as number)
+                        ) {
+                            e.value = `Giá trị phải nhỏ hơn hoặc bằng ${maxNum}`;
+                        }
+                    }
                 }
             }
         }
@@ -185,10 +223,21 @@ const NgDialog: React.FC<NgDialogProps> = ({
                         <label>Giá trị kiểm tra: </label>
                         <ToggleButtonGroup
                             exclusive
-                            value={formData.value ?? "NG"}
+                            // Nếu đang lưu "UPDATED", hiện thị "OK" để button tương ứng được chọn
+                            value={
+                                formData.value === "UPDATED"
+                                    ? "OK"
+                                    : formData.value ?? "NG"
+                            }
                             onChange={(_, newValue) => {
                                 if (newValue === null) return;
-                                setFormData({ ...formData, value: newValue });
+                                // Nếu user chọn "OK" thì lưu "UPDATED", ngược lại lưu chính xác giá trị được chọn (ví dụ "NG")
+                                const storedValue =
+                                    newValue === "OK" ? "UPDATED" : newValue;
+                                setFormData({
+                                    ...formData,
+                                    value: storedValue,
+                                });
                                 setErrors((prev) => ({
                                     ...prev,
                                     value: undefined,
@@ -214,14 +263,22 @@ const NgDialog: React.FC<NgDialogProps> = ({
                     </div>
                 ) : formData.dataType === "NUMBER" ? (
                     <TextField
-                        label="Giá trị kiểm tra (số)"
+                        label={`Giá trị kiểm tra (số)${
+                            formData.min !== undefined ||
+                            formData.max !== undefined
+                                ? ` — khoảng ${formData.min ?? "-"} đến ${
+                                      formData.max ?? "-"
+                                  }`
+                                : ""
+                        }`}
                         fullWidth
                         margin="dense"
                         type="number"
                         value={formData.value ?? ""}
                         onChange={(e) => {
                             const raw = e.target.value;
-                            const parsed = raw === "" ? "" : Number(raw);
+                            const parsed = raw === "" ? "" : raw;
+                            setFormData({ ...formData, value: parsed });
                             setErrors((prev) => ({
                                 ...prev,
                                 value: undefined,
@@ -229,6 +286,11 @@ const NgDialog: React.FC<NgDialogProps> = ({
                         }}
                         error={Boolean(errors.value)}
                         helperText={errors.value}
+                        inputProps={{
+                            min: formData.min ?? undefined,
+                            max: formData.max ?? undefined,
+                            step: "any",
+                        }}
                     />
                 ) : (
                     <TextField
