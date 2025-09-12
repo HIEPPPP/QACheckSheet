@@ -200,6 +200,9 @@ const NgDialog: React.FC<NgDialogProps> = ({
                             ngContentDetail: e.target.value,
                         })
                     }
+                    multiline
+                    minRows={1}
+                    maxRows={20}
                     error={Boolean(errors.ngContentDetail)}
                     helperText={errors.ngContentDetail}
                 />
@@ -214,6 +217,9 @@ const NgDialog: React.FC<NgDialogProps> = ({
                             fixContent: e.target.value,
                         })
                     }
+                    multiline
+                    minRows={1}
+                    maxRows={20}
                     error={Boolean(errors.fixContent)}
                     helperText={errors.fixContent}
                 />

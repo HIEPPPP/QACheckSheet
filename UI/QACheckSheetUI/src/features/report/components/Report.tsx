@@ -4,7 +4,7 @@ import type { ReportData, ReportHeader, ReportNG } from "../types/report";
 import ReportDataComponent from "./ReportDataComponent";
 import ReportHeaderComponent from "./ReportHeaderComponent";
 import ReportNgComponent from "./ReportNgComponent";
-import { Button } from "@mui/material";
+import ReportEvnComponent from "./ReportEnvComponent";
 
 type Props = {
     monthRef?: string;
@@ -71,6 +71,10 @@ const Report: React.FC<Props> = ({
 
             {/* Report Data */}
             <ReportDataComponent rows={reportData ?? []} days={daysInMonth} />
+
+            {reportHeader?.deviceName === "Nhiệt độ - Độ ẩm" && (
+                <ReportEvnComponent rows={reportData ?? []} />
+            )}
 
             {/* Report NG */}
             <ReportNgComponent reportNG={reportNG} />

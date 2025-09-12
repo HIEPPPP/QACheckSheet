@@ -86,14 +86,12 @@ const DeviceCard: React.FC<DeviceProps> = ({
 
                 {/* OK: {entry.okCount} • NG: {entry.ngCount} • Pending:{" "}
                         {entry.pendingCount} */}
-                {/*                           
+                {/* 
                 {entry && (
-                    <div className="mt-2 text-xs text-gray-400 pl-22 mt-3">                        
+                    <div className="mt-2 text-xs text-gray-400 pl-22 mt-3">
                         OK: {entry.okCount} • NG: {entry.ngCount}
                     </div>
-                )}
-                
-                */}
+                )} */}
             </div>
         </div>
     );

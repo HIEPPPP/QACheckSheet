@@ -116,6 +116,9 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
                     onChange={(e) =>
                         setFormData({ ...formData, title: e.target.value })
                     }
+                    multiline
+                    minRows={1}
+                    maxRows={20}
                     error={Boolean(errors.title)}
                     helperText={errors.title}
                 />

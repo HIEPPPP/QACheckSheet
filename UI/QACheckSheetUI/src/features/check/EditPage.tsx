@@ -61,6 +61,7 @@ const EditPage: React.FC<EditPageProps> = ({
         setChecker,
         confirmer,
         setConfirmer,
+        setDirty,
     } = useEditPage(rawCode, user);
 
     // Handler lưu (Hoàn thành)
@@ -124,6 +125,7 @@ const EditPage: React.FC<EditPageProps> = ({
                                 onChange={(_, val) => {
                                     setChecker(val ?? undefined);
                                     setConfirmer(undefined);
+                                    setDirty(true);
                                 }}
                                 renderInput={(params) => (
                                     <TextField
@@ -146,9 +148,10 @@ const EditPage: React.FC<EditPageProps> = ({
                                 )}
                                 getOptionLabel={(opt) => opt.userCode || ""}
                                 value={confirmer ?? null}
-                                onChange={(_, val) =>
-                                    setConfirmer(val ?? undefined)
-                                }
+                                onChange={(_, val) => {
+                                    setConfirmer(val ?? undefined);
+                                    setDirty(true);
+                                }}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}

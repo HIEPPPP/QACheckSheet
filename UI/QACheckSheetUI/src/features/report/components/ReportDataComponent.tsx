@@ -267,7 +267,7 @@ const ReportDataComponent: React.FC<Props> = ({
                                                 <div
                                                     style={{
                                                         paddingLeft: lvl * 6,
-                                                        whiteSpace: "normal",
+                                                        whiteSpace: "pre-wrap",
                                                         lineHeight: 1.15,
                                                         fontSize: 12,
                                                     }}

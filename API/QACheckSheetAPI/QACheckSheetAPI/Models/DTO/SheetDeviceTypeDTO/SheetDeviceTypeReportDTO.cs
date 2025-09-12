@@ -5,6 +5,7 @@
         public int? ConfirmApproveId { get; set; }
         public string? SheetCode { get; set; }
         public string? SheetName { get; set; }
+        public string? FormNO { get; set; }
         public string? DeviceCode { get; set; }
         public string? DeviceName { get; set; }
         public int? DefaultFrequency { get; set; }

@@ -15,11 +15,25 @@ const Devices: React.FC<DeviceProps> = ({ devices, filter = "All" }) => {
         const entry = statusMap[Number(device.deviceId)];
         // nếu filter All -> hiển tất cả
         if (filter === "All") return true;
+
         if (filter === "Confirm") {
             return !!entry?.confirmBy;
         }
+
         // Pending / OK / NG: treat missing entry as Pending
         const status = (entry?.status ?? "Pending").toString();
+
+        // Nếu filter === "OK" thì chỉ lấy những device có status OK
+        // và **chưa được confirm** (không có confirmBy).
+        if (filter === "OK") {
+            return status === "OK" && !entry?.confirmBy;
+        }
+
+        if (filter === "NG") {
+            return status === "NG";
+        }
+
+        // Với Pending (hoặc default) so sánh bình thường
         return status === filter;
     };
 

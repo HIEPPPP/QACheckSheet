@@ -56,8 +56,17 @@ const ItemRow: React.FC<{
                             style={{ paddingLeft: indentPx }}
                             className="max-w-[350px] min-w-[350px] text-wrap truncate"
                         >
-                            <div className="font-medium">{item.title}</div>
-                            <div className="text-sm text-gray-500">
+                            <div
+                                className="font-medium"
+                                style={{ whiteSpace: "pre-wrap" }}
+                            >
+                                {item.title}
+                            </div>
+
+                            <div
+                                className="text-sm text-gray-500"
+                                style={{ whiteSpace: "pre-wrap" }}
+                            >
                                 {item.pathTitles}
                             </div>
                         </div>

@@ -31,11 +31,17 @@ const LeafRow: React.FC<{
             }}
         >
             <Box sx={{ flex: 1 }}>
-                <Typography sx={{ fontWeight: 600 }}>{item.title}</Typography>
+                <Typography sx={{ fontWeight: 600, whiteSpace: "pre-wrap" }}>
+                    {item.title}
+                </Typography>
                 {item.pathTitles && (
                     <Typography
                         variant="body2"
-                        sx={{ color: "text.secondary", mt: 0.5 }}
+                        sx={{
+                            color: "text.secondary",
+                            mt: 0.5,
+                            whiteSpace: "pre-wrap",
+                        }}
                     >
                         {item.pathTitles}
                     </Typography>

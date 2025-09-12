@@ -168,7 +168,8 @@ namespace QACheckSheetAPI.Repositories.Implementation
             //DECLARE @SheetCode VARCHAR(50) = 'CS4'
 
             var query = @"SELECT s.SheetCode, ca.ConfirmApproveId,
-                                   s.SheetName, 
+                                   s.SheetName,
+                                   s.FormNO,
                                    d.DeviceCode, 
                                    d.DeviceName, 
                                    dt.DefaultFrequency, 
@@ -403,7 +404,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
                                 SELECT r.ResultId, 
                                        r.CheckedDate,
 	                                   r.PathTitles, 
-	                                   ng.NGContentDetail, 
+	                                   ng.NGContentDetail,
 	                                   ng.FixContent, 
 	                                   r.Status, 
 	                                   ng.FixedBy, 

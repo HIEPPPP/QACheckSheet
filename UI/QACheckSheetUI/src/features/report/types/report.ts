@@ -11,6 +11,7 @@ export interface ReportHeader {
     confirmApproveId?: number;
     sheetCode?: string;
     sheetName?: string;
+    formNO?: string;
     deviceCode?: string;
     deviceName?: string;
     defaultFrequency?: number | null;

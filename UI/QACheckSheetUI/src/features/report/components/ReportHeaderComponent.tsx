@@ -177,11 +177,11 @@ const ReportHeaderComponent: React.FC<ReportHeaderProps> = ({
                     Phê duyệt
                 </Button>
             </div>
-
+            <div className="text-xs text-gray-400 flex-shrink-0">
+                {reportHeader?.formNO}
+            </div>
             {/* Title Check Sheet */}
             <div className="flex items-start justify-between mb-2">
-                <div className="min-w-[150px] flex-shrink-0"></div>
-
                 <h2 className="text-xl font-semibold text-center underline flex-1">
                     {reportHeader?.sheetName}
                 </h2>

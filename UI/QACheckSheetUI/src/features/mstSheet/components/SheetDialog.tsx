@@ -88,6 +88,9 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                     onChange={(e) =>
                         setFormData({ ...formData, sheetName: e.target.value })
                     }
+                    multiline
+                    minRows={1}
+                    maxRows={20}
                     error={Boolean(errors.sheetName)}
                     helperText={errors.sheetName}
                 />
