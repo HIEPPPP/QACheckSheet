@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { CreateUserRequest, UpdateUserRequest } from "../types/users";
+import type { User } from "../types/users";
 
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL + "/User",
@@ -34,7 +34,7 @@ export const getUserById = async (id: number) => {
 };
 
 // Thêm
-export const createUser = async (user: CreateUserRequest) => {
+export const createUser = async (user: User) => {
     try {
         const res = await apiClient.post("/createUser", user);
         return res.data.data;
@@ -44,7 +44,7 @@ export const createUser = async (user: CreateUserRequest) => {
 };
 
 // Cập nhật
-export const updateUser = async (id: number, user: UpdateUserRequest) => {
+export const updateUser = async (id: number, user: User) => {
     try {
         const res = await apiClient.put(`/${id}`, user);
         return res.data.data;

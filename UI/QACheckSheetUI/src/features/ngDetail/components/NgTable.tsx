@@ -18,13 +18,13 @@ import type { ConfirmNgPayload, NgDetail } from "../types/ngDetail";
 import { Edit } from "@mui/icons-material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { formatDateTime, vnTime } from "../../../utils/formatDateTime";
-import type { User } from "../../../shared/type/localstorage";
+import type { UserLocalStorage } from "../../../shared/type/localstorage";
 
 interface NgTableProps {
     resultNgDetail?: NgDetail[];
     onEdit: (result: NgDetail) => void;
     onConfirm: (payload: ConfirmNgPayload) => void;
-    user: User | null;
+    user: UserLocalStorage | null;
 }
 
 const NgTable: React.FC<NgTableProps> = ({
@@ -69,7 +69,7 @@ const NgTable: React.FC<NgTableProps> = ({
     );
 
     const handleChangePage = (
-        event: React.ChangeEvent<unknown>,
+        _: React.ChangeEvent<unknown>,
         newPage: number
     ) => {
         setPage(newPage - 1);

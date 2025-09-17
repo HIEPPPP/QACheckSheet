@@ -1,11 +1,11 @@
 import React, { createContext, useState } from "react";
 
 import { getAuthData, clearAuthData } from "../shared/services/auth.service";
-import type { User } from "../shared/type/localstorage";
+import type { UserLocalStorage } from "../shared/type/localstorage";
 
 export const UserContext = createContext<{
-    user: User | null;
-    loginUser: (data: User) => void;
+    user: UserLocalStorage | null;
+    loginUser: (data: UserLocalStorage) => void;
     logoutUser: () => void;
 }>({
     user: null,
@@ -16,8 +16,8 @@ export const UserContext = createContext<{
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
-    const [user, setUser] = useState<User | null>(getAuthData());
-    const loginUser = (data: User) => {
+    const [user, setUser] = useState<UserLocalStorage | null>(getAuthData());
+    const loginUser = (data: UserLocalStorage) => {
         setUser(data);
     };
 

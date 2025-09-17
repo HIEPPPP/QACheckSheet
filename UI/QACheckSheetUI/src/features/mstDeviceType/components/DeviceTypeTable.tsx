@@ -49,7 +49,7 @@ const DeviceTypeTable: React.FC<DeviceTypeTableProps> = ({
     );
 
     const handleChangePage = (
-        event: React.ChangeEvent<unknown>,
+        _: React.ChangeEvent<unknown>,
         newPage: number
     ) => {
         setPage(newPage - 1);

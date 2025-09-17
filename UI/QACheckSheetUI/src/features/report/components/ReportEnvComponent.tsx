@@ -123,6 +123,7 @@ const ReportEvnComponent: React.FC<Props> = ({ rows = [] }) => {
                 {
                     name: "Nhiệt độ (°C)",
                     type: "line",
+                    color: "#ff6b6b",
                     data: tempNums.map((v) => (v === null ? null : v)),
                 } as Highcharts.SeriesLineOptions,
             ],
@@ -166,7 +167,7 @@ const ReportEvnComponent: React.FC<Props> = ({ rows = [] }) => {
             yAxis: {
                 title: { text: undefined },
                 min: 0,
-                max: 100,
+                max: 90,
                 tickInterval: 5,
                 gridLineWidth: 1,
                 gridLineColor: "rgba(0,0,0,0.06)",
@@ -174,7 +175,7 @@ const ReportEvnComponent: React.FC<Props> = ({ rows = [] }) => {
                     {
                         from: 20,
                         to: 70,
-                        color: "rgba(220,255,220,0.12)",
+                        color: "rgba(200,230,255,0.2)",
                         zIndex: 0,
                     },
                 ],

@@ -8,7 +8,6 @@ import {
     Container,
     Paper,
 } from "@mui/material";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useAuth } from "./hooks/useAuth";
 

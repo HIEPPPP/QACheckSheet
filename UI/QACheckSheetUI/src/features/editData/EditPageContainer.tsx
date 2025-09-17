@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { Button, TextField, Autocomplete } from "@mui/material";
 import { ArticleRounded, Search, UpdateOutlined } from "@mui/icons-material";
@@ -9,7 +8,7 @@ import { useEditContainer } from "./hooks/useEditContainer";
 const EditPageContainer = () => {
     const [showCheckSheet, setShowCheckSheet] = useState(false);
     const [deviceCode, setDeviceCode] = useState<string>("");
-    const [deviceName, setDeviceName] = useState<string>("");
+    // const [deviceName, setDeviceName] = useState<string>("");
     const { sheets, deviceSheet, sheetCode, setSheetCode, dayRef, setDayRef } =
         useEditContainer();
 
@@ -62,11 +61,11 @@ const EditPageContainer = () => {
                     onChange={(_, newValue) => {
                         if (newValue) {
                             setDeviceCode(String(newValue.deviceCode));
-                            setDeviceName(String(newValue.deviceName));
+                            // setDeviceName(String(newValue.deviceName));
                             setShowCheckSheet(false);
                         } else {
                             setDeviceCode("");
-                            setDeviceName("");
+                            // setDeviceName("");
                         }
                     }}
                     renderInput={(params) => (

@@ -24,7 +24,6 @@ const CheckPage: React.FC = () => {
         setError,
         isLocked,
         checkedBy,
-        setIsLocked,
         answers,
         setAnswer,
         submitAll,

@@ -15,7 +15,7 @@ export interface NgDetail {
     checkedDate?: Date | string | null;
     ngContentDetail?: string;
     fixContent?: string;
-    fixedBy?: string;
+    fixedBy?: string | null;
     fixedDate?: Date | string | null;
     confirmedBy?: string;
     confirmedDate: Date | string | null;

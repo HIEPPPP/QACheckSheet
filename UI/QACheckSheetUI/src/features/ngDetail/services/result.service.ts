@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import type { UpdateValueResultPayload } from "../types/ngDetail";
 
 const apiClient = axios.create({

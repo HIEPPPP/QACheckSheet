@@ -150,7 +150,7 @@ const UserDialog: React.FC<UserDialogProps> = ({
                     options={roles}
                     getOptionLabel={(option) => option.roleName ?? ""}
                     value={currentRoleValue}
-                    onChange={(event, newValue) => {
+                    onChange={(_, newValue) => {
                         setFormData({
                             ...formData,
                             roleIds: newValue ? [newValue.roleId!] : [],

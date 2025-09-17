@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import type { CreateItemDTO, UpdateItemDTO } from "./../types/item";
 
 const apiClient = axios.create({

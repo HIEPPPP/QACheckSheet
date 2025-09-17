@@ -1,9 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import type {
-    CreateUserRequest,
-    UpdateUserRequest,
-    User,
-} from "../types/users";
+import type { User } from "../types/users";
 import {
     createUser,
     deleteUser,
@@ -16,11 +12,8 @@ type UserResult = {
     loading: boolean;
     error: string | null;
     refresh: () => Promise<void>;
-    create: (payload: CreateUserRequest) => Promise<CreateUserRequest | null>;
-    update: (
-        id: number,
-        payload: UpdateUserRequest
-    ) => Promise<UpdateUserRequest | null>;
+    create: (payload: User) => Promise<User | null>;
+    update: (id: number, payload: User) => Promise<User | null>;
     remove: (id: number) => Promise<boolean>;
 };
 
@@ -46,7 +39,7 @@ export const useUser = (): UserResult => {
         void fetchList();
     }, [fetchList]);
 
-    const create = async (payload: CreateUserRequest) => {
+    const create = async (payload: User) => {
         setLoading(true);
         try {
             const res = await createUser(payload);
@@ -59,7 +52,7 @@ export const useUser = (): UserResult => {
         }
     };
 
-    const update = async (id: number, payload: UpdateUserRequest) => {
+    const update = async (id: number, payload: User) => {
         setLoading(true);
         try {
             const res = await updateUser(id, payload);

@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import type { DeviceType } from "../types/deviceType";
 
 const apiClient = axios.create({

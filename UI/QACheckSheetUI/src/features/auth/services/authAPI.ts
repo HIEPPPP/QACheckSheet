@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import type { LoginResponse, ChangePwdRequest } from "../type/auth";
 import { saveAuthData } from "../../../shared/services/auth.service";
-import type { User } from "../../../shared/type/localstorage";
+import type { UserLocalStorage } from "../../../shared/type/localstorage";
 
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL + "/Auth",
@@ -19,7 +19,7 @@ const handleError = (error: AxiosError) => {
 export const login = async (
     userCode: string,
     password: string
-): Promise<User | null> => {
+): Promise<UserLocalStorage | null> => {
     try {
         const res = await apiClient.post<LoginResponse>("/login", {
             userCode,
@@ -30,7 +30,7 @@ export const login = async (
         const payload = res.data?.data;
         if (!payload) return null;
 
-        const user: User = {
+        const user: UserLocalStorage = {
             userCode: String(payload.userCode ?? ""),
             fullName: String(payload.fullName ?? ""),
             roles: Array.isArray(payload.roles)

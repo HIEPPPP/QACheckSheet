@@ -13,7 +13,7 @@ import {
     TextField,
     MenuItem,
 } from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import type { Device } from "../types/device";
 
@@ -49,7 +49,7 @@ const DeviceTable: React.FC<DeviceTableProps> = ({
     );
 
     const handleChangePage = (
-        event: React.ChangeEvent<unknown>,
+        _: React.ChangeEvent<unknown>,
         newPage: number
     ) => {
         setPage(newPage - 1);
@@ -236,4 +236,4 @@ const DeviceTable: React.FC<DeviceTableProps> = ({
     );
 };
 
-export default DeviceTable;
+export default React.memo(DeviceTable);

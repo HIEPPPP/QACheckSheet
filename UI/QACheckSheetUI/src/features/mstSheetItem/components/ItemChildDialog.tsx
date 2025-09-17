@@ -4,22 +4,21 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    Autocomplete,
     TextField,
     FormControl,
     InputLabel,
     MenuItem,
     Select,
     Button,
-    FormHelperText,
 } from "@mui/material";
 import type { CreateItemDTO } from "../types/item";
 
 interface ItemChildDialogProps {
     open: boolean;
-    formData: any; // replace with actual type
-    setFormData: (data: any) => void; // replace with actual type
-    onSave: () => void;
+    /** Initial data for the dialog. Dialog will manage its own item form state. */
+    initialData: CreateItemDTO;
+    /** Called when user saves. Receives the current form data. */
+    onSave: (data: CreateItemDTO) => void | Promise<void>;
     onClose: () => void;
 }
 
@@ -29,34 +28,45 @@ type Errors = {
 
 const ItemChildDialog: React.FC<ItemChildDialogProps> = ({
     open,
-    formData,
-    setFormData,
+    initialData,
     onSave,
     onClose,
 }) => {
+    const [item, setItem] = useState<CreateItemDTO>(initialData);
     const [errors, setErrors] = useState<Errors>({});
+    const [saving, setSaving] = useState(false);
 
     useEffect(() => {
-        if (!open) setErrors({});
-    }, [open]);
+        // when opened (or initialData changes) reset item state and errors
+        if (open) {
+            setItem(initialData);
+            setErrors({});
+        }
+    }, [open, initialData]);
 
-    const validate = async (): Promise<boolean> => {
+    const validate = (): boolean => {
         const e: Errors = {};
-
-        if (!formData.title || formData.title.trim() === "") {
+        if (!item.title || item.title.trim() === "") {
             e.title = "Nội dung là bắt buộc";
         }
-
         setErrors(e);
-
         return Object.keys(e).length === 0;
     };
 
     const handleSave = async () => {
-        const ok = await validate();
-        if (!ok) return;
-        onSave();
+        if (!validate()) return;
+        try {
+            setSaving(true);
+            await onSave(item);
+            onClose();
+        } catch (err) {
+            // bạn có thể show snackbar hoặc đặt lỗi chung ở đây
+            console.error("Lỗi khi lưu ItemChild:", err);
+        } finally {
+            setSaving(false);
+        }
     };
+
     return (
         <Dialog
             open={open}
@@ -66,32 +76,37 @@ const ItemChildDialog: React.FC<ItemChildDialogProps> = ({
             disableRestoreFocus
         >
             <DialogTitle>
-                {formData.itemId
-                    ? "Cập Nhật Nội dung Con"
-                    : "Thêm Nội dung Con"}
+                {item.itemId ? "Cập Nhật Nội dung Con" : "Thêm Nội dung Con"}
             </DialogTitle>
+
             <DialogContent>
                 <TextField
                     label="ID Cha"
                     fullWidth
                     margin="dense"
-                    value={formData.parentItemId ?? ""}
+                    value={
+                        item.parentItemId != null
+                            ? String(item.parentItemId)
+                            : ""
+                    }
                     disabled
                 />
+
                 <TextField
                     label="ND Cha"
                     fullWidth
                     margin="dense"
-                    value={formData.parentTitle ?? ""}
+                    value={item.parentTitle ?? ""}
                     disabled
                 />
+
                 <TextField
                     label="ND Con"
                     fullWidth
                     margin="dense"
-                    value={formData.title ?? ""}
+                    value={item.title ?? ""}
                     onChange={(e) =>
-                        setFormData({ ...formData, title: e.target.value })
+                        setItem((p) => ({ ...p, title: e.target.value }))
                     }
                     multiline
                     minRows={1}
@@ -99,17 +114,18 @@ const ItemChildDialog: React.FC<ItemChildDialogProps> = ({
                     error={Boolean(errors.title)}
                     helperText={errors.title}
                 />
+
                 <FormControl fullWidth margin="dense" required>
                     <InputLabel id="data-type-label">Kiểu dữ liệu *</InputLabel>
                     <Select
                         labelId="data-type-label"
                         id="data-type-select"
-                        value={formData.dataType ?? ""}
+                        value={item.dataType ?? ""}
                         onChange={(e) =>
-                            setFormData({
-                                ...formData,
+                            setItem((p) => ({
+                                ...p,
                                 dataType: e.target.value,
-                            })
+                            }))
                         }
                         label="Kiểu dữ liệu"
                     >
@@ -119,39 +135,54 @@ const ItemChildDialog: React.FC<ItemChildDialogProps> = ({
                         <MenuItem value="NUMBER">NUMBER</MenuItem>
                         <MenuItem value="DATE">DATE</MenuItem>
                     </Select>
-
-                    <TextField
-                        label="Min"
-                        fullWidth
-                        margin="dense"
-                        type="number"
-                        value={formData.min ?? ""}
-                        onChange={(e) =>
-                            setFormData({
-                                ...formData,
-                                min: Number(e.target.value),
-                            })
-                        }
-                    />
-                    <TextField
-                        label="Max"
-                        fullWidth
-                        margin="dense"
-                        type="number"
-                        value={formData.max ?? ""}
-                        onChange={(e) =>
-                            setFormData({
-                                ...formData,
-                                max: Number(e.target.value),
-                            })
-                        }
-                    />
+                    {/* nếu muốn hiển thị helper của lỗi chung cho dataType, có thể thêm FormHelperText ở đây */}
                 </FormControl>
+
+                <TextField
+                    label="Min"
+                    fullWidth
+                    margin="dense"
+                    type="number"
+                    value={item.min ?? ""}
+                    onChange={(e) =>
+                        setItem((p) => ({
+                            ...p,
+                            min:
+                                e.target.value === ""
+                                    ? null
+                                    : Number(e.target.value),
+                        }))
+                    }
+                />
+
+                <TextField
+                    label="Max"
+                    fullWidth
+                    margin="dense"
+                    type="number"
+                    value={item.max ?? ""}
+                    onChange={(e) =>
+                        setItem((p) => ({
+                            ...p,
+                            max:
+                                e.target.value === ""
+                                    ? null
+                                    : Number(e.target.value),
+                        }))
+                    }
+                />
             </DialogContent>
+
             <DialogActions>
-                <Button onClick={onClose}>Hủy</Button>
-                <Button onClick={handleSave} variant="contained">
-                    Lưu
+                <Button onClick={onClose} disabled={saving}>
+                    Hủy
+                </Button>
+                <Button
+                    onClick={handleSave}
+                    variant="contained"
+                    disabled={saving}
+                >
+                    {saving ? "Đang lưu..." : "Lưu"}
                 </Button>
             </DialogActions>
         </Dialog>

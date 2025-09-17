@@ -10,7 +10,11 @@ type Props = {
 
 const getDayKey = (i: number) => `day${i}`;
 const txt = (v: any) =>
-    v === null || v === undefined || String(v).trim() === "" ? "" : String(v);
+    v === null
+        ? "/" // nếu đúng null -> hiển thị "/"
+        : v === undefined || String(v).trim() === ""
+        ? "" // undefined hoặc chuỗi rỗng -> để trống
+        : String(v);
 
 const sum = (arr: number[]) => arr.reduce((a, b) => a + b, 0);
 
@@ -61,9 +65,10 @@ const ReportDataComponent: React.FC<Props> = ({
     );
     const timeRow = timeRowIndex >= 0 ? parsed[timeRowIndex].raw : null;
 
+    // keep nulls (so we can detect them and show "/")
     const headerTimes = Array.from({ length: days }, (_, i) => {
         const key = getDayKey(i + 1);
-        return timeRow ? timeRow[key] ?? "" : "";
+        return timeRow ? timeRow[key] ?? null : null;
     });
 
     const bodyParsed = useMemo(() => {
@@ -213,11 +218,7 @@ const ReportDataComponent: React.FC<Props> = ({
                             <th
                                 key={`hour-${d}`}
                                 className="border border-gray-300 p-1 text-[11px] text-center align-middle whitespace-nowrap"
-                                title={
-                                    headerTimes[d - 1]
-                                        ? String(headerTimes[d - 1])
-                                        : undefined
-                                }
+                                title={txt(headerTimes[d - 1]) || undefined}
                             >
                                 {txt(headerTimes[d - 1])}
                             </th>
@@ -286,7 +287,7 @@ const ReportDataComponent: React.FC<Props> = ({
                                         <td
                                             key={`${rowKey}-D${d}`}
                                             className="border border-gray-300 h-[36px] p-0 text-center align-middle text-xs whitespace-nowrap"
-                                            title={txt(val)}
+                                            title={txt(val) || undefined}
                                         >
                                             <div className="h-full w-full flex items-center justify-center px-1">
                                                 <span className="text-xs">

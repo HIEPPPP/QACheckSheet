@@ -1,7 +1,6 @@
 import {
     Autocomplete,
     Button,
-    colors,
     Dialog,
     DialogActions,
     DialogContent,
@@ -19,15 +18,14 @@ import HourglassBottomOutlinedIcon from "@mui/icons-material/HourglassBottomOutl
 
 import type { Device } from "../types/device";
 import type { DeviceType } from "../../mstDeviceType/types/deviceType";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { getListDeviceType } from "../../mstDeviceType/services/deviceTypeServices";
 
 interface DeviceFormDialogProps {
     open: boolean;
-    formData: Device;
-    setFormData: (data: Device) => void;
-    onSave: () => void;
+    initialData: Partial<Device>;
+    onSave: (data: Partial<Device>) => void | Promise<void>;
     onClose: () => void;
 }
 
@@ -43,13 +41,14 @@ type Errors = {
 
 const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
     open,
-    formData,
-    setFormData,
+    initialData,
     onSave,
     onClose,
 }) => {
+    const [formData, setFormData] = useState<Partial<Device>>(initialData);
     const [deviceTypes, setDeviceTypes] = useState<DeviceType[]>([]);
     const [errors, setErrors] = useState<Errors>({});
+    const [saving, setSaving] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -65,7 +64,9 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
 
     useEffect(() => {
         if (!open) setErrors({});
-    }, [open]);
+        // clone để tránh tham chiếu tới object bên ngoài
+        setFormData({ ...(initialData ?? {}) });
+    }, [initialData, open]);
 
     const validate = async (): Promise<boolean> => {
         const e: Errors = {};
@@ -78,13 +79,13 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
             e.deviceName = "Tên thiết bị là bắt buộc";
         }
 
-        if (!formData.seriNumber || formData.seriNumber.trim() === "") {
-            e.seriNumber = "Số serial là bắt buộc";
-        }
+        // if (!formData.seriNumber || formData.seriNumber.trim() === "") {
+        //     e.seriNumber = "Số serial là bắt buộc";
+        // }
 
-        if (!formData.model || formData.model.trim() === "") {
-            e.model = "Model thiết bị là bắt buộc";
-        }
+        // if (!formData.model || formData.model.trim() === "") {
+        //     e.model = "Model thiết bị là bắt buộc";
+        // }
 
         if (!formData.location || formData.location.trim() === "") {
             e.location = "Vị trí để thiết bị là bắt buộc";
@@ -106,8 +107,21 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
     const handleSave = async () => {
         const ok = await validate();
         if (!ok) return;
-        onSave();
+        try {
+            setSaving(true);
+            await onSave(formData);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setSaving(false);
+            // onClose();
+        }
     };
+
+    const selectedType = useMemo(
+        () => deviceTypes.find((t) => t.typeId === formData.typeId) || null,
+        [deviceTypes, formData.typeId]
+    );
 
     return (
         <Dialog
@@ -128,12 +142,8 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                     size="medium"
                     options={deviceTypes}
                     getOptionLabel={(option) => option.typeName}
-                    value={
-                        deviceTypes.find(
-                            (type) => type.typeId === formData.typeId
-                        ) || null
-                    }
-                    onChange={(event, newValue) => {
+                    value={selectedType}
+                    onChange={(_, newValue) => {
                         setFormData({
                             ...formData,
                             typeId: newValue ? newValue.typeId : null,
@@ -281,7 +291,9 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose}>Hủy</Button>
+                <Button onClick={onClose} disabled={saving}>
+                    Hủy
+                </Button>
                 <Button onClick={handleSave} variant="contained">
                     Lưu
                 </Button>

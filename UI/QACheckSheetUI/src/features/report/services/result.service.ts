@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { toMonthStartString } from "../../../utils/formatDateTime";
 import type { ReportData, ReportHeader, ReportNG } from "../types/report";
 

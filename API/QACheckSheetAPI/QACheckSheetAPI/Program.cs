@@ -18,9 +18,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin", policy => policy
-        .WithOrigins(
-            "http://172.17.140.11:5000",
-            "http://localhost:5173"
+        .WithOrigins(            
+            "http://localhost:5173",
+            "https://172.17.140.11:3001",
+            "https://172.17.140.11:3000",
+            "https://10.220.100.1:3001",
+            "https://10.220.100.1:3000"
         )
         .AllowAnyMethod()
         .AllowAnyHeader()

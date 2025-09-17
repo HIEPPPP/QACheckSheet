@@ -7,7 +7,13 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import FilterDevice from "./components/FilterDevice";
 import { Close, Pending, QrCode } from "@mui/icons-material";
-import { Alert, Button, IconButton, TextField } from "@mui/material";
+import {
+    Alert,
+    Button,
+    IconButton,
+    LinearProgress,
+    TextField,
+} from "@mui/material";
 import { useStatus } from "../../contexts/StatusProvider";
 import type { DeviceSheet } from "../editData/types/EditData";
 import { getDevicesBySheetCode } from "../mstDevice/services/deviceServices";
@@ -17,7 +23,8 @@ import { useNavigate } from "react-router-dom";
 type FilterKey = "All" | "Pending" | "OK" | "NG" | "Confirm";
 
 const DashboardPage: React.FC = () => {
-    const { devices, loading, error } = useDashboard();
+    // const { devices, loading, error } = useDashboard();
+    const { devices, loading } = useDashboard();
     const { totals } = useStatus();
     const navigate = useNavigate();
 
@@ -29,7 +36,7 @@ const DashboardPage: React.FC = () => {
     const [showInput, setShowInput] = useState<boolean>(false); // for desktop text input
     const [scannerError, setScannerError] = useState<string>("");
     const scannerRef = useRef<Html5Qrcode | null>(null);
-    const videoStreamRef = useRef<MediaStream | null>(null);
+    // const videoStreamRef = useRef<MediaStream | null>(null);
 
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -61,7 +68,7 @@ const DashboardPage: React.FC = () => {
         {
             id: "OK",
             title: "OK",
-            value: String(totals.ok ?? 0),
+            value: String(Number(totals.ok - totals.confirmed) ?? 0),
             icon: <ThumbUpIcon />,
             accent: "blue",
         },
@@ -117,62 +124,147 @@ const DashboardPage: React.FC = () => {
     const startScanner = useCallback(async () => {
         setScannerError("");
         const qrRegionId = "qr-reader";
+
+        // Wait for element
+        const waitForElement = (id: string, timeout = 3000) =>
+            new Promise<HTMLElement | null>((resolve) => {
+                const el = document.getElementById(id);
+                if (el) return resolve(el as HTMLElement);
+                let waited = 0;
+                const iv = window.setInterval(() => {
+                    const el2 = document.getElementById(id);
+                    if (el2) {
+                        clearInterval(iv);
+                        resolve(el2 as HTMLElement);
+                    } else {
+                        waited += 100;
+                        if (waited >= timeout) {
+                            clearInterval(iv);
+                            resolve(null);
+                        }
+                    }
+                }, 100);
+            });
+
+        const mountEl = await waitForElement(qrRegionId, 3000);
+        if (!mountEl) {
+            setScannerError("Lỗi giao diện: vùng quét chưa sẵn sàng.");
+            setShowScanner(false);
+            return;
+        }
+
         let html5Qrcode: Html5Qrcode;
         try {
             html5Qrcode = new Html5Qrcode(qrRegionId);
             scannerRef.current = html5Qrcode;
         } catch (err) {
-            console.error("Không thể tạo instance Html5Qrcode:", err);
-            setScannerError(
-                "Trình duyệt không hỗ trợ camera hoặc không thể khởi tạo scanner."
-            );
+            setScannerError("Không thể khởi tạo scanner.");
             setShowScanner(false);
             return;
         }
 
-        try {
-            await html5Qrcode.start(
-                { facingMode: { exact: "environment" } },
-                {
-                    fps: 10,
-                    qrbox: { width: 250, height: 120 },
-                    aspectRatio: 2.5,
-                },
-                (decodedText: string) => {
-                    // stop then handle
-                    (html5Qrcode.stop() as unknown as Promise<void>)
-                        .catch(() => {})
-                        .finally(() => setShowScanner(false));
-                    handleScannedCode(decodedText);
-                },
-                (errorMessage: string) => {
-                    console.debug("decode error:", errorMessage);
-                }
-            );
-        } catch (err) {
-            console.warn("Fallback start call due to:", err);
+        const config = {
+            fps: 10,
+            qrbox: (viewfinderWidth: number, viewfinderHeight: number) => {
+                const size = Math.min(viewfinderWidth, viewfinderHeight, 360); // <= 360px
+                return { width: size, height: size }; // vuông
+            },
+            aspectRatio: 1,
+        };
+        const onSuccess = (decodedText: string) => {
+            (html5Qrcode.stop() as unknown as Promise<void>)
+                .catch(() => {})
+                .finally(() => setShowScanner(false));
+            handleScannedCode(decodedText);
+        };
+        const onError = (errMsg: string) =>
+            console.debug("decode error:", errMsg);
+
+        // helper: enumerate devices (returns videoinput list)
+        const listVideoInputs = async () => {
             try {
-                // fallback call (thêm 4th arg)
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                return devices.filter((d) => d.kind === "videoinput");
+            } catch (e) {
+                console.warn("enumerateDevices error", e);
+                return [];
+            }
+        };
+
+        try {
+            // 1) Try to trigger permission prompt on mobile/tablet by calling getUserMedia simple
+            // This often makes labels/deviceIds appear on subsequent enumerateDevices()
+            try {
+                await navigator.mediaDevices.getUserMedia({ video: true });
+                // stop tracks immediately (we just wanted permission)
+                try {
+                    const s = await navigator.mediaDevices.getUserMedia({
+                        video: true,
+                    });
+                    s.getTracks().forEach((t) => t.stop());
+                } catch (e) {
+                    /* ignore */
+                }
+            } catch (gmErr) {
+                // If user denied or it fails, we'll capture it below
+                console.warn("Initial getUserMedia failed:", gmErr);
+            }
+
+            // 2) enumerate to pick camera
+            const cams = await listVideoInputs();
+            console.debug("Video inputs:", cams);
+
+            if (cams.length > 0) {
+                // prefer rear/back if label suggests it, else last one
+                const rear = cams.find((c) =>
+                    /back|rear|environment|rear camera/i.test(c.label || "")
+                );
+                const chosen = (rear ||
+                    cams[cams.length - 1]) as MediaDeviceInfo;
+                console.log(
+                    "Starting with deviceId:",
+                    chosen.deviceId,
+                    "label:",
+                    chosen.label
+                );
+                await html5Qrcode.start(
+                    chosen.deviceId,
+                    config,
+                    onSuccess,
+                    onError
+                );
+                return;
+            }
+
+            // 3) try non-exact facingMode (less strict than exact)
+            try {
+                console.log("Trying facingMode: 'environment'");
                 await html5Qrcode.start(
                     { facingMode: "environment" } as MediaTrackConstraints,
-                    { fps: 10, qrbox: { width: 250, height: 120 } },
-                    (decodedText: string) => {
-                        (html5Qrcode.stop() as unknown as Promise<void>)
-                            .catch(() => {})
-                            .finally(() => setShowScanner(false));
-                        handleScannedCode(decodedText);
-                    },
-                    (errorMessage: string) => {
-                        console.debug("decode error:", errorMessage);
-                    }
+                    config,
+                    onSuccess,
+                    onError
                 );
-            } catch (err2) {
-                console.error("Không thể khởi động máy quét:", err2);
-                setScannerError(
-                    "Không thể truy cập camera. Vui lòng kiểm tra quyền camera."
-                );
-                setShowScanner(false);
+                return;
+            } catch (fmErr) {
+                console.warn("facingMode environment failed:", fmErr);
             }
+
+            // 4) final fallback: try default camera
+            console.log("Trying default camera (no constraints)");
+            await html5Qrcode.start(
+                undefined as unknown as MediaTrackConstraints,
+                config,
+                onSuccess,
+                onError
+            );
+        } catch (err) {
+            console.error("Không thể khởi động máy quét:", err);
+            // show detailed error for debugging
+            const name = (err && (err as any).name) || "Error";
+            const msg = (err && (err as any).message) || String(err);
+            setScannerError(`${name}: ${msg}`);
+            setShowScanner(false);
         }
     }, [handleScannedCode]);
 
@@ -245,6 +337,7 @@ const DashboardPage: React.FC = () => {
     return (
         <div className="flex flex-col">
             <div className="flex justify-between">
+                {loading && <LinearProgress />}
                 <div className="max-w-2xl w-full">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mr-6">
                         {sampleStats.map((s) => (
@@ -308,17 +401,18 @@ const DashboardPage: React.FC = () => {
             {/* Camera scanner (tablet/mobile) */}
             {showScanner && !scannerError && !isDesktop && (
                 <div className="mt-5 relative">
+                    {/* container vuông responsive: tối đa 360px, luôn 1:1 */}
                     <div
                         id="qr-reader"
-                        className="mx-auto"
-                        style={{ width: 300, height: 300 }}
+                        className="mx-auto w-full max-w-[360px] aspect-square"
+                        style={{ touchAction: "manipulation" }}
                     />
                     <IconButton
                         onClick={() => setShowScanner(false)}
                         sx={{
                             position: "absolute",
                             top: 0,
-                            right: "calc(50% - 150px)",
+                            right: "calc(50% - 180px)", // chỉnh lại nếu cần
                         }}
                     >
                         <Close />

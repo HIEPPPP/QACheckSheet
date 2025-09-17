@@ -48,7 +48,7 @@ const UserTable: React.FC<UserTableProps> = ({
     );
 
     const handleChangePage = (
-        event: React.ChangeEvent<unknown>,
+        _: React.ChangeEvent<unknown>,
         newPage: number
     ) => {
         setPage(newPage - 1);

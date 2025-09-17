@@ -1,4 +1,4 @@
-import React, { use, useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import {
     Container,
     Paper,
@@ -44,8 +44,7 @@ const ProfilePage: React.FC = () => {
     const handleChangePassword = async (payload: ChangePwdRequest) => {
         setLoading(true);
         try {
-            // gọi API của bạn, ví dụ changePassword(payload)
-            const res = await changePassword({
+            await changePassword({
                 userCode: payload.userCode,
                 oldPassword: payload.oldPassword,
                 newPassword: payload.newPassword,
@@ -66,8 +65,7 @@ const ProfilePage: React.FC = () => {
 
             return true; // báo thành công cho dialog
         } catch (error: any) {
-            const msg =
-                error?.response?.data?.message || "Đổi mật khẩu thất bại";
+            error?.response?.data?.message || "Đổi mật khẩu thất bại";
             setSnackbar({
                 open: true,
                 message: "Đổi mật khẩu thất bại",

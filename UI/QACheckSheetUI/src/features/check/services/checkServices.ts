@@ -2,7 +2,7 @@ import type {
     CreateCheckResultRequestDTO,
     UpdateResultRequestDTO,
 } from "../types/CheckResult";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL + "/CheckResult",
@@ -117,7 +117,7 @@ export const getListResultBySDCodeAndDate = async (
                 ? dayRef
                 : new Date(dayRef).toISOString().split("T")[0]; // Chuyển đổi sang định dạng 'YYYY-MM-DD'
         const res = await apiClient.get(
-            `/getListResultBySDCodeAndDate?sheetCode=${sheetCode}&deviceCode=${deviceCode}&dayRef=${dayRef}`
+            `/getListResultBySDCodeAndDate?sheetCode=${sheetCode}&deviceCode=${deviceCode}&dayRef=${dayRefStr}`
         );
         return res.data.data ?? [];
     } catch (error) {

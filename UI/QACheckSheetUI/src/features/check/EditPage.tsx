@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import {
     Alert,
     Autocomplete,
@@ -11,9 +10,7 @@ import {
 import { UserContext } from "../../contexts/UserProvider";
 import ItemNodeComponent from "./components/ItemNodeComponent";
 import Notification from "../../shared/components/Notification";
-import { useStatus } from "../../contexts/StatusProvider";
 import { useEditPage } from "./hooks/useEditPage";
-import type { User } from "../users/types/users";
 
 type EditPageProps = {
     rawCode?: string;
@@ -23,17 +20,11 @@ type EditPageProps = {
     onComplete?: () => void;
 };
 
-const EditPage: React.FC<EditPageProps> = ({
-    rawCode,
-    sheetCode,
-    deviceCode,
-    dayRef,
-    onComplete,
-}) => {
-    const navigate = useNavigate();
+const EditPage: React.FC<EditPageProps> = ({ rawCode, onComplete }) => {
+    // const navigate = useNavigate();
 
     const { user } = React.useContext(UserContext);
-    const role = user?.roles;
+    // const role = user?.roles;
 
     const {
         template,
@@ -44,16 +35,11 @@ const EditPage: React.FC<EditPageProps> = ({
         error,
         setError,
         isLocked,
-        checkedBy,
-        setIsLocked,
         answers,
         setAnswer,
         submitAll,
-        confirmAll,
-        dirty,
         isComplete,
         canSubmit,
-        canConfirm,
         snackbar,
         setSnackbar,
         // user

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../services/authAPI";
 import type { UseAuthResult } from "../type/auth";
 import { UserContext } from "../../../contexts/UserProvider";
-import type { User } from "../../../shared/type/localstorage";
 
 export function useAuth(): UseAuthResult {
     const [userCode, setUserCode] = useState<string>("");
@@ -28,7 +27,7 @@ export function useAuth(): UseAuthResult {
 
             setLoading(true);
             try {
-                const user: User | null = await login(userCode, password);
+                const user = await login(userCode, password);
 
                 if (!user) {
                     setError(

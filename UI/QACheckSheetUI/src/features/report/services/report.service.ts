@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import type { CreateConfirm, UpdateApprove } from "../types/report";
 
 const apiClient = axios.create({

@@ -117,7 +117,6 @@ const ItemRow: React.FC<{
     );
 };
 
-// --- New ItemTable that shows per-sheet selection ---
 interface ItemTableProps {
     sheets: Sheet[];
     onAddChild?: (item: ItemDTO) => void;
@@ -246,4 +245,4 @@ const ItemTable: React.FC<ItemTableProps> = ({
     );
 };
 
-export default ItemTable;
+export default React.memo(ItemTable);

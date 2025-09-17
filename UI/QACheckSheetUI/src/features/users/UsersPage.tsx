@@ -19,8 +19,10 @@ const DEFAUT_FORM_ADD: User = {
 };
 
 const UsersPage: React.FC = () => {
-    const { users, loading, error, refresh, create, update, remove } =
-        useUser();
+    // const { users, loading, error, refresh, create, update, remove } =
+    //     useUser();
+
+    const { users, refresh, create, update, remove } = useUser();
 
     const [formData, setFormData] = useState<User>(DEFAUT_FORM_ADD);
 

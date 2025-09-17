@@ -53,7 +53,7 @@ const TypeSheetTable: React.FC<TypeSheetTableProps> = ({
     }, [filteredSheets, page, rowsPerPage]);
 
     const handleChangePage = (
-        event: React.ChangeEvent<unknown>,
+        _: React.ChangeEvent<unknown>,
         newPage: number
     ) => {
         setPage(Math.max(0, newPage - 1));

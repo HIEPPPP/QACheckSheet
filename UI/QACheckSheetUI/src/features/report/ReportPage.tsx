@@ -10,7 +10,6 @@ const ReportPage: React.FC = () => {
     const {
         confirmApproveResults,
         refresh: refreshConfirmApprove,
-        loadingHeader,
         error,
         monthRef,
         setMonthRef,

@@ -12,14 +12,7 @@ import {
     Typography,
     Box,
 } from "@mui/material";
-import {
-    FiUser,
-    FiMail,
-    FiList,
-    FiHelpCircle,
-    FiLock,
-    FiLogOut,
-} from "react-icons/fi";
+import { FiUser, FiLogOut } from "react-icons/fi";
 import { clearAuthData } from "../shared/services/auth.service";
 import { UserContext } from "../contexts/UserProvider";
 

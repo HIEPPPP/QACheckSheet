@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+// ItemDialog.tsx
+import React, { useEffect, useMemo, useState } from "react";
 import {
     Dialog,
     DialogActions,
@@ -8,63 +9,54 @@ import {
     TextField,
 } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
-import {
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Select,
-    FormHelperText,
-} from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import type { ItemDTO, Sheet } from "../types/item";
 
 interface ItemDialogProps {
     open: boolean;
-    formData: ItemDTO;
-    setFormData: (data: ItemDTO) => void;
-    onSave: () => void;
+    initialData: ItemDTO;
+    onSave: (data: ItemDTO) => void | Promise<void>;
     onClose: () => void;
     sheets: Sheet[];
 }
 
-type Errors = {
-    sheetId?: string;
-    title?: string;
-};
+type Errors = { sheetId?: string; title?: string };
 
 const ItemDialog: React.FC<ItemDialogProps> = ({
     open,
-    formData,
-    setFormData,
+    initialData,
     onSave,
     onClose,
     sheets,
 }) => {
+    const [item, setItem] = useState<ItemDTO>(initialData);
     const [errors, setErrors] = useState<Errors>({});
 
     useEffect(() => {
-        if (!open) setErrors({});
-    }, [open]);
+        if (open) {
+            setItem(initialData);
+            setErrors({});
+        }
+    }, [open, initialData]);
 
-    const validate = async (): Promise<boolean> => {
+    const validate = (): boolean => {
         const e: Errors = {};
-        if (!formData.sheetId) {
-            e.sheetId = "Sheet ID là bắt buộc";
-        }
-
-        if (!formData.title || formData.title.trim() === "") {
+        if (!item.sheetId) e.sheetId = "Sheet ID là bắt buộc";
+        if (!item.title || item.title.trim() === "")
             e.title = "Nội dung là bắt buộc";
-        }
-
         setErrors(e);
-
         return Object.keys(e).length === 0;
     };
 
     const handleSave = async () => {
-        const ok = await validate();
-        if (!ok) return;
-        onSave();
+        if (!validate()) return;
+        await onSave(item);
     };
+
+    const sheetValue = useMemo(
+        () => sheets.find((s) => s.sheetId === item.sheetId) || null,
+        [sheets, item.sheetId]
+    );
 
     return (
         <Dialog
@@ -75,7 +67,7 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
             disableRestoreFocus
         >
             <DialogTitle>
-                {formData.itemId ? "Cập Nhật Nội Dung" : "Thêm Nội dung"}
+                {item.itemId ? "Cập Nhật Nội Dung" : "Thêm Nội dung"}
             </DialogTitle>
             <DialogContent>
                 <Autocomplete
@@ -84,19 +76,16 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
                     getOptionLabel={(option) =>
                         `${option.sheetId} - ${option.sheetName}`
                     }
-                    value={
-                        sheets.find(
-                            (sheet) => sheet.sheetId === formData.sheetId
-                        ) || null
+                    value={sheetValue}
+                    isOptionEqualToValue={(option, value) =>
+                        option.sheetId === value?.sheetId
                     }
-                    onChange={(_, newValue) => {
-                        if (newValue) {
-                            setFormData({
-                                ...formData,
-                                sheetId: Number(newValue.sheetId),
-                            });
-                        }
-                    }}
+                    onChange={(_, newValue) =>
+                        setItem((prev) => ({
+                            ...prev,
+                            sheetId: newValue ? Number(newValue.sheetId) : null,
+                        }))
+                    }
                     renderInput={(params) => (
                         <TextField
                             {...params}
@@ -106,15 +95,16 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
                         />
                     )}
                     sx={{ marginTop: 2 }}
-                    disabled={formData.itemId !== null}
+                    disabled={item.itemId !== null}
                 />
+
                 <TextField
                     label="Nội dung"
                     fullWidth
                     margin="dense"
-                    value={formData.title ?? ""}
+                    value={item.title ?? ""}
                     onChange={(e) =>
-                        setFormData({ ...formData, title: e.target.value })
+                        setItem((prev) => ({ ...prev, title: e.target.value }))
                     }
                     multiline
                     minRows={1}
@@ -122,17 +112,18 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
                     error={Boolean(errors.title)}
                     helperText={errors.title}
                 />
+
                 <FormControl fullWidth margin="dense">
                     <InputLabel id="data-type-label">Kiểu dữ liệu</InputLabel>
                     <Select
                         labelId="data-type-label"
                         id="data-type-select"
-                        value={formData.dataType ?? ""}
+                        value={item.dataType ?? ""}
                         onChange={(e) =>
-                            setFormData({
-                                ...formData,
+                            setItem((prev) => ({
+                                ...prev,
                                 dataType: e.target.value,
-                            })
+                            }))
                         }
                         label="Kiểu dữ liệu"
                     >
@@ -142,37 +133,42 @@ const ItemDialog: React.FC<ItemDialogProps> = ({
                         <MenuItem value="NUMBER">NUMBER</MenuItem>
                         <MenuItem value="DATE">DATE</MenuItem>
                     </Select>
-                    {/* {errors.dataType && (
-                        <FormHelperText>{errors.dataType}</FormHelperText>
-                    )} */}
-                    <TextField
-                        label="Min"
-                        fullWidth
-                        margin="dense"
-                        type="number"
-                        value={formData.min ?? ""}
-                        onChange={(e) =>
-                            setFormData({
-                                ...formData,
-                                min: Number(e.target.value),
-                            })
-                        }
-                    />
-                    <TextField
-                        label="Max"
-                        fullWidth
-                        margin="dense"
-                        type="number"
-                        value={formData.max ?? ""}
-                        onChange={(e) =>
-                            setFormData({
-                                ...formData,
-                                max: Number(e.target.value),
-                            })
-                        }
-                    />
                 </FormControl>
+
+                <TextField
+                    label="Min"
+                    fullWidth
+                    margin="dense"
+                    type="number"
+                    value={item.min ?? ""}
+                    onChange={(e) =>
+                        setItem((prev) => ({
+                            ...prev,
+                            min:
+                                e.target.value === ""
+                                    ? null
+                                    : Number(e.target.value),
+                        }))
+                    }
+                />
+                <TextField
+                    label="Max"
+                    fullWidth
+                    margin="dense"
+                    type="number"
+                    value={item.max ?? ""}
+                    onChange={(e) =>
+                        setItem((prev) => ({
+                            ...prev,
+                            max:
+                                e.target.value === ""
+                                    ? null
+                                    : Number(e.target.value),
+                        }))
+                    }
+                />
             </DialogContent>
+
             <DialogActions>
                 <Button onClick={onClose}>Hủy</Button>
                 <Button onClick={handleSave} variant="contained">

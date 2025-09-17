@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNgDetail } from "./hooks/useNgDetail";
-import { Button, LinearProgress, type AlertColor } from "@mui/material";
+import { LinearProgress, type AlertColor } from "@mui/material";
 import NgTable from "./components/NgTable";
 import NgDialog from "./components/NgDialog";
 import type {
@@ -17,7 +17,7 @@ const NgDetailPage: React.FC = () => {
     const {
         resultNgDetails,
         loading,
-        error,
+        // error,
         refresh,
         create,
         updateValueOrStatusResult,

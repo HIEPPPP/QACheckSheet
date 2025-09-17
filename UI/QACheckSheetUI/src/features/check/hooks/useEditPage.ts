@@ -7,7 +7,6 @@ import type {
     CheckResult,
     CreateCheckResultRequestDTO,
     ItemNode,
-    UpdateResultRequestDTO,
     ItemAnswer,
     AnswerValue,
 } from "../types/CheckResult";
@@ -17,15 +16,11 @@ import { getListItemBySheetId } from "../../mstSheetItem/services/item.service";
 import {
     createResult,
     getListResultDayBySDCode,
-    bulkUpdateResults,
     confirm as apiConfirmResults,
     getListResultBySDCodeAndDate,
     editResults,
 } from "../services/checkServices";
-import {
-    buildCheckResultsPayload,
-    buildEditResultsPayload,
-} from "../types/CheckResult";
+import { buildEditResultsPayload } from "../types/CheckResult";
 import type { AlertColor } from "@mui/material";
 import type { User } from "../../users/types/users";
 import { getListUser } from "../../users/services/users.service";
@@ -664,9 +659,9 @@ export const useEditPage = (rawCode?: string, user?: any) => {
                     : [];
                 setFetchedResults(arrLatest);
                 setAnswers(buildAnswersFromResults(arrLatest));
-                const locked = arrLatest.some(
-                    (r: any) => !!(r?.confirmBy ?? r?.ConfirmBy)
-                );
+                // const locked = arrLatest.some(
+                //     (r: any) => !!(r?.confirmBy ?? r?.ConfirmBy)
+                // );
                 setCheckedBy(
                     arrLatest[0]?.checkedBy ??
                         arrLatest[0]?.CheckedBy ??

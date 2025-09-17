@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import type { Sheet } from "../types/sheet";
 
 const apiClient = axios.create({

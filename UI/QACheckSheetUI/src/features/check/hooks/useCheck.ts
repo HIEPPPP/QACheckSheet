@@ -7,7 +7,6 @@ import type {
     CheckResult,
     CreateCheckResultRequestDTO,
     ItemNode,
-    UpdateResultRequestDTO,
     ItemAnswer,
     AnswerValue,
 } from "../types/CheckResult";
@@ -16,7 +15,6 @@ import { getDeviceByCode } from "../../mstDevice/services/deviceServices";
 import { getListItemBySheetId } from "../../mstSheetItem/services/item.service";
 import {
     createResult,
-    updateResult,
     getListResultDayBySDCode,
     bulkUpdateResults,
     confirm as apiConfirmResults,
@@ -102,6 +100,27 @@ export const useCheck = (rawCode?: string, user?: any) => {
     const getResultId = (r: any): number | null =>
         r?.resultId ?? r?.ResultId ?? r?.resultID ?? r?.id ?? null;
 
+    const deriveBooleanStatus = (raw: any): "OK" | "NG" | null => {
+        if (raw === null || raw === undefined) return null;
+        const s = String(raw).trim().toUpperCase();
+
+        if (s === "OK" || s === "UPDATED") return "OK";
+        if (s === "NG") return "NG";
+        return null;
+    };
+
+    // helper chuẩn hoá value thành một trong 3 token (nên dùng cho answers.value)
+    const normalizeBooleanValue = (
+        raw: any
+    ): "OK" | "NG" | "UPDATED" | null => {
+        if (raw === null || raw === undefined) return null;
+        const s = String(raw).trim().toUpperCase();
+        if (s === "OK") return "OK";
+        if (s === "NG") return "NG";
+        if (s === "UPDATED") return "UPDATED";
+        return null;
+    };
+
     // build answers map từ kết quả fetch
     const buildAnswersFromResults = useCallback(
         (results: CheckResult[] | undefined) => {
@@ -118,12 +137,24 @@ export const useCheck = (rawCode?: string, user?: any) => {
                 let status: "OK" | "NG" | null = null;
 
                 if (dataType === "BOOLEAN") {
-                    if (rawValue === "OK" || rawValue === "NG") {
-                        status = rawValue === "OK" ? "OK" : "NG";
-                        value = rawValue;
+                    // cố gắng lấy status từ trường status nếu API có
+                    const rawStatus = r?.status ?? null;
+
+                    const normRawStatus = normalizeBooleanValue(rawStatus);
+                    if (normRawStatus) {
+                        status = normRawStatus === "NG" ? "NG" : "OK";
+                        value = normRawStatus;
                     } else {
-                        value = rawValue ?? null;
-                        status = null;
+                        // nếu không có trường status riêng, suy từ rawValue
+                        const normVal = normalizeBooleanValue(rawValue);
+                        if (normVal) {
+                            status = normVal === "NG" ? "NG" : "OK";
+                            value = normVal;
+                        } else {
+                            // không suy được -> giữ nguyên rawValue (hoặc set null)
+                            value = rawValue ?? null;
+                            status = null;
+                        }
                     }
                 } else if (dataType === "NUMBER") {
                     if (
@@ -284,26 +315,78 @@ export const useCheck = (rawCode?: string, user?: any) => {
     }, [itemsTree]);
 
     // isComplete: tất cả leaf đã được trả lời hợp lệ
+    // const isComplete = useMemo(() => {
+    //     if (!requiredLeafIds || requiredLeafIds.length === 0) return false;
+    //     for (const id of requiredLeafIds) {
+    //         const ans = answers[id];
+    //         // tìm node để biết dataType
+    //         const findNode = (nodes: ItemNode[] | null): ItemNode | null => {
+    //             if (!nodes) return null;
+    //             for (const n of nodes) {
+    //                 if (n.itemId === id) return n;
+    //                 const f = findNode(n.children || []);
+    //                 if (f) return f;
+    //             }
+    //             return null;
+    //         };
+    //         const node = findNode(itemsTree);
+    //         const dataType = (node?.dataType ?? "").toString().toUpperCase();
+
+    //         if (dataType === "BOOLEAN") {
+    //             if (!(ans && (ans.status === "OK" || ans.status === "NG")))
+    //                 return false;
+    //         } else if (dataType === "NUMBER") {
+    //             if (
+    //                 !ans ||
+    //                 ans.value === null ||
+    //                 ans.value === "" ||
+    //                 ans.value === undefined
+    //             )
+    //                 return false;
+    //             const num = Number(ans.value);
+    //             if (!Number.isFinite(num)) return false;
+    //         } else {
+    //             if (!ans) return false;
+    //             if (
+    //                 ans.value === null ||
+    //                 ans.value === "" ||
+    //                 ans.value === undefined
+    //             )
+    //                 return false;
+    //         }
+    //     }
+    //     return true;
+    // }, [requiredLeafIds, answers, itemsTree]);
+
+    // isComplete: tất cả leaf đã được trả lời hợp lệ
     const isComplete = useMemo(() => {
         if (!requiredLeafIds || requiredLeafIds.length === 0) return false;
+        if (!itemsTree) return false;
+
+        const findNodeById = (
+            id: number,
+            nodes: ItemNode[] | null
+        ): ItemNode | null => {
+            if (!nodes) return null;
+            for (const n of nodes) {
+                if (n.itemId === id || String(n.itemId) === String(id))
+                    return n;
+                const f = findNodeById(id, n.children || []);
+                if (f) return f;
+            }
+            return null;
+        };
+
         for (const id of requiredLeafIds) {
             const ans = answers[id];
-            // tìm node để biết dataType
-            const findNode = (nodes: ItemNode[] | null): ItemNode | null => {
-                if (!nodes) return null;
-                for (const n of nodes) {
-                    if (n.itemId === id) return n;
-                    const f = findNode(n.children || []);
-                    if (f) return f;
-                }
-                return null;
-            };
-            const node = findNode(itemsTree);
+            const node = findNodeById(id, itemsTree);
             const dataType = (node?.dataType ?? "").toString().toUpperCase();
 
             if (dataType === "BOOLEAN") {
-                if (!(ans && (ans.status === "OK" || ans.status === "NG")))
-                    return false;
+                const hasStatus =
+                    ans && (ans.status === "OK" || ans.status === "NG");
+                const derived = ans ? deriveBooleanStatus(ans.value) : null;
+                if (!hasStatus && !derived) return false;
             } else if (dataType === "NUMBER") {
                 if (
                     !ans ||
@@ -315,8 +398,8 @@ export const useCheck = (rawCode?: string, user?: any) => {
                 const num = Number(ans.value);
                 if (!Number.isFinite(num)) return false;
             } else {
-                if (!ans) return false;
                 if (
+                    !ans ||
                     ans.value === null ||
                     ans.value === "" ||
                     ans.value === undefined
@@ -324,6 +407,7 @@ export const useCheck = (rawCode?: string, user?: any) => {
                     return false;
             }
         }
+
         return true;
     }, [requiredLeafIds, answers, itemsTree]);
 
