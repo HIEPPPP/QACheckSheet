@@ -71,6 +71,15 @@ const DeviceCard: React.FC<DeviceProps> = ({
                 <div className="mt-2 text-sm text-gray-500 truncate">
                     {device.deviceName}
                 </div>
+                {/* <div className="mt-1 text-sm text-gray-600 font-semibold truncate">
+                    {device.location}
+                </div> */}
+
+                {device.description && (
+                    <div className="mt-2 text-[11px] bg-amber-300 rounded text-gray-600 italic truncate">
+                        "{device.description}"
+                    </div>
+                )}
 
                 {entry?.confirmBy && (
                     <div className="mt-3 flex items-center gap-2">

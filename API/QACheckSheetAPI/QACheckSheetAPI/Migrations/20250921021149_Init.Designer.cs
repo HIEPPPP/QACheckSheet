@@ -12,8 +12,8 @@ using QACheckSheetAPI.Data;
 namespace QACheckSheetAPI.Migrations
 {
     [DbContext(typeof(QACheckSheetDBContext))]
-    [Migration("20250908040249_add FixedBy")]
-    partial class addFixedBy
+    [Migration("20250921021149_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,7 +52,7 @@ namespace QACheckSheetAPI.Migrations
 
                     b.Property<string>("DeviceCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("DeviceId")
                         .HasColumnType("int");
@@ -100,7 +100,7 @@ namespace QACheckSheetAPI.Migrations
 
                     b.Property<string>("SheetCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("SheetId")
                         .HasColumnType("int");
@@ -137,6 +137,9 @@ namespace QACheckSheetAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ResultId");
+
+                    b.HasIndex("SheetCode", "DeviceCode", "CheckedDate")
+                        .HasDatabaseName("IX_CheckResult_Sheet_Device_CheckedDate");
 
                     b.ToTable("CheckResults");
                 });

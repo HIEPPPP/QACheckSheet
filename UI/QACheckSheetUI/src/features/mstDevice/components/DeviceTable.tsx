@@ -114,6 +114,9 @@ const DeviceTable: React.FC<DeviceTableProps> = ({
                                 Model
                             </TableCell>
                             <TableCell sx={{ fontWeight: 700 }}>
+                                Khu vực
+                            </TableCell>
+                            <TableCell sx={{ fontWeight: 700 }}>
                                 Vị trí
                             </TableCell>
                             <TableCell sx={{ fontWeight: 700 }}>
@@ -162,6 +165,7 @@ const DeviceTable: React.FC<DeviceTableProps> = ({
                                     <TableCell>{device.deviceName}</TableCell>
                                     <TableCell>{device.seriNumber}</TableCell>
                                     <TableCell>{device.model}</TableCell>
+                                    <TableCell>{device.area}</TableCell>
                                     <TableCell>{device.location}</TableCell>
                                     <TableCell>{device.factory}</TableCell>
                                     {device.status === "Đang sử dụng" && (

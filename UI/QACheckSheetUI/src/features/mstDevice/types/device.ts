@@ -7,6 +7,7 @@ export interface Device {
     deviceName: string;
     seriNumber: string;
     model: string;
+    area: string;
     location: string;
     factory: string;
     status: string;

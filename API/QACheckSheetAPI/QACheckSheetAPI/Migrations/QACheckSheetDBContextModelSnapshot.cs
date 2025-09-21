@@ -184,6 +184,10 @@ namespace QACheckSheetAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeviceId"));
 
+                    b.Property<string>("Area")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("CancelFlag")
                         .HasColumnType("bit");
 

@@ -33,7 +33,6 @@ namespace QACheckSheetAPI.Controllers
             return Ok(new ApiResponse<List<DeviceDTO>>(200, "OK", list));
         }
 
-
         // GET: api/device/{id}
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetDevice(int id)

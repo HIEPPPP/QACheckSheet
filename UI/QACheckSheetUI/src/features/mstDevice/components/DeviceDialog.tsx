@@ -34,6 +34,7 @@ type Errors = {
     deviceName?: string;
     seriNumber?: string;
     model?: string;
+    area?: string;
     location?: string;
     factory?: string;
     status?: string;
@@ -86,6 +87,10 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
         // if (!formData.model || formData.model.trim() === "") {
         //     e.model = "Model thiết bị là bắt buộc";
         // }
+
+        if (!formData.area || formData.area.trim() === "") {
+            e.location = "Khu vực để thiết bị là bắt buộc";
+        }
 
         if (!formData.location || formData.location.trim() === "") {
             e.location = "Vị trí để thiết bị là bắt buộc";
@@ -192,6 +197,32 @@ const DeviceFormDialog: React.FC<DeviceFormDialogProps> = ({
                     error={Boolean(errors.model)}
                     helperText={errors.model}
                 />
+                <FormControl fullWidth margin="dense">
+                    <InputLabel id="factory">Khu vực</InputLabel>
+                    <Select
+                        labelId="area"
+                        id="area"
+                        value={formData.area ?? ""}
+                        label="Khu vực"
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                area: e.target.value,
+                            })
+                        }
+                        error={Boolean(errors.area)}
+                    >
+                        <MenuItem value={"Feeling"}>Feeling</MenuItem>
+                        <MenuItem value={"Chức năng"}>Chức năng</MenuItem>
+                        <MenuItem value={"Low Temp"}>Low Temp</MenuItem>
+                        <MenuItem value={"Cắt trổ, làm MFR"}>
+                            Cắt trổ, làm MFR
+                        </MenuItem>
+                    </Select>
+                    {errors.area && (
+                        <FormHelperText>{errors.area}</FormHelperText>
+                    )}
+                </FormControl>
                 <TextField
                     label="Vị trí"
                     fullWidth

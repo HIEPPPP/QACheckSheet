@@ -12,8 +12,8 @@ using QACheckSheetAPI.Data;
 namespace QACheckSheetAPI.Migrations
 {
     [DbContext(typeof(QACheckSheetDBContext))]
-    [Migration("20250903040324_Update NGDetail")]
-    partial class UpdateNGDetail
+    [Migration("20250921042122_add properties area")]
+    partial class addpropertiesarea
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,7 +52,7 @@ namespace QACheckSheetAPI.Migrations
 
                     b.Property<string>("DeviceCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("DeviceId")
                         .HasColumnType("int");
@@ -89,9 +89,6 @@ namespace QACheckSheetAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NGDetail")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("OrderNumber")
                         .HasColumnType("int");
 
@@ -103,7 +100,7 @@ namespace QACheckSheetAPI.Migrations
 
                     b.Property<string>("SheetCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("SheetId")
                         .HasColumnType("int");
@@ -140,6 +137,9 @@ namespace QACheckSheetAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ResultId");
+
+                    b.HasIndex("SheetCode", "DeviceCode", "CheckedDate")
+                        .HasDatabaseName("IX_CheckResult_Sheet_Device_CheckedDate");
 
                     b.ToTable("CheckResults");
                 });
@@ -186,6 +186,10 @@ namespace QACheckSheetAPI.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeviceId"));
+
+                    b.Property<string>("Area")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("CancelFlag")
                         .HasColumnType("bit");
@@ -330,8 +334,17 @@ namespace QACheckSheetAPI.Migrations
                         .HasMaxLength(700)
                         .HasColumnType("nvarchar(700)");
 
+                    b.Property<string>("FixedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("FixedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("NGContentDetail")
+                        .IsRequired()
+                        .HasMaxLength(700)
+                        .HasColumnType("nvarchar(700)");
 
                     b.Property<string>("Note")
                         .IsRequired()

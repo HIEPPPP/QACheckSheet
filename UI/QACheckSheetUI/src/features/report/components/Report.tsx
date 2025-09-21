@@ -72,9 +72,9 @@ const Report: React.FC<Props> = ({
             {/* Report Data */}
             <ReportDataComponent rows={reportData ?? []} days={daysInMonth} />
 
-            {reportHeader?.deviceName === "Nhiệt độ - Độ ẩm" && (
-                <ReportEvnComponent rows={reportData ?? []} />
-            )}
+            {String(reportHeader?.deviceName).includes(
+                "Bảng nhiệt độ - độ ẩm"
+            ) && <ReportEvnComponent rows={reportData ?? []} />}
 
             {/* Report NG */}
             <ReportNgComponent reportNG={reportNG} />

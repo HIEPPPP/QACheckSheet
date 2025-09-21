@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QACheckSheetAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a5732c90cab34ac825ad81a8e032529b698daf81")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7605459387db8532522116b994c74ce6d2e08953")]
 [assembly: System.Reflection.AssemblyProductAttribute("QACheckSheetAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QACheckSheetAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

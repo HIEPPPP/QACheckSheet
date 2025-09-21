@@ -70,7 +70,7 @@ namespace QACheckSheetAPI.Services
                 device.DeviceName = dto.DeviceName;
             if(!string.IsNullOrWhiteSpace(dto.Status))
                 device.Status = dto.Status;
-            if(!string.IsNullOrWhiteSpace(dto.Description)) 
+            //if(!string.IsNullOrWhiteSpace(dto.Description)) 
                 device.Description = dto.Description;
             if(!string.IsNullOrWhiteSpace(dto.SeriNumber))
                 device.SeriNumber = dto.SeriNumber; 
@@ -80,6 +80,8 @@ namespace QACheckSheetAPI.Services
                 device.Factory = dto.Factory;
             if(!string.IsNullOrWhiteSpace(dto.UpdateBy))
                 device.UpdateBy = dto.UpdateBy;
+            //if (!string.IsNullOrWhiteSpace(dto.Area))
+            //    device.Area = dto.Area;
             if (!string.IsNullOrWhiteSpace(dto.Location))
                 device.Location = dto.Location;
 

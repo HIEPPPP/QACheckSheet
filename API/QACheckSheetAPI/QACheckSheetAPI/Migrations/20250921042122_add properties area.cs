@@ -5,14 +5,14 @@
 namespace QACheckSheetAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class addFixedBy : Migration
+    public partial class addpropertiesarea : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "FixedBy",
-                table: "NGDetails",
+                name: "Area",
+                table: "Devices",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
@@ -22,8 +22,8 @@ namespace QACheckSheetAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "FixedBy",
-                table: "NGDetails");
+                name: "Area",
+                table: "Devices");
         }
     }
 }

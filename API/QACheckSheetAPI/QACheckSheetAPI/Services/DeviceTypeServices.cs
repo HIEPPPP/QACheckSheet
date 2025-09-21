@@ -52,7 +52,7 @@ namespace QACheckSheetAPI.Services
             
             if (!string.IsNullOrWhiteSpace(dto.TypeName))
                 type.TypeName = dto.TypeName;
-            if(!string.IsNullOrWhiteSpace(dto.Description))
+            //if(!string.IsNullOrEmpty(dto.Description))
                 type.Description = dto.Description;
             if(dto.DefaultFrequency.HasValue)
                 type.DefaultFrequency = dto.DefaultFrequency.Value;

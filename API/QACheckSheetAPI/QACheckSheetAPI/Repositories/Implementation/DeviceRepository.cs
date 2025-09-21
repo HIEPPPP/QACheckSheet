@@ -80,6 +80,7 @@ namespace QACheckSheetAPI.Repositories.Implementation
                         )
                     )
                 )
+                .OrderBy(x => x.DeviceName)
                 .ToListAsync();
         }
 

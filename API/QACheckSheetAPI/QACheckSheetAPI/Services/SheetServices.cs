@@ -54,7 +54,7 @@ namespace QACheckSheetAPI.Services
                 sheet.SheetName = dto.SheetName;
             if(!string.IsNullOrWhiteSpace(dto.FormNO))
                 sheet.FormNO = dto.FormNO;
-            if(!string.IsNullOrWhiteSpace(dto.Description))
+            //if(!string.IsNullOrWhiteSpace(dto.Description))
                 sheet.Description = dto.Description;
             if(!string.IsNullOrEmpty(dto.UpdateBy))
                 sheet.UpdateBy = dto.UpdateBy;

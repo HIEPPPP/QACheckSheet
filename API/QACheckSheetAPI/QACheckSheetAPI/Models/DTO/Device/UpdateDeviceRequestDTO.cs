@@ -6,6 +6,7 @@
         public string DeviceName { get; set; } = null!;
         public string SeriNumber { get; set; } = string.Empty;
         public string Model { get; set; } = string.Empty;
+        public string Area { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;
         public string Factory { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty; //Tình trạng: Đang sử dụng, Bảo trì, Hỏng,...
