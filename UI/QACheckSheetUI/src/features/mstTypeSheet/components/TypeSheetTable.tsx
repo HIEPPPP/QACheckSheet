@@ -42,7 +42,11 @@ const TypeSheetTable: React.FC<TypeSheetTableProps> = ({
             if (!type) return false;
             const sheetCode = (type.sheetCode ?? "").toString();
             const sheetName = (type.sheetName ?? "").toString();
-            return `${sheetCode} ${sheetName}`.toLowerCase().includes(q);
+            const deviceTypeCode = (type.deviceTypeCode ?? "").toString();
+            const deviceTypeName = (type.deviceTypeName ?? "").toString();
+            return `${sheetCode} ${sheetName} ${deviceTypeCode} ${deviceTypeName}`
+                .toLowerCase()
+                .includes(q);
         });
     }, [typeSheets, searchText]);
 

@@ -37,7 +37,7 @@ const DeviceTable: React.FC<DeviceTableProps> = ({
 
     // Lọc theo deviceCode hoặc deviceName
     const filteredDevice = devices.filter((type) =>
-        `${type.deviceCode} ${type.deviceName}`
+        `${type.deviceCode} ${type.deviceName} ${type.typeCode} ${type.typeName} ${type.model} ${type.status} ${type.area} ${type.location} ${type.description} ${type.factory}`
             .toLowerCase()
             .includes(searchText.toLowerCase())
     );

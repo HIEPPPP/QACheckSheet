@@ -36,7 +36,7 @@ const DeviceTypeTable: React.FC<SheetTableProps> = ({
     const [searchText, setSearchText] = useState<string>("");
 
     const filteredSheets = sheets.filter((type) =>
-        `${type.sheetCode} ${type.sheetName}`
+        `${type.sheetCode} ${type.sheetName} ${type.formNO} ${type.description}`
             .toLowerCase()
             .includes(searchText.toLowerCase())
     );

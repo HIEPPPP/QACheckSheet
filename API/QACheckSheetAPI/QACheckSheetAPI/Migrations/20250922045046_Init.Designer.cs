@@ -12,8 +12,8 @@ using QACheckSheetAPI.Data;
 namespace QACheckSheetAPI.Migrations
 {
     [DbContext(typeof(QACheckSheetDBContext))]
-    [Migration("20250921042122_add properties area")]
-    partial class addpropertiesarea
+    [Migration("20250922045046_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
