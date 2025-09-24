@@ -1,6 +1,8 @@
 export interface Device {
     deviceId?: number | null;
     typeId?: number | null;
+    sheetCode?: string;
+    sheetName?: string;
     typeCode?: string;
     typeName?: string;
     deviceCode?: string | null;

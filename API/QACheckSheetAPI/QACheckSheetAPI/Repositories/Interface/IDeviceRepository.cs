@@ -6,7 +6,7 @@ namespace QACheckSheetAPI.Repositories.Interface
     public interface IDeviceRepository
     {
         Task<bool> IsDeviceCodeExistAsync (string deviceCode);
-        Task<List<DeviceMST>> GetListAsync();
+        Task<List<DeviceDTO>> GetListAsync();
         Task<List<DeviceSheetDTO>> GetListDeviceBySheetCodeAsync(string sheetCode);
         Task<List<DeviceMST>> GetListDeviceDashboard();
         Task<DeviceMST?> GetAsync(int deviceId);

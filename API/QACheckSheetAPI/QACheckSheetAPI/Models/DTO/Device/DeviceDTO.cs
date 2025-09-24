@@ -7,6 +7,8 @@ namespace QACheckSheetAPI.Models.DTO.Device
     {
         public int DeviceId { get; set; }
         public int TypeId { get; set; }
+        public string? SheetCode { get; set; }
+        public string? SheetName { get; set; }
         public string TypeCode { get; set; } = null!;
         public string TypeName { get; set; } = null!;
         public string DeviceCode { get; set; } = null!;

@@ -38,9 +38,37 @@ namespace QACheckSheetAPI.Repositories.Implementation
             return await context.Devices.Include(x => x.DeviceTypeMST).FirstOrDefaultAsync(x => x.DeviceCode == deviceCode);
         }
 
-        public async Task<List<DeviceMST>> GetListAsync()
+        public async Task<List<DeviceDTO>> GetListAsync()
         {
-            return await context.Devices.Include(x => x.DeviceTypeMST).ToListAsync();
+            var result = from s in context.Sheets
+                         join sd in context.SheetDeviceTypes on s.SheetId equals sd.SheetId
+                         join dt in context.DeviceTypes on sd.DeviceTypeId equals dt.TypeId
+                         join d in context.Devices on dt.TypeId equals d.TypeId
+                         select new DeviceDTO
+                         {
+                             DeviceId = d.DeviceId,
+                             TypeId = dt.TypeId,
+                             SheetCode = s.SheetCode,
+                             SheetName = s.SheetName,
+                             TypeCode = dt.TypeCode,
+                             TypeName = dt.TypeName,
+                             DeviceCode = d.DeviceCode,
+                             DeviceName = d.DeviceName,
+                             SeriNumber = d.SeriNumber,
+                             Model = d.Model,
+                             Area = d.Area,
+                             Location = d.Location,
+                             Factory = d.Factory,
+                             Status = d.Status,
+                             DefaultFrequency = dt.DefaultFrequency,
+                             FrequencyOverride = d.FrequencyOverride,
+                             Description = d.Description,
+                             CreateAt = d.CreateAt,
+                             CreateBy = d.CreateBy,
+                             UpdateAt = d.UpdateAt,
+                             UpdateBy = d.UpdateBy,                             
+                         };
+            return await result.ToListAsync();
         }
 
         public async Task<List<DeviceSheetDTO>> GetListDeviceBySheetCodeAsync(string sheetCode)

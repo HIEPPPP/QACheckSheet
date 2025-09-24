@@ -1,6 +1,6 @@
-import React, { useState, useContext, useCallback } from "react";
+import React, { useState, useContext, useCallback, useEffect } from "react";
 import { Button, LinearProgress } from "@mui/material";
-import { Add } from "@mui/icons-material";
+import { Add, Print } from "@mui/icons-material";
 import type { Device } from "./types/device";
 import DeviceTable from "./components/DeviceTable";
 import DeviceDialog from "./components/DeviceDialog";
@@ -10,6 +10,7 @@ import { useDevices } from "./hooks/useDevice";
 import type { AlertColor } from "@mui/material";
 import { UserContext } from "../../contexts/UserProvider";
 import { vnTime } from "../../utils/formatDateTime";
+import Barcode from "react-barcode";
 
 const emptyDevice = (userCode?: string): Partial<Device> => ({
     deviceId: null,
@@ -39,6 +40,11 @@ const DevicePage: React.FC = () => {
     const [dialogInitial, setDialogInitial] = useState<Partial<Device> | null>(
         null
     );
+
+    // ... existing states
+    const [selectedDeviceIds, setSelectedDeviceIds] = useState<number[]>([]);
+    const [showPrintArea, setShowPrintArea] = useState(false);
+
     const [confirmDelete, setConfirmDelete] = useState<number | null>(null);
     const [snackbar, setSnackbar] = useState<{
         open: boolean;
@@ -49,6 +55,32 @@ const DevicePage: React.FC = () => {
         message: "",
         severity: "success",
     });
+
+    // clear selection when devices list changes (optional behavior)
+    useEffect(() => {
+        // keep selection only for existing devices
+        const existingIds = new Set(devices.map((d) => Number(d.deviceId)));
+        setSelectedDeviceIds((prev) =>
+            prev.filter((id) => existingIds.has(id))
+        );
+    }, [devices]);
+
+    // hàm gọi khi bấm in
+    const handlePrintSelected = useCallback(() => {
+        if (selectedDeviceIds.length === 0) return;
+        setShowPrintArea(true);
+
+        // ensure print area rendered before calling print
+        setTimeout(() => {
+            window.print();
+        }, 100);
+
+        const after = () => {
+            setShowPrintArea(false);
+            window.removeEventListener("afterprint", after);
+        };
+        window.addEventListener("afterprint", after);
+    }, [selectedDeviceIds]);
 
     const handleOpenForm = useCallback(
         (device?: Device | null) => {
@@ -173,19 +205,99 @@ const DevicePage: React.FC = () => {
         <div>
             {loading && <LinearProgress />}
             <h1 className="text-3xl font-bold mb-4">Danh Sách Thiết Bị</h1>
-            <Button
-                variant="contained"
-                startIcon={<Add />}
-                onClick={handleButtonAddClick}
-            >
-                Thêm Thiết Bị
-            </Button>
+            <div className="flex gap-2 mb-4">
+                <Button
+                    variant="contained"
+                    startIcon={<Add />}
+                    onClick={handleButtonAddClick}
+                >
+                    Thêm Thiết Bị
+                </Button>
+
+                <Button
+                    variant="outlined"
+                    startIcon={<Print />}
+                    onClick={handlePrintSelected}
+                    disabled={selectedDeviceIds.length === 0}
+                >
+                    In barcode ({selectedDeviceIds.length})
+                </Button>
+            </div>
 
             <DeviceTable
                 devices={devices}
                 onEdit={(d: Device) => handleOpenForm(d)}
                 onDelete={(id: number) => setConfirmDelete(id)}
+                selectedIds={selectedDeviceIds}
+                onSelectionChange={(ids) => setSelectedDeviceIds(ids)}
             />
+
+            {/* phần in: chỉ hiển thị khi showPrintArea = true hoặc khi in (CSS @media print sẽ chỉ show vùng này) */}
+            {showPrintArea && (
+                <>
+                    <style>
+                        {`
+                        @media print {
+                            body * { visibility: hidden; }
+                            .print-area, .print-area * { visibility: visible; }
+                            .print-area { position: absolute; left: 0; top: 0; width: 100%; }
+                            /* chia từng barcode 1 hàng, can chỉnh */
+                            .barcode-card { page-break-inside: avoid; margin: 8px 0; padding: 8px; border-bottom: 1px solid #ccc;}
+                        }
+                        `}
+                    </style>
+
+                    <div className="print-area" style={{ padding: 16 }}>
+                        {selectedDeviceIds.map((id) => {
+                            const device = devices.find(
+                                (d) => Number(d.deviceId) === id
+                            );
+                            if (!device) return null;
+                            const value =
+                                String(
+                                    `${device.deviceCode} - ${device.sheetCode}`
+                                ) ?? "";
+                            // const label =
+                            //     String(
+                            //         `${device.deviceName} / ${device.sheetName}`
+                            //     ) ?? "";
+                            return (
+                                <div
+                                    key={id}
+                                    className="barcode-card"
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        alignItems: "center",
+                                        gap: 16,
+                                    }}
+                                >
+                                    <div style={{ minWidth: 260 }}>
+                                        <Barcode
+                                            value={value}
+                                            format="CODE128"
+                                            displayValue={true}
+                                            width={2}
+                                            height={60}
+                                        />
+                                    </div>
+                                    <div className="max-w-[300px] min-w-[300px]">
+                                        <div style={{ fontWeight: 700 }}>
+                                            {value}
+                                        </div>
+                                        <div className="text-sm min-w-[200px]">
+                                            <span className="text-amber-400">
+                                                {device.deviceName}
+                                            </span>{" "}
+                                            / <span>{device.sheetName}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </>
+            )}
 
             {dialogInitial && (
                 <DeviceDialog
