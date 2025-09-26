@@ -42,7 +42,7 @@ const CheckPage: React.FC = () => {
     const handleFinish = async () => {
         if (isLocked) return;
         const res = await submitAll();
-        if (res.success) {
+        if (res.success && role?.includes("Operator")) {
             setSnackbar({
                 open: true,
                 message:
@@ -54,6 +54,15 @@ const CheckPage: React.FC = () => {
             setTimeout(() => {
                 navigate("/app/dashboard");
             }, 2500);
+        } else if (res.success && !role?.includes("Operator")) {
+            setSnackbar({
+                open: true,
+                message:
+                    "Lưu dữ liệu thành công, hãy xác nhận để hoàn thành kiểm tra",
+                severity: "success",
+            });
+            // refresh status
+            await refreshStatus();
         } else {
             setSnackbar({
                 open: true,
@@ -101,7 +110,7 @@ const CheckPage: React.FC = () => {
             await refreshStatus();
             setTimeout(() => {
                 navigate("/app/dashboard");
-            }, 2500);
+            }, 2000);
         } else {
             setSnackbar({
                 open: true,

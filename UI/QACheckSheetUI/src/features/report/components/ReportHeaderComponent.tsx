@@ -53,8 +53,11 @@ const ReportHeaderComponent: React.FC<ReportHeaderProps> = ({
     });
 
     // Quyền xác nhận, phê duyệt
-    const isConfirmerMonth = String(user?.roles).includes("Staff");
-    const isApprover = String(user?.roles).includes("Assistant");
+    const isConfirmerMonth = String(user?.roles).includes("Leader");
+    const s = String(user?.roles ?? "").toLowerCase();
+    const isApprover = ["staff", "assistant", "manager"].some((r) =>
+        s.includes(r)
+    );
 
     const isConfirmedMonth = Boolean(reportHeader?.confirmedBy);
     const isApproved = Boolean(reportHeader?.approvedBy);

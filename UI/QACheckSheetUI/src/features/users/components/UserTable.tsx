@@ -13,10 +13,11 @@ import {
     TextField,
     MenuItem,
 } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { formatDateTime } from "../../../utils/formatDateTime";
 import type { User } from "../types/users";
+import { UserContext } from "../../../contexts/UserProvider";
 
 // Định nghĩa props cho component
 interface UserTableProps {
@@ -33,6 +34,9 @@ const UserTable: React.FC<UserTableProps> = ({
     const [page, setPage] = useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
     const [searchText, setSearchText] = useState<string>("");
+
+    const { user } = useContext(UserContext);
+    const userCode = user?.userCode;
 
     // Lọc theo deviceCode hoặc deviceName
     const filteredUser = users.filter((u) =>
@@ -127,12 +131,14 @@ const UserTable: React.FC<UserTableProps> = ({
                                     {formatDateTime(user.createdAt ?? null)}
                                 </TableCell>
                                 <TableCell>
-                                    <IconButton
-                                        color="primary"
-                                        onClick={() => onEdit(user)}
-                                    >
-                                        <Edit />
-                                    </IconButton>
+                                    {userCode === "24182" && (
+                                        <IconButton
+                                            color="primary"
+                                            onClick={() => onEdit(user)}
+                                        >
+                                            <Edit />
+                                        </IconButton>
+                                    )}
                                     <IconButton
                                         color="error"
                                         onClick={() =>
